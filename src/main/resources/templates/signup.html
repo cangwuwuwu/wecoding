@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>注册你的账号</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/personal.css" th:href="@{css/personal.css}" rel="stylesheet">
+    <link href="../static/css/signup.css" th:href="@{css/signup.css}" rel="stylesheet">
+    <link href="../static/css/form-validation.css" th:href="@{css/form-validation.css}" rel="stylesheet">
+    <link href="../static/css/loading.css" th:href="@{css/loading.css}" rel="stylesheet">
+    <link href="../static/css/back-top.css" th:href="@{css/back-top.css}" rel="stylesheet">
+    <link href="http:////at.alicdn.com/t/font_1298080_174tpixyn02.css" rel="stylesheet"/>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .tips {
+                left: 23.5%;
+            }
+
+            .bigBlock {
+                width: 355px;
+                margin: 15px auto  auto 2%;
+            }
+            #headimg {
+                width: 98px;
+                height: 98px;
+            }
+
+            .info-left {
+                height: 100px;
+            }
+
+            .info-right {
+                width: 360px;
+            }
+
+            .personal-username {
+                font-size: 25px;
+            }
+
+            .personal-head {
+                width: 100px;
+            }
+
+            .personal-head div {
+                width: 100px;
+            }
+
+            .psn-underbox {
+                width: 440px;
+                padding: 5px 0 0 0;
+            }
+        }
+
+    </style>
+
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-5 text-center h2-font-weight">
+        <h2>注册</h2>
+        <p class="lead">注册您的账号，有些信息在注册时不是必要的。这些信息都会在个人主页上展示，您也可以在个人中心修改您的个人信息。
+            邮件发送会在20s之内发送到您的邮箱，若接收不到邮件，查看垃圾箱或及时反馈。
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4" id="getFiveStus">
+            <div id="tips" class="tips" v-show="showtips" v-cloak>
+                <span id="sm-tips" v-text="tip">这是一条任意长度的消息</span>
+            </div>
+            <div style="height: 50px">
+                <!--加载中进度条-->
+                <div id="loadingbar1" class="loading" v-if="loading1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">ta 注册了</span>
+                    <span class="badge badge-secondary badge-pill">5</span>
+                </h4>
+            </div>
+            <ul class="ul-user-point list-group mb-3">
+                <li class="user-point list-group-item d-flex justify-content-between lh-condensed"
+                    v-for="user in search(keywords)" :key="user.stuId" @click="displays(user.stuId)">
+                    <div>
+                        <h6 class="my-0" v-text="user.stuUsername">Username</h6>
+                        <small class="text-muted" v-text="user.stuId">ID</small>
+                    </div>
+                    <span class="text-muted" v-cloak>{{ user.stuRegistTime | formatDateTime }}</span>
+                </li>
+            </ul>
+            <div class="list-group-item d-flex justify-content-between">
+                <span>总数 (人)</span>
+                <strong v-cloak>{{length}}</strong>
+            </div>
+
+            <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Username / ID" v-model="keywords">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-info iconfont icon-search"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 order-md-1" id="signupForm">
+            <!-- <h4 class="mb-3">请注册</h4> -->
+            <form class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="stuName">姓名</label>
+                        <input type="text" class="form-control" id="stuName" v-model="stuName" name="stuName" required placeholder="Name">
+                        <div class="invalid-feedback">
+                            姓名是必须的
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="stuId">学号</label>
+                        <input type="text" class="form-control" id="stuId" v-model="stuId" name="stuId" required
+                               @blur="checkId" placeholder="Student ID">
+                        <div class="invalid-feedback">
+                            学号是必须的
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="username">用户名/昵称</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="username" v-model="stuUsername" name="stuUsername" placeholder="Username"
+                               @blur="checkUsername" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            用户名是必须的
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">邮箱 </label>
+                    <input type="email" class="form-control" id="email" v-model="stuEmail" name="stuEmail" placeholder="you@example.com"
+                           required>
+                    <div class="invalid-feedback">
+                        请输入一个有效的电子邮件地址
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8 col-md-8 mb-3">
+                        <label for="code">验证码</label>
+                        <input type="text" class="form-control" id="code" v-model="stuCode" name="stuCode" placeholder="填写邮箱收到的验证码"
+                               required autocomplete="off">
+                        <div class="invalid-feedback">
+                            验证码是必须的
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 mb-3">
+                        <label></label>
+                        <button type="button" class="btn btn-lg btn-primary btn-block" :style="btnstyle"
+                                @click="sendMail" :disabled="disabled" v-text="btntext">获取验证码</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="stu-password">密码</label>
+                        <input type="password" class="form-control" id="stu-password" name="stuPassword"
+                                v-model="stuPassword" placeholder="Password" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            密码是必须的
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="stu-rePassword">确认密码</label>
+                        <input type="password" class="form-control" id="stu-rePassword" name="stuRePassword"
+                               v-model="stuRePassword" placeholder="Enter the password again" required autocomplete="off">
+                        <div class="invalid-feedback">
+                            两次密码输入不一致！请检查
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="mb-3">
+                    <label for="stuBirthday">生日 <span class="text-muted">(选填)</span></label>
+                    <input type="text" class="form-control" id="stuBirthday" v-model="stuBirthday" name="stuBirthday" placeholder="Birthday">
+                </div>
+
+                <div class="mb-3">
+                    <label for="stuPhone">电话 <span class="text-muted">(选填)</span></label>
+                    <input type="text" class="form-control" id="stuPhone" v-model="stuPhone" name="stuPhone" placeholder="Phone">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="stuProvince">省份<span class="text-muted">(选填)</span></label>
+                        <select class="custom-select d-block w-100" id="stuProvince" v-model="stuProvince" name="stuProvince">
+                            <option value="">Choose...</option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="stuCity">市<span class="text-muted">(选填)</span></label>
+                        <select class="custom-select d-block w-100" id="stuCity" v-model="stuCity" name="stuCity">
+                            <option value="">Choose...</option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="mb-3">
+                    <label for="stuInfo">签名/自我介绍 <span class="text-muted">(选填)</span></label>
+                    <textarea class="form-control text-area-height" id="stuInfo" v-model="stuInfo" name="stuInfo"></textarea>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="button" @click="submit">完成注册</button>
+            </form>
+        </div>
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2019 SEC2-NIT</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">我们</a></li>
+            <li class="list-inline-item"><a href="#">反馈</a></li>
+            <li class="list-inline-item"><a href="#">支持</a></li>
+        </ul>
+    </footer>
+</div>
+<div class="personal-frame" id="allPersonInformation" v-show="frame" v-cloak>
+    <div class="boxes">
+        <div class="bigBlock box-shadow">
+            <!--加载中进度条-->
+            <div class="loading" v-show="loading2">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h2>
+                个人资料<span class="close close-frame" @click="close">×</span>
+            </h2>
+            <div class="info-all">
+                <div class="info-left">
+                    <!--上传头像-->
+                    <form method="post" enctype="multipart/form-data" action="">
+                        <div class="personal-head">
+                            <div>
+                                <img alt="用户头像" type="file" id="headimg" src="../static/images/myhead.jpg"
+                                     th:src="@{images/myhead.jpg}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="info-right">
+                    <div class="personal-id">ID：<span v-text="person.stuId"></span></div>
+                    <div class="personal-username">用户名：<span v-text="person.stuUsername"></span></div>
+                </div>
+                <div class="psn-underbox">
+                    <div>性别：<span></span></div>
+                    <div>姓名：<span v-text="person.stuName"></span></div>
+                    <div>邮箱：<span v-text="person.stuEmail"></span></div>
+                    <div>电话：<span v-text="person.stuPhone"></span></div>
+                    <div>籍贯：<span> - </span></div>
+                    <div>生日：<span v-cloak>{{ person.stuBirthday | formatDate }}</span></div>
+                    <div>注册日期：<span v-cloak>{{ person.stuRegistTime | formatDateTime }}</span></div>
+                    <div class="personal-intro">简介：<span v-text="person.stuInfo"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--back to top button-->
+<div class="back-top" id="back-top">
+    <i class="iconfont icon-top"></i>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="../static/js/form-validation.js" th:src="@{js/form-validation.js}"></script>
+<script src="../static/js/jquery.timerMin.js" th:src="@{js/jquery.timerMin.js}"></script>
+<script type="module" src="../static/js/signup.js" th:src="@{js/signup.js}"></script>
+<script type="text/javascript" src="../static/js/personal-dynamic.js" th:src="@{js/personal-dynamic.js}"></script>
+<script type="text/javascript" src="../static/js/back-top.js" th:src="@{js/back-top.js}"></script>
+</body>
+</html>

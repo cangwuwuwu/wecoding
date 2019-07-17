@@ -1,0 +1,49 @@
+.info-all {
+    width: 785px;
+    float: left;
+}
+
+.personal-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 2;
+}
+.close-frame {
+    padding-top: 5px;
+    cursor: pointer;
+}
+.user-point {
+    margin-top: 7px;
+    cursor: pointer;
+    text-decoration: #808080;
+}
+.user-point:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27);
+    border-radius: 3px;
+}
+.bigBlock {
+    margin-top: 150px!important;
+}
+.tips {
+    position: fixed;
+    left: 42%;
+    top: 60%;
+    z-index: 99;
+    width: fit-content;
+    padding: 10px 40px 10px 40px;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    opacity: .9;
+}
+.bigBlock {
+    margin: 15px 100px auto;
+}
+
+[v-cloak] {
+    display: none;
+}

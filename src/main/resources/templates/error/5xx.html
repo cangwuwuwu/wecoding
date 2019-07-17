@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>出错啦</title>
+    <style>
+        body {
+            background: #f7f7f7;
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+        .fontInfo {
+            font-size: 30px;
+        }
+        .errorPageAllInfo {
+            width: 600px;
+            margin: 0 auto;
+        }
+        .picCenter {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+<div class="picCenter">
+    <img src="/wecoding/static/images/finderror.jpg" th:src="@{images/finderror.jpg}"/>
+    <div th:switch="${status}">
+        <div class="fontInfo" th:case="500">服务器错误</div>
+        <div class="fontInfo" th:case="*">出错啦</div>
+    </div>
+</div>
+<div class="errorPageAllInfo">
+    <h2>Status: [[${status}]]</h2>
+    <h4>Timestamp: [[${#dates.format(timestamp,'yyyy-MM-dd HH:mm:ss')}]]</h4>
+    <h4>error: [[${error}]]</h4>
+    <h4>message: [[${message}]]</h4>
+</div>
+</div>
+</body>
+</html>

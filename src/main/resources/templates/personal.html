@@ -1,0 +1,88 @@
+    <!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link href="../static/css/personal.css" th:href="@{css/personal.css}" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+
+</head>
+<body>
+<div class="navbar-persion">
+    <div class="navbar-div">
+        <ul class="ul-person">
+            <li><a th:href="@{/index}">首页</a></li>
+        </ul>
+        <ul class="ul-person ul-right">
+            <li>
+                <a id="nav-me" class="down-arrow" sec:authentication="name"></a>
+                <div class="mylist box-shadow">
+                    <div><a>修改信息</a></div>
+                    <div><a th:href="@{/logout}">退出登录</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="boxes">
+    <div class="left-box">
+        <div class="active left-tags box-shadow">
+            个人资料
+        </div>
+        <div class="t2 left-tags box-shadow">
+            去逛逛
+        </div>
+    </div>
+    <div class="bigBlock box-shadow">
+        <h2>
+            个人资料
+        </h2>
+        <div class="info-left">
+            <!--上传头像-->
+            <form method="post" enctype="multipart/form-data" action="">
+            <div class="personal-head">
+                <div>
+                    <input class="uploadfile" type="file" name="file" title="上传头像">
+                    <img type="file" id="headimg" src="../static/images/myhead.jpg" th:src="@{images/myhead.jpg}" width="178" height="178">
+                </div>
+                <button type="submit" class="uploadbtn">完成上传</button>
+                <div><span></span></div>
+            </div>
+            </form>
+        </div>
+        <div id="allPersonInformation">
+            <div class="info-right">
+                <div class="personal-id">ID：<span v-text="person.stuId"></span></div>
+                <div class="personal-username">用户名：<span v-text="person.stuUsername"></span></div>
+            </div>
+            <div class="psn-underbox">
+                <div>性别：<span></span></div>
+                <div>姓名：<span v-text="person.stuName"></span></div>
+                <div>邮箱：<span v-text="person.stuEmail"></span></div>
+                <div>电话：<span v-text="person.stuPhone"></span></div>
+                <div>籍贯：<span> - </span></div>
+                <div>生日：<span v-text="person.stuBirthday"></span></div>
+                <div>注册日期：<span v-text="person.stuRegistTime"></span></div>
+                <div class="personal-intro">简介：<span v-text="person.stuInfo"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        var username = [[${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}]];
+        $.get("stu/stu-username/"+ username, function (data_person) {
+            new Vue({
+                el: '#allPersonInformation',
+                data: {
+                    person: data_person
+                }
+            })
+        });
+    });
+</script>
+<script type="text/javascript" src="../static/js/personal-dynamic.js" th:src="@{js/personal-dynamic.js}"></script>
+</body>
+</html>

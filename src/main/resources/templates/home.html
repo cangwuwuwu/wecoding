@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>HomePage-主页</title>
+    <link href="https://cdn.bootcss.com/font-awesome/5.8.0/css/all.css" rel="stylesheet"/>
+    <link href="../static/css/home.css" th:href="@{css/home.css}" rel="stylesheet"/>
+    <link href="../static/css/back-top.css" th:href="@{css/back-top.css}" rel="stylesheet" />
+    <link href="http:////at.alicdn.com/t/font_1298080_174tpixyn02.css" rel="stylesheet"/>
+    <style>
+
+        @media screen and (max-width: 1100px) {
+            .service-desc {
+                display: none;
+            }
+
+            .service-right {
+                float: right;
+            }
+
+            .service-box {
+                max-width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .service-box {
+                max-width: 100%;
+            }
+            .section-title {
+                text-align: center;
+                padding: 0 0 0 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="services-section">
+    <div class="inner-width">
+        <div class="section-title">Home</div>
+        <div class="service-user">
+            <div sec:authorize="isAuthenticated()">
+<!--                <div class="service-username" sec:authentication="name">username</div>-->
+                <img alt="头像" src="../static/images/myhead.jpg" th:src="@{images/myhead.jpg}" class="service-head">
+                <!--  下拉菜单-->
+                <!--      登录     -->
+                <!--      注册     -->
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}"><div class="service-username">未登录</div></a>
+                <img alt="头像" src="/images/myhead.jpg" class="service-head">
+                <!--  下拉菜单-->
+                <!--  个人中心-->
+                <!--  修改密码-->
+                <!--  退出登录-->
+            </div>
+        </div>
+        <div class="border"></div>
+        <div class="services-container">
+            <div class="service-box" onclick="window.location='/guide'">
+                <div class="icon-title">
+                    <div class="service-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="service-title">校园指南</div>
+                </div>
+                <div class="service-desc">
+                    做过电商项目的同学都知道，店铺装修是电商系统必备的一个功能，在某些场景下，可能是广告页制作、活动页制作、微页面制作，但基本功能都是类似的。所谓店铺装修，就是用户可以在
+                    PC端进行移动页辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+            <div class="service-box" onclick="window.location='/resources'">
+                <div class="icon-title service-right">
+                    <div class="service-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <div class="service-title">资源分享</div>
+                </div>
+                <div class="service-desc">
+                    做过电商项目的同学都知道，店铺装修是电商系统必备的一个功能，在某些场景下，可能是广告页制作、活动页制作、微页要通过简单的拖拽就可以实现页面的编辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+            <div class="service-box" onclick="window.location='/forum'">
+                <div class="icon-title">
+                    <div class="service-icon">
+                        <i class="fas iconfont icon-forum"></i>
+                    </div>
+                    <div class="service-title">论坛</div>
+                </div>
+                <div class="service-desc">
+                    做过电商项目的同学都知道，店铺装修是电商系统必备的一个功能，在某些场景下，可能是广告页制作、活动页制作、微页面制作，但基本功能都是拖拽就可以实现页面的编辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+            <div class="service-box" onclick="window.location='/photos'">
+                <div class="icon-title service-right">
+                    <div class="service-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="service-title">照片墙</div>
+                </div>
+                <div class="service-desc">
+                    PC端进行移动页面的制作，只需要通过简单的拖拽就可以实现页面的编辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+            <div class="service-box" onclick="window.location='/allstus'">
+                <div class="icon-title">
+                    <div class="service-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="service-title">去逛逛</div>
+                </div>
+                <div class="service-desc">
+                    做过电商项目的同学都知道，店铺装修是电商系统必备的一个功能，在某些场景下，可能是广告页制作、活动页制。所谓店铺装修，就是用户可以在
+                    PC端进行移动页面的制作，只需要通过简单的拖拽就可以实现页面的编辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+            <div class="service-box" onclick="window.location='/help'">
+                <div class="icon-title service-right">
+                    <div class="service-icon">
+                        <i class="fas iconfont icon-help2"></i>
+                    </div>
+                    <div class="service-title">帮助</div>
+                </div>
+                <div class="service-desc">
+                    做过电商项目的同学都知道，店铺装修是电商系统必备的一个功能，在某些场景下，可能是广告页制作、活动页制作、微页面制作，但基本需要通过简单的拖拽就可以实现页面的编辑，属于用户高度自定义的功能。最终编辑的结果。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="back-top" id="back-top">
+    <i class="iconfont icon-top"></i>
+</div>
+<script type="text/javascript" src="../static/js/back-top.js" th:src="@{js/back-top.js}"></script>
+</body>
+</html>

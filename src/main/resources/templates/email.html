@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>email-code</title>
+    <style type="text/css">
+        * {
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h4>您正在注册：<a th:href="${address}">www.wecoding.com</a></h4>
+<h5>您的验证码是：<a href="#">[[${codes}]]</a></h5>
+</body>
+</html>

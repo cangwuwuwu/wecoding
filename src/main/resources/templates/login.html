@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${msg} eq null ? #{login.head} : ${msg}">Please Sign in</title>
+
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+          crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link href="../static/css/signin.css" th:href="@{css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/login}" method="post">
+    <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
+    <div th:if="${msg}" th:text="${msg}" th:class="${loginClass}">用户名或密码错误</div>
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" name="username" id="username" class="form-control" autocomplete="off"
+           placeholder="Student Id" th:placeholder="#{login.Username}" required autofocus>
+    <label for="password" class="sr-only" th:text="#{login.Username}">Password</label>
+    <input type="password" name="password" id="password" class="form-control"
+           placeholder="Password" th:placeholder="#{login.password}" required>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="remember-me"> [[#{login.remember}]]
+        </label>
+    </div>
+    <div  sec:authorize="!isAuthenticated()">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.signIn}">Sign in</button>
+    </div>
+    <div  sec:authorize="isAuthenticated()">
+        <button type="button" class="morse btn btn-lg btn-primary btn-block" disabled="disabled" th:text="#{login.already}">You are already signed in</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted">&copy;2019</p>
+    <a class="btn btn-small" th:href="@{/login(language='zh_CN')}">简体</a>/
+    <a class="btn btn-small" th:href="@{/login(language='zh_TW')}">繁體</a>
+    <a class="btn btn-small" th:href="@{/login(language='en_US')}">English</a>
+</form>
+</body>
+</html>

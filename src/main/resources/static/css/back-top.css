@@ -1,0 +1,24 @@
+/*全局回到顶部按钮*/
+.back-top {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 99;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #1e90ff;
+    color: #1e90ff;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 45px;
+}
+.back-top:hover {
+    background-color: #1e90ff;
+    color: #FFF;
+}
+.icon-top,.icon-top1,.icon-top2,.icon-top3 {
+     font-size: 30px!important;
+     font-weight: bold!important;
+ }
