@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>email-feedback</title>
+    <style type="text/css">
+        * {
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h3>收到一条 [[${type}]] 类型的消息</h3>
+<br>
+<h4>[[${content}]]</h4>
+<br>
+<a th:href="${address}">www.niter.work</a>
+</body>
+</html>

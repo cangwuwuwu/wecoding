@@ -1,10 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>校园指南</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>校园指南-Wecoding:便捷的校内信息交流网站</title>
+    <link href="https://cdn.bootcss.com/iview/3.4.2/styles/iview.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/5.8.0/css/all.css" rel="stylesheet"/>
+    <link href="../static/css/back-top.css" th:href="@{css/back-top.css}" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-light.min.css" rel="stylesheet">
+    <link href="../static/css/guide.css" th:href="@{css/guide.css}" rel="stylesheet" />
 </head>
 <body>
-校园指南页面
+<div id="all-home" class="wrapper">
+    <template>
+        <div class="layout">
+            <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
+                <i-Menu theme="light" style="width: 310px;"
+                        @on-select="getmdpage"  @on-open-change="addbread">
+                    <Submenu name="学校信息">
+                        <template slot="title">
+                            <Icon type="ios-navigate"></Icon>
+                            学校信息
+                        </template>
+                        <Menu-Item name="college-website">学校官网</Menu-Item>
+                        <Menu-Item name="college-address">学校地址/路线</Menu-Item>
+                        <Menu-Item name="map">学校地图</Menu-Item>
+                    </Submenu>
+                    <!--<Submenu name="1-1">
+                        <template slot="title">
+                            <Icon type=""></Icon>
+                            Item 1-1
+                        </template>
+                        <Menu-Item name="1-1-1">Option 1</Menu-Item>
+                        <Menu-Item name="1-2-2">Option 2</Menu-Item>
+                        <Menu-Item name="1-3-3">Option 3</Menu-Item>
+                    </Submenu>-->
+                    <Submenu name="校园指南">
+                        <template slot="title">
+                            <Icon type="ios-keypad"></Icon>
+                            校园指南
+                        </template>
+                        <Menu-Group title="新生专区">
+                            <Menu-Item name="wel-new">自助迎新</Menu-Item>
+                            <Menu-Item name="military-training">军训安排</Menu-Item>
+                            <Menu-Item name="dormitory">宿舍环境</Menu-Item>
+                            <Menu-Item name="wifi">宽带配置</Menu-Item>
+                            <Menu-Item name="start-test">开学考试</Menu-Item>
+                        </Menu-Group>
+                        <Menu-Group title="A-E">
+                            <Menu-Item name="score">成绩查询</Menu-Item>
+                            <Menu-Item name="electric">电费缴纳</Menu-Item>
+                        </Menu-Group>
+                        <Menu-Group title="F-J">
+                            <Menu-Item name="edu-email">教育邮箱</Menu-Item>
+                        </Menu-Group>
+                        <Menu-Group title="K-O">
+                            <Menu-Item name="cet">四六级</Menu-Item>
+                            <Menu-Item name="repair">社区报修</Menu-Item>
+                        </Menu-Group>
+                    </Submenu>
+                </i-Menu>
+            </Sider>
+
+            <Layout :style="{marginLeft: '320px'}">
+                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
+                <i-Content :style="{padding: '0 16px 16px'}">
+                    <Breadcrumb :style="{margin: '16px 0'}" >
+                        <Breadcrumb-Item >{{ bread1[0] }}</Breadcrumb-Item>
+                        <Breadcrumb-Item >{{bread2}}</Breadcrumb-Item>
+<!--                        <Breadcrumb-item v-for="bread in breads">{{ bread }}</Breadcrumb-item>-->
+                    </Breadcrumb>
+                    <Card>
+                        <div style="padding-left: 15%; padding-right:15%;font-size: 20px;height: fit-content;min-height: 1000px" v-html="md"></div>
+                    </Card>
+                </i-Content>
+            </Layout>
+        </div>
+    </template>
+    <div class="back-top" id="back-top">
+        <Icon type="md-arrow-round-up" size="30"/>
+    </div>
+    <div style="height: 180px"></div>
+</div>
+
+<footer class="footer" id="footer">
+    <template>
+        <Row>
+            <i-col span="5">
+                <Icon type="logo-github" size="30"/>
+            </i-col>
+            <i-col span="5">
+                <Icon type="md-thumbs-up" size="30"/>
+            </i-col>
+            <i-col span="5">
+                <Icon type="md-help-circle" size="30"/>
+            </i-col>
+            <i-col span="9">
+                <Icon type="logo-buffer" size="40"/>
+            </i-col>
+        </Row>
+        <Row>
+            <i-col span="5">
+                <a target="_blank" href="https://github.com/cangwuwuwu/wecoding">
+                    <h2>GitHub</h2>
+                    <h3>项目源码地址</h3>
+                </a>
+            </i-col>
+            <i-col span="5">
+                <h3>点赞</h3>
+                <a target="_blank" href="https://blog.csdn.net/qq_43581949"><h3>作者博客</h3></a>
+                <Poptip trigger="hover" placement="right-end" title="扫二维码,  加入我们">
+                    <h3>加入我们</h3>
+                    <div slot="content"><img alt="二维码" src="../static/images/ours2code.jpg" th:src="@{images/ours2code.jpg}"/></div>
+                </Poptip>
+            </i-col>
+            <i-col span="5">
+                <a href="/help"><h3>帮助</h3></a>
+                <a target="_blank" href="/help"><h3>更新日志</h3></a>
+                    <h3 @click="bug = true">反馈Bug</h3>
+            </i-col>
+            <i-col span="9">
+                <h2>Wecoding</h2>
+                <h3>&copy; 2019</h3>
+            </i-col>
+        </Row>
+        <Modal
+                footer-hide
+                draggable
+                title="反馈"
+                v-model="bug">
+            <div>反馈类型</div>
+            <Radio-Group v-model="bugtype">
+                <Radio label="bug">
+                    <Icon type="md-alert" size="15"></Icon>
+                    <span>Bug</span>
+                </Radio>
+                <Radio label="need">
+                    <Icon type="ios-hand" size="15"></Icon>
+                    <span>没有我想要的</span>
+                </Radio>
+                <Radio label="advice">
+                    <Icon type="ios-information-circle" size="15"></Icon>
+                    <span>纰漏/指正/建议</span>
+                </Radio>
+            </Radio-Group>
+            <div>反馈内容</div>
+            <div class="bug-div">
+                <i-Input v-model="bugcontent" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..." />
+            </div>
+            <div class="bug-div">
+                <i-Button :loading="loading" long type="primary" @click="sendfeedback">提交反馈</i-Button>
+            </div>
+        </Modal>
+    </template>
+</footer>
+<script src="../static/js/vue.js" th:src="@{js/vue.js}"></script>
+<script src="../static/js/iview.min.js" th:src="@{js/iview.min.js}"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/vue-router/3.0.7/vue-router.min.js"></script>-->
+<script src="https://cdn.bootcss.com/marked/0.7.0/marked.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="../static/js/guide.js" th:src="@{js/guide.js}"></script>
+<script type="text/javascript" src="../static/js/back-top.js" th:src="@{js/back-top.js}"></script>
 </body>
 </html>

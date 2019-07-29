@@ -118,3 +118,17 @@
     float: left;
 }
 
+[v-cloak] {
+    display: none;
+}
+
+.ivu-head {
+    font-size: 12px;
+    cursor: pointer;
+}
+.ivu-head > img {
+    width: 60px;
+}
+
+.bug-div {
+}

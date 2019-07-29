@@ -3,16 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>注册你的账号</title>
+    <title>注册-Wecoding:便捷的校内信息交流网站</title>
 
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/iview/3.4.2/iview.min.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/iview/3.4.2/styles/iview.css" rel="stylesheet">
     <link href="../static/css/personal.css" th:href="@{css/personal.css}" rel="stylesheet">
     <link href="../static/css/signup.css" th:href="@{css/signup.css}" rel="stylesheet">
     <link href="../static/css/form-validation.css" th:href="@{css/form-validation.css}" rel="stylesheet">
     <link href="../static/css/loading.css" th:href="@{css/loading.css}" rel="stylesheet">
     <link href="../static/css/back-top.css" th:href="@{css/back-top.css}" rel="stylesheet">
-    <link href="http:////at.alicdn.com/t/font_1298080_174tpixyn02.css" rel="stylesheet"/>
+    <link href="http://at.alicdn.com/t/font_1298080_174tpixyn02.css" rel="stylesheet"/>
 
     <style>
         .bd-placeholder-img {
@@ -84,9 +86,6 @@
 
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4" id="getFiveStus">
-            <div id="tips" class="tips" v-show="showtips" v-cloak>
-                <span id="sm-tips" v-text="tip">这是一条任意长度的消息</span>
-            </div>
             <div style="height: 50px">
                 <!--加载中进度条-->
                 <div id="loadingbar1" class="loading" v-if="loading1">
@@ -101,16 +100,19 @@
                     <span class="badge badge-secondary badge-pill">5</span>
                 </h4>
             </div>
-            <ul class="ul-user-point list-group mb-3">
-                <li class="user-point list-group-item d-flex justify-content-between lh-condensed"
-                    v-for="user in search(keywords)" :key="user.stuId" @click="displays(user.stuId)">
-                    <div>
-                        <h6 class="my-0" v-text="user.stuUsername">Username</h6>
-                        <small class="text-muted" v-text="user.stuId">ID</small>
-                    </div>
-                    <span class="text-muted" v-cloak>{{ user.stuRegistTime | formatDateTime }}</span>
-                </li>
-            </ul>
+            <template>
+                <ul class="ul-user-point list-group mb-3" v-cloak>
+                    <li class="user-point list-group-item d-flex justify-content-between lh-condensed"
+                        v-for="user in search(keywords)" :key="user.stuId" @click="displays(user.stuId)">
+                        <div>
+                            <Avatar :style="{background: color[ranum()]}">{{user.stuUsername.substr(0,1)}}</Avatar>
+                            <h6 class="my-0" v-text="user.stuUsername">Username</h6>
+                            <small class="text-muted" v-text="user.stuId">ID</small>
+                        </div>
+                        <span class="text-muted" v-cloak>{{ user.stuRegistTime | formatDateTime }}</span>
+                    </li>
+                </ul>
+            </template>
             <div class="list-group-item d-flex justify-content-between">
                 <span>总数 (人)</span>
                 <strong v-cloak>{{length}}</strong>
@@ -131,14 +133,14 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="stuName">姓名</label>
-                        <input type="text" class="form-control" id="stuName" v-model="stuName" name="stuName" required placeholder="Name">
+                        <input type="text" class="form-control" id="stuName" v-model="stuName" required placeholder="Name">
                         <div class="invalid-feedback">
                             姓名是必须的
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="stuId">学号</label>
-                        <input type="text" class="form-control" id="stuId" v-model="stuId" name="stuId" required
+                        <input type="text" class="form-control" id="stuId" v-model="stuId" required
                                @blur="checkId" placeholder="Student ID">
                         <div class="invalid-feedback">
                             学号是必须的
@@ -161,9 +163,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="email">邮箱 </label>
-                    <input type="email" class="form-control" id="email" v-model="stuEmail" name="stuEmail" placeholder="you@example.com"
-                           required>
+                    <label>邮箱 </label>
+                    <template>
+                        <auto-complete
+                                v-model="stuEmail" size="large"
+                                @on-search="emailSearch"
+                                placeholder="you@example.com"
+                                required>
+                            <i-option v-for="item in data2" :value="item" :key="item">{{ item }}</i-option>
+                        </auto-complete>
+                    </template>
                     <div class="invalid-feedback">
                         请输入一个有效的电子邮件地址
                     </div>
@@ -204,32 +213,50 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <div class="mb-3">
-                    <label for="stuBirthday">生日 <span class="text-muted">(选填)</span></label>
-                    <input type="text" class="form-control" id="stuBirthday" v-model="stuBirthday" name="stuBirthday" placeholder="Birthday">
-                </div>
-
-                <div class="mb-3">
-                    <label for="stuPhone">电话 <span class="text-muted">(选填)</span></label>
-                    <input type="text" class="form-control" id="stuPhone" v-model="stuPhone" name="stuPhone" placeholder="Phone">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>生日 <span class="text-muted">(选填)</span></label>
+                        <template>
+                            <Row>
+                                <i-col span="12">
+                                    <date-picker
+                                            type="date" size="large"
+                                            @on-change="choosebirthday"
+                                            placeholder="Select date" style="width: 290px"></date-picker>
+                                </i-col>
+                            </Row>
+                        </template>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>物种<span class="text-muted">(选填)</span></label>
+                        <template>
+                            <Radio-Group v-model="stuGender" type="button" size="large">
+                                <Radio label="汉子"></Radio>
+                                <Radio label="猛男"></Radio>
+                                <Radio label="Gay"></Radio>
+                                <Radio label="嘤嘤怪"></Radio>
+                                <Radio label="妹纸"></Radio>
+                                <Radio label="女汉子"></Radio>
+                                <Radio label="大妈"></Radio>
+                                <Radio label="秘密"></Radio>
+                            </Radio-Group>
+                        </template>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="stuProvince">省份<span class="text-muted">(选填)</span></label>
-                        <select class="custom-select d-block w-100" id="stuProvince" v-model="stuProvince" name="stuProvince">
-                            <option value="">Choose...</option>
-                            <option></option>
-                        </select>
+                        <label for="stuPhone">电话 <span class="text-muted">(选填)</span></label>
+                        <input type="text" class="form-control" id="stuPhone" v-model="stuPhone" name="stuPhone" placeholder="Phone">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="stuCity">市<span class="text-muted">(选填)</span></label>
-                        <select class="custom-select d-block w-100" id="stuCity" v-model="stuCity" name="stuCity">
-                            <option value="">Choose...</option>
-                            <option></option>
-                        </select>
+                        <label>籍贯<span class="text-muted">(选填)</span></label>
+                        <template>
+                            <Cascader :data="provs" v-model="stuArea" change-on-select size="large"></Cascader>
+                        </template>
                     </div>
                 </div>
+
                 <hr class="mb-4">
                 <div class="mb-3">
                     <label for="stuInfo">签名/自我介绍 <span class="text-muted">(选填)</span></label>
@@ -241,7 +268,7 @@
         </div>
     </div>
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2019 SEC2-NIT</p>
+        <p class="mb-1">&copy; 2019 Wecoding</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">我们</a></li>
             <li class="list-inline-item"><a href="#">反馈</a></li>
@@ -265,28 +292,22 @@
             </h2>
             <div class="info-all">
                 <div class="info-left">
-                    <!--上传头像-->
-                    <form method="post" enctype="multipart/form-data" action="">
                         <div class="personal-head">
-                            <div>
-                                <img alt="用户头像" type="file" id="headimg" src="../static/images/myhead.jpg"
-                                     th:src="@{images/myhead.jpg}">
-                            </div>
+                                <img alt="用户头像" id="headimg" :src="'http://39.106.85.24:9000/wecoding/M00/00/00/'+person.stuBigImg"/>
                         </div>
-                    </form>
                 </div>
                 <div class="info-right">
                     <div class="personal-id">ID：<span v-text="person.stuId"></span></div>
                     <div class="personal-username">用户名：<span v-text="person.stuUsername"></span></div>
                 </div>
-                <div class="psn-underbox">
-                    <div>性别：<span></span></div>
+                <div class="psn-underbox" v-cloak>
+                    <div>物种：<span v-text="person.stuGender"></span></div>
                     <div>姓名：<span v-text="person.stuName"></span></div>
                     <div>邮箱：<span v-text="person.stuEmail"></span></div>
                     <div>电话：<span v-text="person.stuPhone"></span></div>
-                    <div>籍贯：<span> - </span></div>
-                    <div>生日：<span v-cloak>{{ person.stuBirthday | formatDate }}</span></div>
-                    <div>注册日期：<span v-cloak>{{ person.stuRegistTime | formatDateTime }}</span></div>
+                    <div>籍贯：<span v-text="person.stuArea"></span></div>
+                    <div>生日：<span>{{ person.stuBirthday | formatDate }}</span></div>
+                    <div>注册日期：<span>{{ person.stuRegistTime | formatDateTime }}</span></div>
                     <div class="personal-intro">简介：<span v-text="person.stuInfo"></span></div>
                 </div>
             </div>
@@ -299,9 +320,8 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="../static/js/form-validation.js" th:src="@{js/form-validation.js}"></script>
-<script src="../static/js/jquery.timerMin.js" th:src="@{js/jquery.timerMin.js}"></script>
 <script type="module" src="../static/js/signup.js" th:src="@{js/signup.js}"></script>
-<script type="text/javascript" src="../static/js/personal-dynamic.js" th:src="@{js/personal-dynamic.js}"></script>
+<script type="text/javascript" src="../static/js/signupform.js" th:src="@{js/signupform.js}"></script>
 <script type="text/javascript" src="../static/js/back-top.js" th:src="@{js/back-top.js}"></script>
 </body>
 </html>

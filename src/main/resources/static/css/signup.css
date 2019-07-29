@@ -47,3 +47,10 @@
 [v-cloak] {
     display: none;
 }
+
+.ivu-input-large {
+    height: 38px;
+}
+.ivu-radio-group-button .ivu-radio-wrapper {
+    padding: 0 20px;
+}

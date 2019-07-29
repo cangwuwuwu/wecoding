@@ -16,13 +16,13 @@ public class Student {
     private String stuName;
     private String stuUsername;
     private String stuPhone;
+    private String stuGender;
     private String stuEmail;
     @DateTimeFormat(
             pattern = "yyyy-MM-dd"
     )
     private Date stuBirthday;
-    private String stuProvince;
-    private String stuCity;
+    private String stuArea;
     @DateTimeFormat(
             pattern = "yyyy-MM-dd"
     )
@@ -32,4 +32,6 @@ public class Student {
     )
     private Date stuModifyTime;
     private String stuInfo;
+    private String stuImg;
+    private String stuBigImg;
 }

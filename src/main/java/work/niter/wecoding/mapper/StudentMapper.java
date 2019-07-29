@@ -25,12 +25,18 @@ public interface StudentMapper {
     @Select({"select * from tb_stu"})
     List<Student> getAllStudents();
 
-    @Insert({"insert into tb_stu(stu_id,stu_name,stu_username,stu_phone,stu_email,stu_birthday,stu_province,stu_city,stu_info) values(#{stuId},#{stuName},#{stuUsername},#{stuPhone},#{stuEmail},#{stuBirthday},#{stuProvince},#{stuCity},#{stuInfo})"})
+    @Insert({"insert into tb_stu(stu_id,stu_name,stu_username," +
+            "stu_phone,stu_gender,stu_email,stu_birthday,stu_area,stu_info) " +
+            "values(#{stuId},#{stuName},#{stuUsername},#{stuPhone},#{stuGender}," +
+            "#{stuEmail},#{stuBirthday},#{stuArea},#{stuInfo})"})
     int addStudent(Student student);
 
     @Delete({"delete from tb_stu where stu_id=#{stuId}"})
     int deleteStudentById(Integer stuId);
 
-    @Update({"update tb_stu set stu_name=#{stuName},stu_username=#{stuUsername},stu_phone=#{stuPhone},stu_email=#{stuEmail},stu_birthday=#{stuBirthday},stu_province=#{stuProvince},stu_city=#{stuCity},stu_info=#{stuInfo} where stu_id=#{stuId}"})
+    @Update({"update tb_stu set stu_name=#{stuName}," +
+            "stu_username=#{stuUsername},stu_phone=#{stuPhone},stu_gender=#{stuGender}," +
+            "stu_email=#{stuEmail},stu_birthday=#{stuBirthday},stu_area=#{stuArea}," +
+            "stu_info=#{stuInfo},stu_img=#{stuImg},stu_big_img=#{stuBigImg} where stu_id=#{stuId}"})
     void updateStudent(Student student);
 }

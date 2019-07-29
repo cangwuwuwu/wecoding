@@ -1,15 +1,22 @@
 package work.niter.wecoding.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
+import java.util.Set;
+
+import com.github.tobato.fastdfs.domain.fdfs.MetaData;
+import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import com.github.tobato.fastdfs.domain.fdfs.ThumbImageConfig;
+import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import work.niter.wecoding.entity.Student;
+import work.niter.wecoding.entity.StusBO;
 import work.niter.wecoding.service.StudentService;
+import work.niter.wecoding.utils.FileUtils;
 
 /**
  * @Author: Cangwu
@@ -21,6 +28,10 @@ import work.niter.wecoding.service.StudentService;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private FastFileStorageClient storageClient;
+    @Autowired
+    private ThumbImageConfig thumbImageConfig;
 
     @GetMapping({"/stu-id/{id}"})
     public Student checkStudentAccountById(@PathVariable(value = "id",required = false) Integer id) {
@@ -34,11 +45,6 @@ public class StudentController {
 
         return result;
     }
-
-    /*@GetMapping({"/{stuId}/allInfo"})
-    public Student findOneStudentById(@PathVariable("stuId") Integer stuId) {
-        return this.studentService.getOne(stuId);
-    }*/
 
     @GetMapping({"/stu-username/{username}"})
     public Student checkStudentAccountByUsername(@PathVariable(value = "username",required = false) String username) {
@@ -61,5 +67,23 @@ public class StudentController {
     @PostMapping
     public int addAStudentForREST(Student student) {
         return this.studentService.addAStudent(student);
+    }
+
+    @PostMapping("/uploadheadimg")
+    public Student uploadHeadImg(@RequestBody StusBO stusBO) throws Exception {
+        String bace64Data = stusBO.getBaceData();
+        String stusBacePath = "F:\\" + stusBO.getStuId() + "stusHeadImg.png";
+        FileUtils.base64ToFile(stusBacePath, bace64Data);
+
+        MultipartFile file = FileUtils.fileToMultipart(stusBacePath);
+        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
+        String thumbPath = thumbImageConfig.getThumbImagePath(storePath.getPath());
+        String bigPath = storePath.getPath();
+
+        Student student = studentService.getOne(stusBO.getStuId());
+        student.setStuImg(thumbPath);
+        student.setStuBigImg(bigPath);
+        studentService.updateStudent(student);
+        return student;
     }
 }

@@ -1,7 +1,7 @@
 # Wecoding
 
 #### 前言
-`wecoding`致力于打造一个完善的小型校内资源共享网站，采用当前流行的技术实现。
+`wecoding`致力于打造一个便捷的小型校内信息交流网站，采用当前流行的技术实现。
 #### 项目介绍
 `wecoding`基于SpringBoot + MyBatis实现。包含欢迎、首页、学生注册、学生登录、学生信息展示、学生搜索、资源分享、校园指南、资源上传、帮助中心、论坛讨论等模块。
 
@@ -11,6 +11,7 @@
 | 技术      | 说明    |  官网  |
 | ------  | -----   | ---- |
 | Spring Boot        | 容器+MVC框架     |   https://spring.io/projects/spring-boot   |
+| Netty     |  高可用网络服务器 |  https://netty.io/ |
 | Spring Security        | 认证和授权框架     |   https://spring.io/projects/spring-security    |
 | MyBatis    |   ORM框架    |   http://www.mybatis.org/mybatis-3/zh/index.html   |
 | RabbitMq |  消息队列    |  	https://www.rabbitmq.com/|
@@ -25,6 +26,7 @@
 |技术      | 说明    |  官网|  
 | ----- | ----- | ---- |
 |Vue	|前端框架	|https://vuejs.org/|
+|iView| 基于 Vue 的 UI 组件库| https://www.iviewui.com/ |
 |JQuery| JavaScript框架|https://jquery.com/|
 |Bootstrap|开源工具包|https://www.bootcss.com/|
 |Thymeleaf|模板引擎|https://www.thymeleaf.org/|
@@ -34,7 +36,7 @@
 | 工具      | 说明    |  官网  |
 | ----- | ----- | ---- |
 |IDEA	| 开发IDE |	https://www.jetbrains.com/idea/download|
-|RedisView| redis可视化工具|
+|RedisView| redis可视化工具|https://github.com/cc20110101/RedisView|
 |Navicat	|数据库连接工具	|http://www.formysql.com/xiazai.html|
 |X-shell|	Linux远程连接工具	|http://www.netsarang.com/download/software.html|
   
@@ -53,6 +55,7 @@
 * [Spring实战(第四版)](https://book.douban.com/subject/26767354/)
 * [Spring Boot实战](https://book.douban.com/subject/26857423/)
 * [JavaEE开发的颠覆者 Spring Boot实战](https://book.douban.com/subject/26762595/)
+* [Netty实战](https://book.douban.com/subject/27038538/)
 
 #### 更新日志
 ##### 2019/7/3  first commit;Some basic registration and login functions
@@ -78,3 +81,13 @@
 ##### 2019/7/16 front-end development
 * signup.html使用Vue双向绑定取代了JQuery的DOM操作
 * 新增通过右边的搜索框搜索学生，查看其个人信息
+##### 2019/7/21 Use Netty for websocket and iView for view
+* 整合了Netty 编写了一个简单的聊天室，聊天、显示在线人数等功能
+* 添加了iView 美化注册页面,  添加了省市联动、显示性别、头像等
+#### 2019/7/25 finished school-guide model
+* 使用iView编写了home/guide/help页面,  用来展示主页和校园指南信息
+* guide/help页面使用marked.js+highlight.js 将md文件转化成 html并高亮显示
+#### 2019/7/29 fastDFS Support
+* 添加的fastDFS头像上传的后端代码
+* 部分大图片配置到nginx静态资源服务器
+* 添加了通过邮件方式发送反馈

@@ -1,0 +1,61 @@
+.ivu-layout-sider {
+    background: #f5f7f9;
+}
+.layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.layout-header-bar{
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+/*页脚*/
+.footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    padding: 45px 0 45px 0;
+}
+.wrapper {
+    min-height: 100%;
+    height: 100%;
+    margin: 0 auto -180px;
+}
+footer{
+    font-size: 12px;
+    text-align: center;
+    color: rgba(0,0,0,.5);
+    background-color: #ccc;
+}
+footer p{
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #515a6e;
+}
+footer h3:hover {
+    color: #2d8cf0;
+    cursor: pointer;
+}
+.ivu-layout-sider {
+    min-width: 310px!important;
+}
+
+.md-strong {
+    color: #c82333;
+}
+.md-list {
+    padding-left: 35px;
+}
+.md-header:hover {
+    color: #333;
+}
+.bug-div {
+    padding-top: 15px;
+}

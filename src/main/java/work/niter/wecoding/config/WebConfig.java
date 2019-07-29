@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("login").setViewName("login");
         registry.addViewController("index").setViewName("index");
         registry.addViewController("signup").setViewName("signup");
-        registry.addViewController("em").setViewName("email");
+        registry.addViewController("em").setViewName("email-code");
         registry.addViewController("home").setViewName("home");
         registry.addViewController("personal").setViewName("personal");
         registry.addViewController("allstus").setViewName("allstus");
@@ -29,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("forum").setViewName("forum");
         registry.addViewController("photos").setViewName("photos");
         registry.addViewController("resources").setViewName("resources");
+        registry.addViewController("chatroom").setViewName("chatroom");
     }
 
     @Bean

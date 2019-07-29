@@ -90,10 +90,6 @@ ul {
 }
 .info-left {
     float: left;
-    height: 420px;
-}
-.info-left div {
-    height: 100%;
 }
 .personal-head {
     position: relative;
@@ -201,4 +197,29 @@ h2 {
     height: 100px;
     float: left;
     padding-left: 10px;
+}
+
+.demo-upload-list img {
+    width: 150px;
+    height: 150px;
+}
+.demo-upload-list-cover {
+    visibility: hidden;
+    text-align: center;
+    line-height: 150px;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    position: absolute;
+    top: 143px;
+    background: rgba(128, 128, 128, .3);
+}
+.img150 {
+    width: 150px;
+}
+.info-left-head {
+    margin-top: 18px;
+}
+.info-left-head:hover > .demo-upload-list-cover {
+    visibility: visible;
 }

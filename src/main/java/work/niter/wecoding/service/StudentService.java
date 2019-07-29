@@ -56,9 +56,8 @@ public class StudentService {
             cacheNames = {"stu"},
             key = "#student.stuId"
     )
-    public Student updateStudent(Student student) {
+    public void updateStudent(Student student) {
         this.studentMapper.updateStudent(student);
-        return student;
     }
 
     public int addAStudent(Student student) {

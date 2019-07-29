@@ -17,7 +17,7 @@ public class LoginController {
 
     @GetMapping({"/login"})
     public String login(@RequestParam(value = "error",required = false) String error, @RequestParam(value = "logout",required = false) String logout, Model model) {
-        Map<String, Object> map = new HashMap(4);
+        Map<String, Object> map = new HashMap<>(4);
         if (error != null) {
             map.put("msg", "账号或密码错误!");
             map.put("loginClass", "alert alert-danger");
