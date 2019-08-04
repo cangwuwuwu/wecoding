@@ -1,13 +1,7 @@
 package work.niter.wecoding.controller;
 
-import java.util.concurrent.TimeUnit;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.entity.FeedBack;
 import work.niter.wecoding.exception.NullEmailRequestException;
 import work.niter.wecoding.service.MailService;
@@ -23,10 +17,9 @@ public class MailController {
     @Autowired
     private MailService mailService;
 
-    @PostMapping({"/sign"})
-    public String sendMail(HttpServletRequest request) {
+    @PostMapping("/sign")
+    public String sendMail(@RequestParam String email) {
         try {
-            String email = request.getParameter("email");
             if ("".equals(email)) {
                 throw new NullEmailRequestException();
             } else {

@@ -5,21 +5,23 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import work.niter.wecoding.entity.Account;
+import work.niter.wecoding.entity.MyMessage;
+
+import java.util.List;
 
 /**
  * @Author: Cangwu
- * @Date: 2019/7/14 1:29
+ * @Date: 2019/8/3 23:55
  * @Description:
  */
 @Mapper
-public interface AccountMapper {
+public interface MessageMapper {
 
     @Transactional(readOnly = true)
-    @Select({"select * from account where stu_username=#{stuUsername}"})
-    Account getAccountByUsernameInMapper(String stuUsername);
+    @Select("select * from fanout_msg")
+    List<MyMessage> getAllHistoryMessage();
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @Insert({"insert into account values(#{stuUsername}, #{stuPassword})"})
-    int addUserPassword(Account account);
+    @Insert("insert into fanout_msg values(#{msgId}, #{msgType}, #{msgHead}, #{msgContent}, #{msgSender}, #{msgTime})")
+    int insertNewHistoryMessage(MyMessage message);
 }

@@ -6,146 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>主页-Wecoding:便捷的校内信息交流网站</title>
-    <link href="https://cdn.bootcss.com/iview/3.4.2/styles/iview.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/5.8.0/css/all.css" rel="stylesheet"/>
+    <link href="../static/css/iview.css" th:href="@{css/iview.css}" rel="stylesheet">
+    <link href="../static/css/all.css" th:href="@{css/all.css}" rel="stylesheet"/>
     <link href="../static/css/home.css" th:href="@{css/home.css}" rel="stylesheet"/>
-    <style scoped>
-        body {
-            background: #f6f6f6;
-        }
-        a {
-            color: #515a6e;
-        }
-        h3:hover {
-            color: #2d8cf0;
-            cursor: pointer;
-        }
-        .time{
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .content{
-            padding-left: 5px;
-        }
-
-        .layout{
-            border: 1px solid #d7dde4;
-            background: #f5f7f9;
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .layout-logo{
-            width: 100px;
-            height: 30px;
-            background: #5b6270;
-            border-radius: 3px;
-            float: left;
-            position: relative;
-            top: 15px;
-            left: 20px;
-        }
-        .layout-nav{
-            width: 420px;
-            margin: 0 auto;
-            margin-right: 20px;
-        }
-        .layout-right {
-            float: right;
-        }
-        .font-light {
-            color: rgba(255,255,255,.7);
-        }
-        .box-left {
-            margin: 10px auto auto 10px;
-            float: left;
-            width: 350px;
-        }
-
-        .footer {
-            text-align: center;
-            background: #fff;
-            width: 100%;
-            height: 180px;
-            position: fixed;
-            z-index: 10;
-            padding: 45px 0 45px 0;
-            bottom: 0;
-        }
-        .footer > a {
-            color: #000;
-        }
-        .wrapper {
-            min-height: 100%;
-            height: 100%;
-            margin: 0 auto -180px;
-        }
-    </style>
 </head>
 <body>
-<div id="all-home" class="wrapper">
+<div id="all-home" class="wrapper" v-cloak>
     <template>
         <i-menu mode="horizontal"
                 :theme="theme" @on-select="selectMenu"
                 :style="{background: theme1}" :class="fontcolor">
-            <Menu-Item to="index" name="index" title="返回封面" >
+            <Menu-Item to="index" name="index" title="返回封面">
                 <Icon type="md-backspace" size="30"></Icon>
                 <span>返回封面</span>
             </Menu-Item>
-                <Menu-Item to="guide" name="guide">
-                    <Icon type="ios-paper" ></Icon>
-                    校园指南
-                </Menu-Item>
-                <Menu-Item to="resources" name="resources">
-                    <Icon type="logo-buffer" size="16"></Icon>
-                    资源分享
-                </Menu-Item>
-                <Submenu name="talk-chat">
+            <Menu-Item to="guide" name="guide">
+                <Icon type="ios-paper"></Icon>
+                校园指南
+            </Menu-Item>
+            <Menu-Item to="resources" name="resources">
+                <Icon type="logo-buffer" size="16"></Icon>
+                资源分享
+            </Menu-Item>
+            <Submenu name="talk-chat">
                 <template slot="title">
-                    <Icon type="ios-stats" ></Icon>
+                    <Icon type="ios-stats"></Icon>
                     交流讨论
                 </template>
                 <Menu-Group title="现在开始">
                     <Menu-Item to="forum" name="forum">
-                        <Icon type="md-chatboxes" ></Icon>
+                        <Icon type="md-chatboxes"></Icon>
                         论坛
                     </Menu-Item>
                     <Menu-Item to="chatroom" name="chatroom">
-                        <Icon type="ios-chatbubbles" ></Icon>
+                        <Icon type="ios-chatbubbles"></Icon>
                         聊天室
                     </Menu-Item>
                 </Menu-Group>
             </Submenu>
-                <Menu-Item to="allstus" name="allstus">
-                    <Icon type="ios-people" size="18"></Icon>
-                    参观一下
-                </Menu-Item>
-                <Menu-Item to="photos" name="photos">
-                    <Icon type="md-images" ></Icon>
-                    照片墙
-                </Menu-Item>
-                <Menu-Item to="help" name="help">
-                    <Icon type="md-help-circle" size="16"></Icon>
-                    帮助
-                </Menu-Item>
+            <Menu-Item to="allstus" name="allstus">
+                <Icon type="ios-people" size="18"></Icon>
+                参观一下
+            </Menu-Item>
+            <Menu-Item to="photos" name="photos">
+                <Icon type="md-images"></Icon>
+                照片墙
+            </Menu-Item>
+            <Menu-Item to="help" name="help">
+                <Icon type="md-help-circle" size="16"></Icon>
+                帮助
+            </Menu-Item>
             <Poptip trigger="hover" title="相信我!  点进去你就出不来了!  " content="戴上耳机，好好放松一下吧！">
                 <Menu-Item to="relax" target="_blank" name="relax">
-                    <Icon type="md-musical-note" ></Icon>
+                    <Icon type="md-musical-note"></Icon>
                     放松一下
                 </Menu-Item>
             </Poptip>
             <Submenu name="choose-theme" v-model="theme" style="float: right;">
                 <template slot="title">
-                    <Icon type="md-color-palette" ></Icon>
+                    <Icon type="md-color-palette"></Icon>
                     更换主题
                 </template>
                 <Menu-Group title="主题">
                     <Menu-Item name="light">
-                        <Icon type="ios-color-fill-outline" ></Icon>
+                        <Icon type="ios-color-fill-outline"></Icon>
                         亮色
                     </Menu-Item>
                     <Menu-Item name="dark">
-                        <Icon type="ios-color-fill" ></Icon>
+                        <Icon type="ios-color-fill"></Icon>
                         暗色
                     </Menu-Item>
                     <Menu-Item name="primary">
@@ -153,49 +81,74 @@
                         蓝色
                     </Menu-Item>
                     <Menu-Item name="#37a969">
-                        <Icon type="md-color-fill" ></Icon>
+                        <Icon type="md-color-fill"></Icon>
                         水鸭青
                     </Menu-Item>
                     <Menu-Item name="#ffc0cb">
-                        <Icon type="md-color-fill" ></Icon>
+                        <Icon type="md-color-fill"></Icon>
                         骚粉
                     </Menu-Item>
                     <Menu-Item name="#7B68EE">
-                        <Icon type="md-color-fill" ></Icon>
+                        <Icon type="md-color-fill"></Icon>
                         基佬紫
                     </Menu-Item>
                 </Menu-Group>
             </Submenu>
             <Menu-Item name="6" style="float: right;">
-                <template  sec:authorize="isAuthenticated()">
+                <template sec:authorize="isAuthenticated()">
                     <Dropdown @on-click="go">
                         <template>
-                            <Avatar style="background-color: #1E90FF" icon="ios-person" />
+                            <badge :count="msgcount">
+                                <Avatar style="background-color: #1E90FF" icon="ios-person"/>
+                            </badge>
                         </template>
                         <a class="ios-arrow-down" href="javascript:void(0)">
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <Dropdown-Menu slot="list">
-                            <Dropdown-Item name="me"><Icon type="md-at" size="17"></Icon><span id="username" sec:authentication="name"></span></Dropdown-Item>
-                            <Dropdown-Item name="personal" divided><Icon type="ios-person" size="17"></Icon>个人中心</Dropdown-Item>
-                            <Dropdown-Item><Icon type="md-settings" size="17"></Icon>修改密码</Dropdown-Item>
-                            <Dropdown-Item><Icon type="ios-notifications" size="17"></Icon>消息中心</Dropdown-Item>
-                            <Dropdown-Item name="logout" divided><Icon type="md-power" size="17"></Icon>退出登录</Dropdown-Item>
+                            <Dropdown-Item name="me">
+                                <Icon type="md-at" size="17"></Icon>
+                                <span id="username" sec:authentication="name"></span></Dropdown-Item>
+                            <Dropdown-Item name="personal" divided>
+                                <Icon type="ios-person" size="17"></Icon>
+                                个人中心
+                            </Dropdown-Item>
+                            <Dropdown-Item>
+                                <Icon type="md-settings" size="17"></Icon>
+                                修改密码
+                            </Dropdown-Item>
+                            <Dropdown-Item>
+                                <Icon type="ios-notifications" size="17"></Icon>
+                                消息中心
+                            </Dropdown-Item>
+                            <Dropdown-Item name="logout" divided>
+                                <Icon type="md-power" size="17"></Icon>
+                                退出登录
+                            </Dropdown-Item>
                         </Dropdown-Menu>
                     </Dropdown>
                 </template>
-                <template  sec:authorize="!isAuthenticated()">
+                <template sec:authorize="!isAuthenticated()">
                     <Dropdown @on-click="go">
                         <template>
-                            <Avatar style="background-color: #1E90FF" icon="ios-person" />
+                            <Avatar style="background-color: #1E90FF" icon="ios-person"/>
                         </template>
                         <a class="ios-arrow-down" href="javascript:void(0)">
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <Dropdown-Menu slot="list">
-                            <Dropdown-Item name="login"><Icon type="md-contact" size="17"></Icon>未登录</Dropdown-Item>
-                            <Dropdown-Item name="login" divided><Icon type="md-log-in" size="17"></Icon>登录</Dropdown-Item>
-                            <Dropdown-Item name="signup"><Icon type="md-log-out" size="17"></Icon>注册</Dropdown-Item>
+                            <Dropdown-Item name="login">
+                                <Icon type="md-contact" size="17"></Icon>
+                                未登录
+                            </Dropdown-Item>
+                            <Dropdown-Item name="login" divided>
+                                <Icon type="md-log-in" size="17"></Icon>
+                                登录
+                            </Dropdown-Item>
+                            <Dropdown-Item name="signup">
+                                <Icon type="md-log-out" size="17"></Icon>
+                                注册
+                            </Dropdown-Item>
                         </Dropdown-Menu>
                     </Dropdown>
                 </template>
@@ -210,54 +163,59 @@
             </Breadcrumb>
             <Row>
                 <i-col>
-                    <Card class="box-left" >
+                    <Card class="box-left">
                         <Collapse v-model="value2" accordion>
-                    <Panel name="0">
-                        校园指南
-                        <p slot="content">致力于收集全校(南昌工程学院)学习生活过程中可能遇到的小问题，届时只需查阅本页即可解决，例如:  水电缴费、社区报修方式、成绩查询等。</p>
-                    </Panel>
-                    <Panel name="1">
-                       资源分享
-                        <p slot="content">致力于建立一个丰富的计算机学习资源分享天地，例如:  PDF书籍、编程教学视频、学习网站等。</p>
-                    </Panel>
-                    <Panel name="2">
-                        交流讨论
-                        <p slot="content">在论坛发帖提问或者聊天室讨论，文明发言，共同进步。(虽然我知道没人就是了:) <br>(暂未开放)</p>
-                    </Panel>
-                    <Panel name="3">
-                        参观一下
-                        <p slot="content">走过路过，8要错过~可以查看所有注册用户的列表，查看个人主页，关注并私聊他们。 <br>(暂未开放)</p>
-                    </Panel>
-                    <Panel name="4">
-                        照片墙
-                        <p slot="content">汇聚最光辉的时刻(你最糗的样子都在这里:)<br>旨在收藏一些有纪念意义的照片或视频。<br>(暂未开放)</p>
-                    </Panel>
-                </Collapse>
+                            <Panel name="0">
+                                校园指南
+                                <p slot="content">致力于收集全校(南昌工程学院)学习生活过程中可能遇到的小问题，届时只需查阅本页即可解决，例如: 水电缴费、社区报修方式、成绩查询等。</p>
+                            </Panel>
+                            <Panel name="1">
+                                资源分享
+                                <p slot="content">致力于建立一个丰富的计算机学习资源分享天地，例如: PDF书籍、编程教学视频、学习网站等。</p>
+                            </Panel>
+                            <Panel name="2">
+                                交流讨论
+                                <p slot="content">在论坛发帖提问或者聊天室讨论，文明发言，共同进步。(虽然我知道没人就是了:) <br>(暂未开放)</p>
+                            </Panel>
+                            <Panel name="3">
+                                参观一下
+                                <p slot="content">走过路过，8要错过~可以查看所有注册用户的列表，查看个人主页，关注并私聊他们。 <br>(暂未开放)</p>
+                            </Panel>
+                            <Panel name="4">
+                                照片墙
+                                <p slot="content">汇聚最光辉的时刻(你最糗的样子都在这里:)<br>旨在收藏一些有纪念意义的照片或视频。<br>(暂未开放)</p>
+                            </Panel>
+                        </Collapse>
                     </Card>
                 </i-col>
                 <i-col>
-                    <Card class="box-left"  style="width:1062px;">
-                <Carousel v-model="value1" loop trigger="hover">
-                    <Carousel-Item>
-                        <div class="demo-carousel"><img src="../static/images/business.jpg" th:src="@{images/business.jpg}"/> </div>
-                    </Carousel-Item>
-                    <Carousel-Item>
-                        <div class="demo-carousel"><img src="../static/images/resource.jpg" th:src="@{images/resource.jpg}"/></div>
-                    </Carousel-Item>
-                    <Carousel-Item>
-                        <div class="demo-carousel"><img src="../static/images/talk.jpg" th:src="@{images/talk.jpg}"/></div>
-                    </Carousel-Item>
-                    <Carousel-Item>
-                        <div class="demo-carousel"><img src="../static/images/friends.jpg" th:src="@{images/friends.jpg}"/></div>
-                    </Carousel-Item>
-                    <Carousel-Item>
-                        <div class="demo-carousel"><img src="../static/images/photos.jpg" th:src="@{images/photos.jpg}"/></div>
-                    </Carousel-Item>
-                </Carousel>
-            </Card>
+                    <Card class="box-left" style="width:1062px;">
+                        <Carousel v-model="value1" loop trigger="hover">
+                            <Carousel-Item>
+                                <div class="demo-carousel"><img src="../static/images/business.jpg"
+                                                                th:src="@{images/business.jpg}"/></div>
+                            </Carousel-Item>
+                            <Carousel-Item>
+                                <div class="demo-carousel"><img src="../static/images/resource.jpg"
+                                                                th:src="@{images/resource.jpg}"/></div>
+                            </Carousel-Item>
+                            <Carousel-Item>
+                                <div class="demo-carousel"><img src="../static/images/talk.jpg"
+                                                                th:src="@{images/talk.jpg}"/></div>
+                            </Carousel-Item>
+                            <Carousel-Item>
+                                <div class="demo-carousel"><img src="../static/images/friends.jpg"
+                                                                th:src="@{images/friends.jpg}"/></div>
+                            </Carousel-Item>
+                            <Carousel-Item>
+                                <div class="demo-carousel"><img src="../static/images/photos.jpg"
+                                                                th:src="@{images/photos.jpg}"/></div>
+                            </Carousel-Item>
+                        </Carousel>
+                    </Card>
                 </i-col>
                 <i-col>
-                    <Card class="box-left" >
+                    <Card class="box-left">
                         <p slot="title">
                             <Icon type="ios-film-outline"></Icon>
                             时光机
@@ -290,51 +248,135 @@
         </div>
     </template>
     <template>
-        <div>
-            <Drawer :closable="false" width="500" v-model="personinfo">
-                <br>
-                <h2>我的信息</h2>
-                <div style="background:#eee;padding: 10px">
-                    <Card :bordered="false">
-                        <Row>
-                            <i-Col span="4">
-                                <img :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuImg"/>
-                                <div class="ivu-head" @click="handleView" >
+        <Drawer :closable="false" width="500" v-model="personinfo">
+            <Divider orientation="left">我的信息</Divider>
+            <div class="card-surround-gray">
+                <Card :bordered="false">
+                    <Row>
+                        <i-Col span="4">
+                            <img :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuImg"/>
+                            <div class="ivu-head" @click="handleView">
                                 <Icon title="查看大图" type="ios-eye-outline" size="15"></Icon>
                                 查看大图
+                            </div>
+                        </i-Col>
+                        <i-Col span="20">
+                            <Upload
+                                    type="drag"
+                                    action="">
+                                <div style="padding: 20px 0">
+                                    <Icon type="ios-cloud-upload" size="20" style="color: #3399ff"></Icon>
+                                    <p>点击或拖拽上传</p>
                                 </div>
-                            </i-Col>
-                            <i-Col span="20">
-                                <Upload
-                                        type="drag"
-                                        action="">
-                                    <div style="padding: 20px 0">
-                                        <Icon type="ios-cloud-upload" size="20" style="color: #3399ff"></Icon>
-                                        <p>点击或拖拽上传</p>
-                                    </div>
-                                </Upload>
-                            </i-Col>
-                            <Modal title="查看大图" footer-hide v-model="visible">
-                                <img width="60" :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuBigImg" v-if="visible" style="width: 100%">
-                            </Modal>
-                        </Row>
-                        <div>{{ myinfo.stuId }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuName }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuGender }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuEmail }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuArea }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuPhone }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuBirthday }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuRegistTime }}<Icon type="ios-create-outline" /></div>
-                        <div>{{ myinfo.stuInfo }}<Icon type="ios-create-outline" /></div>
-                    </Card>
-                </div>
+                            </Upload>
+                        </i-Col>
+                        <Modal title="查看大图" footer-hide v-model="visible">
+                            <img width="60" :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuBigImg"
+                                 v-if="visible" style="width: 100%">
+                        </Modal>
+                    </Row>
+                    <div>
+                        {{ myinfo.stuId }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuName }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>{{ myinfo.stuGender }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuEmail }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuArea }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuPhone }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuBirthday }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <div>
+                        {{ myinfo.stuRegistTime }}
+                    </div>
+                    <div>
+                        {{ myinfo.stuInfo }}
+                        <Icon type="ios-create-outline"/>
+                    </div>
+                    <Spin fix v-if="spinShow">
+                        <Icon type="ios-loading" size=25 class="demo-spin-icon-load"></Icon>
+                        <div>加载中...</div>
+                    </Spin>
+                </Card>
+            </div>
 
-                <br>
-                <h2>新的消息</h2>
-                <Divider />
-            </Drawer>
-        </div>
+            <br>
+            <Divider orientation="left">新的消息</Divider>
+            <div v-if="msglist.length == 0" class="card-surround-gray">
+                <Card>
+                    <p>
+                        <img alt="空的" src="../static/images/isempty.jpg" th:src="@{images/isempty.jpg}"/>
+                    </p>
+                </Card>
+            </div>
+            <div v-for="amsg in revmsglist" class="card-surround-gray">
+                <Card>
+                    <p slot="title">
+                        {{ amsg.msgType }}消息: {{ amsg.msgHead }}
+                    </p>
+                    <a href="#" slot="extra">
+                        <Icon type="ios-loop-strong"></Icon>
+                        {{ amsg.msgSender }}
+                    </a>
+                    <p> {{ amsg.msgContent }}
+                    <div style="text-align: right;">
+                        <i-Time :time="parseInt(amsg.msgTime)"/>
+                    </div>
+                    </p>
+                </Card>
+            </div>
+            <br>
+            <Divider orientation="left">历史消息</Divider>
+            <div v-if="hismsglist.length == 0" style="padding: 10px;">
+                <Card>
+                    <div class="ivu-upload-drag" @click="show2hismsg">
+                        <div style="padding: 40px 0;">
+                            <Icon type="md-finger-print" size="30"></Icon>
+                            <P>点此加载</P>
+                        </div>
+                    </div>
+                    <Spin fix v-if="spinShowHis">
+                        <Icon type="ios-loading" size=25 class="demo-spin-icon-load"></Icon>
+                        <div>加载中...</div>
+                    </Spin>
+                </Card>
+            </div>
+            <div v-for="ahismsg in hismsglist" style="padding: 10px;">
+                <Card>
+                    <p slot="title">
+                        {{ ahismsg.msgType }}消息: {{ ahismsg.msgHead }}
+                    </p>
+                    <a href="#" slot="extra">
+                        <Icon type="ios-loop-strong"></Icon>
+                        {{ ahismsg.msgSender }}
+                    </a>
+                    <p> {{ ahismsg.msgContent }}
+                    <div style="text-align: right;">
+                        <i-Time :time="parseInt(ahismsg.msgTime)" type="datetime"/>
+                    </div>
+                    </p>
+                </Card>
+            </div>
+            <div style="cursor: pointer" @click="showallhismsg">
+                <Divider>{{ more }}</Divider>
+            </div>
+        </Drawer>
     </template>
     <div style="height: 180px"></div>
 </div>
@@ -366,8 +408,9 @@
                 <h3>点赞</h3>
                 <a target="_blank" href="https://blog.csdn.net/qq_43581949"><h3>作者博客</h3></a>
                 <Poptip trigger="hover" placement="right-end" title="扫二维码,  加入我们">
-                <h3>加入我们</h3>
-                    <div slot="content"><img alt="二维码" src="../static/images/ours2code.jpg" th:src="@{images/ours2code.jpg}"/></div>
+                    <h3>加入我们</h3>
+                    <div slot="content"><img alt="二维码" src="../static/images/ours2code.jpg"
+                                             th:src="@{images/ours2code.jpg}"/></div>
                 </Poptip>
             </i-col>
             <i-col span="5">
@@ -402,7 +445,8 @@
             </Radio-Group>
             <div>反馈内容</div>
             <div class="bug-div">
-                <i-Input v-model="bugcontent" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..." />
+                <i-Input v-model="bugcontent" type="textarea" :autosize="{minRows: 3,maxRows: 5}"
+                         placeholder="Enter something..."/>
             </div>
             <div class="bug-div">
                 <i-Button :loading="loading" long type="primary" @click="sendfeedback">提交反馈</i-Button>
@@ -413,95 +457,7 @@
 <script src="../static/js/vue.js" th:src="@{js/vue.js}"></script>
 <script src="../static/js/iview.min.js" th:src="@{js/iview.min.js}"></script>
 <script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
-<script>
-    var vmhome = new Vue({
-        el: '#all-home',
-        data: {
-            theme: 'light',
-            theme1: '',
-            fontcolor: '',
-            value1: 0,
-            value2: '0',
-            personinfo: false,
-            myinfo: [],
-            visible: false,
-            ruleInline: {
-                user: [
-                    { required: true, message: 'Please fill in the user name', trigger: 'blur' }
-                ]
-            },
-            formInline: {
-                user: '',
-            },
-        },
-        methods: {
-            handleView () {
-                this.visible = true;
-            },
-            changecolor(type) {
-                this.theme1 = type;
-            },
-            go(link) {
-                if (link === 'me') {
-                    vmhome.personinfo = true;
-                    var username = $("#username").text();
-                    $.get("stu/stu-username/" + username, function (data_my) {
-                        vmhome.myinfo = data_my;
-                    });
-                }
-                else window.location = link;
-            },
-            selectMenu(name) {
-                if (name === 'light' || name === 'dark' || name === 'primary')
-                    vmhome.changecolor(name);
-                if (name.substr(0, 1) === '#') {
-                    vmhome.theme1 = name;
-                    vmhome.fontcolor = 'font-light';
-                }
-            }
-        }
-    });
-    var vmfooter = new Vue({
-        el: '#footer',
-        data: {
-            bug: false,
-            bugtype: '',
-            bugcontent: '',
-            loading: false
-        },
-        methods: {
-            sendfeedback() {
-                if (this.bugtype === '' || this.bugcontent === '')
-                    return ;
-                vmfooter.loading = true;
-                $.ajax({
-                    type: 'post',
-                    url: '/sendmail/feedback',
-                    data: {type:this.bugtype, content:this.bugcontent},
-                    success(data_feedback) {
-                        vmfooter.success(data_feedback);
-                        vmfooter.loading = false;
-                    },
-                    error() {
-                        vmfooter.error('糟糕! 反馈好像发送失败了...:(');
-                        vmfooter.loading = false;
-                    },
-                });
-            },
-            success (info) {
-                this.$Message.success({
-                    content: info,
-                    duration: 3
-                });
-            },
-            error (info) {
-                this.$Message.error({
-                    content:info,
-                    duration: 3
-                });
-            }
-        }
-    });
-</script>
+<script src="../static/js/stomp.min.js" th:src="@{js/stomp.min.js}"></script>
+<script src="../static/js/home.js" th:src="@{js/home.js}"></script>
 </body>
 </html>

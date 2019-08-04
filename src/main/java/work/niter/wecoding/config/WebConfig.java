@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("photos").setViewName("photos");
         registry.addViewController("resources").setViewName("resources");
         registry.addViewController("chatroom").setViewName("chatroom");
+        registry.addViewController("admin").setViewName("admin-home");
     }
 
     @Bean

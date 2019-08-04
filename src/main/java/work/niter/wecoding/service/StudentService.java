@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.entity.Student;
 import work.niter.wecoding.mapper.StudentMapper;
 
@@ -44,22 +45,19 @@ public class StudentService {
         return this.studentMapper.getAllStudents();
     }
 
-    @CacheEvict(
-            value = {"stu"},
-            key = "#stuId"
-    )
+    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = {"stu"}, key = "#stuId")
     public int deleteOneStudent(Integer stuId) {
         return this.studentMapper.deleteStudentById(stuId);
     }
 
-    @CachePut(
-            cacheNames = {"stu"},
-            key = "#student.stuId"
-    )
+    @Transactional(rollbackFor = Exception.class)
+    @CachePut(cacheNames = {"stu"}, key = "#student.stuId")
     public void updateStudent(Student student) {
         this.studentMapper.updateStudent(student);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public int addAStudent(Student student) {
         return this.studentMapper.addStudent(student);
     }

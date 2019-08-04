@@ -41,7 +41,7 @@ public class MailService {
 
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-            helper.setFrom(this.from);
+            helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject("From Wecoding");
             Context context = new Context();
@@ -61,7 +61,7 @@ public class MailService {
 
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-            helper.setFrom(this.from);
+            helper.setFrom(from);
             helper.setTo("294352178@qq.com");
             helper.setSubject("Wecoding : " + feedBack.getType());
             Context context = new Context();

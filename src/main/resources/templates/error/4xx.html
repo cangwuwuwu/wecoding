@@ -26,7 +26,7 @@
     <img alt="错误图片" src="/wecoding/static/images/finderror.jpg" th:src="@{images/finderror.jpg}"/>
     <div th:switch="${status}">
         <div class="fontInfo" th:case="400">请求错误</div>
-        <div class="fontInfo" th:case="403">禁止访问</div>
+        <div class="fontInfo" th:case="403">无权访问</div>
         <div class="fontInfo" th:case="404">页面不存在</div>
         <div class="fontInfo" th:case="500">服务器错误</div>
         <div class="fontInfo" th:case="*">出错啦</div>
@@ -37,6 +37,7 @@
     <h4>Timestamp: [[${#dates.format(timestamp,'yyyy-MM-dd HH:mm:ss')}]]</h4>
     <h4>error: [[${error}]]</h4>
     <h4>message: [[${message}]]</h4>
+    <a href="/home"> 返回首页 </a>
 </div>
 </div>
 </body>

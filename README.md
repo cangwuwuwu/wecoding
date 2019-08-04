@@ -20,6 +20,8 @@
 | Docker |	应用容器引擎 |	https://www.docker.com/|
 | Druid |	数据库连接池 | https://github.com/alibaba/druid|
 |Lombok |	简化对象封装工具 | https://github.com/rzwitserloot/lombok|
+| Nginx | 高性能的HTTP和反向代理web服务器 | http://nginx.org/en/ |
+| fastDFS | 高性能文件服务客户端 |  https://github.com/happyfish100/fastdfs |
     
 ##### 前端技术
    
@@ -30,6 +32,7 @@
 |JQuery| JavaScript框架|https://jquery.com/|
 |Bootstrap|开源工具包|https://www.bootcss.com/|
 |Thymeleaf|模板引擎|https://www.thymeleaf.org/|
+| Marked | 在线转码md文件的JS库 | https://github.com/markedjs/marked |
  
 ##### 开发工具
    
@@ -37,19 +40,21 @@
 | ----- | ----- | ---- |
 |IDEA	| 开发IDE |	https://www.jetbrains.com/idea/download|
 |RedisView| redis可视化工具|https://github.com/cc20110101/RedisView|
-|Navicat	|数据库连接工具	|http://www.formysql.com/xiazai.html|
+|Navicat|数据库连接工具	|http://www.formysql.com/xiazai.html|
 |X-shell|	Linux远程连接工具	|http://www.netsarang.com/download/software.html|
+|postman| 网页调试与发送网页HTTP请求工具 |https://www.getpostman.com/ |
   
 ##### 开发环境
   
 | 工具      | 版本号    |  下载  |
 | ----- | ----- | ---- |
 |JDK |	1.8	|https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html|
+|SpringBoot | 2.1.6 | https://spring.io/projects/spring-boot |
 |Mysql	|5.7|	https://www.mysql.com/|
 |Redis |	3.2 |	https://redis.io/download|
-|MongoDb|	3.2	|https://www.mongodb.com/download-center|
-|RabbitMq|	3.7.14|	http://www.rabbitmq.com/download.html|
-|nginx|	1.10	|http://nginx.org/en/download.html|
+|MongoDB|	3.2	|https://www.mongodb.com/download-center|
+|RabbitMQ|	3.7.14|	http://www.rabbitmq.com/download.html|
+|nginx|	1.16 |http://nginx.org/en/download.html|
 
 #### 参考资料
 * [Spring实战(第四版)](https://book.douban.com/subject/26767354/)
@@ -91,3 +96,7 @@
 * 添加的fastDFS头像上传的后端代码
 * 部分大图片配置到nginx静态资源服务器
 * 添加了通过邮件方式发送反馈
+#### 2019/8/2 Add Transactional/message center module
+* 添加事物支持
+* 整合RabbitMQ, stomp消息插件
+* 用户广播消息模块: 历史消息/实时接收在线消息

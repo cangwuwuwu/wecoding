@@ -2,6 +2,7 @@ package work.niter.wecoding.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.mapper.AccountMapper;
 
@@ -15,13 +16,11 @@ public class AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
-    public AccountService() {
-    }
-
     public Account getAccountByUsernameInService(String username) {
         return this.accountMapper.getAccountByUsernameInMapper(username);
     }
 
+//    @Transactional(rollbackFor = Exception.class)
     public void addUserPasswordInService(Account account) {
         this.accountMapper.addUserPassword(account);
     }

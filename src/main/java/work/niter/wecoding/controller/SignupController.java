@@ -1,18 +1,13 @@
 package work.niter.wecoding.controller;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.entity.Student;
 import work.niter.wecoding.entity.UserList;
 import work.niter.wecoding.service.SignupService;
-import work.niter.wecoding.service.StudentService;
 
 /**
  * @Author: Cangwu
@@ -26,15 +21,15 @@ public class SignupController {
     @Autowired
     private SignupService signupService;
 
-    @GetMapping({"/getFive"})
+    @GetMapping("/getFive")
     public UserList toSignUpPage1() {
-        return this.signupService.getFIveStudentsInService();
+        return this.signupService.getFiveStudentsInService();
     }
 
-    @PostMapping({"/regist"})
-    public String addStudentForREST(Student stu, Account account, HttpServletRequest request) throws IOException {
-        String stuRePassword = request.getParameter("stuRePassword");
-        String stuCode = request.getParameter("stuCode");
+    @PostMapping("/regist")
+    public String addStudentForREST(Student stu, Account account,
+                                    @RequestParam String stuRePassword,
+                                    @RequestParam String stuCode) throws IOException {
         return this.signupService.registerInService(stu, account, stuRePassword, stuCode);
     }
 }
