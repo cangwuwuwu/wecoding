@@ -54,6 +54,9 @@ var vmhome = new Vue({
                     console.log(data_history_msg);
                     vmhome.allhismsglist = data_history_msg.reverse();
                     vmhome.hismsglist = data_history_msg.slice(0, 2);
+                    if (vmhome.hismsglist.length === vmhome.allhismsglist.length) {
+                        vmhome.more = '到底啦~';
+                    }
                 }
             })
         },
@@ -62,7 +65,8 @@ var vmhome = new Vue({
             let last = this.hismsglist.length - 1;
             for (let i = 1; i < 4; i++) {
                 vmhome.hismsglist.push(this.allhismsglist.slice(last + i)[0]);
-                if (last + i === vmhome.allhismsglist.length - 1) {
+                // last + i === vmhome.allhismsglist.length - 1
+                if (vmhome.hismsglist.length === vmhome.allhismsglist.length) {
                     vmhome.more = '到底啦~';
                     break;
                 }
@@ -94,7 +98,10 @@ var vmfooter = new Vue({
                 data: {type: this.bugtype, content: this.bugcontent},
                 success(data_feedback) {
                     vmfooter.success(data_feedback);
-                    vmfooter.loading = false;
+                    setTimeout(() => {
+                        vmfooter.loading = false;
+                        vmfooter.bug = false;
+                    }, 1000);
                 },
                 error() {
                     vmfooter.error('糟糕! 反馈好像发送失败了...:(');

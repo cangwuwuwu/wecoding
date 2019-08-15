@@ -106,20 +106,21 @@
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <Dropdown-Menu slot="list">
-                            <Dropdown-Item name="me">
+                            <Dropdown-Item name="#">
                                 <Icon type="md-at" size="17"></Icon>
-                                <span id="username" sec:authentication="name"></span></Dropdown-Item>
-                            <Dropdown-Item name="personal" divided>
+                                <span id="username" sec:authentication="name"></span>
+                            </Dropdown-Item>
+                            <Dropdown-Item name="me" divided>
                                 <Icon type="ios-person" size="17"></Icon>
                                 个人中心
+                            </Dropdown-Item>
+                            <Dropdown-Item name="me">
+                                <Icon type="ios-notifications" size="17"></Icon>
+                                消息中心
                             </Dropdown-Item>
                             <Dropdown-Item>
                                 <Icon type="md-settings" size="17"></Icon>
                                 修改密码
-                            </Dropdown-Item>
-                            <Dropdown-Item>
-                                <Icon type="ios-notifications" size="17"></Icon>
-                                消息中心
                             </Dropdown-Item>
                             <Dropdown-Item name="logout" divided>
                                 <Icon type="md-power" size="17"></Icon>
@@ -236,6 +237,10 @@
                             <Timeline-Item>
                                 <p class="time">7月25日</p>
                                 <p class="content">校园指南第一版完成</p>
+                            </Timeline-Item>
+                            <Timeline-Item>
+                                <p class="time">8月10日</p>
+                                <p class="content">前端重构</p>
                             </Timeline-Item>
                             <Timeline-Item>
                                 <p class="time">Now</p>
@@ -373,7 +378,7 @@
                     </p>
                 </Card>
             </div>
-            <div style="cursor: pointer" @click="showallhismsg">
+            <div v-if="hismsglist.length != 0" style="cursor: pointer" @click="showallhismsg">
                 <Divider>{{ more }}</Divider>
             </div>
         </Drawer>
@@ -405,7 +410,7 @@
                 </a>
             </i-col>
             <i-col span="5">
-                <h3>点赞</h3>
+                <h3>点赞/Star</h3>
                 <a target="_blank" href="https://blog.csdn.net/qq_43581949"><h3>作者博客</h3></a>
                 <Poptip trigger="hover" placement="right-end" title="扫二维码,  加入我们">
                     <h3>加入我们</h3>

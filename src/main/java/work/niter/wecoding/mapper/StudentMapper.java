@@ -1,11 +1,8 @@
 package work.niter.wecoding.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.entity.Student;
 
@@ -14,7 +11,6 @@ import work.niter.wecoding.entity.Student;
  * @Date: 2019/7/14 1:19
  * @Description:
  */
-
 @Mapper
 @Transactional(readOnly = true,rollbackFor = Exception.class)
 public interface StudentMapper {

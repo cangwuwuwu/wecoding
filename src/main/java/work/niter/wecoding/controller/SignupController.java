@@ -23,13 +23,13 @@ public class SignupController {
 
     @GetMapping("/getFive")
     public UserList toSignUpPage1() {
-        return this.signupService.getFiveStudentsInService();
+        return signupService.getFiveStudentsInService();
     }
 
     @PostMapping("/regist")
     public String addStudentForREST(Student stu, Account account,
                                     @RequestParam String stuRePassword,
                                     @RequestParam String stuCode) throws IOException {
-        return this.signupService.registerInService(stu, account, stuRePassword, stuCode);
+        return signupService.registerInService(stu, account, stuRePassword, stuCode);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @EnableAsync
 @EnableRabbit
+//@MapperScan(basePackages = "work.niter.wecoding.mapper")
 @EnableTransactionManagement
 @SpringBootApplication
 public class WecodingApplication extends SpringBootServletInitializer {

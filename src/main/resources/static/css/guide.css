@@ -1,16 +1,18 @@
 .ivu-layout-sider {
     background: #f5f7f9;
 }
-.layout{
+
+.layout {
     border: 1px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
 }
-.layout-header-bar{
+
+.layout-header-bar {
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
 }
 
 /*页脚*/
@@ -20,42 +22,62 @@
     bottom: 0;
     padding: 45px 0 45px 0;
 }
+
 .wrapper {
     min-height: 100%;
     height: 100%;
     margin: 0 auto -180px;
 }
-footer{
+
+footer {
     font-size: 12px;
     text-align: center;
-    color: rgba(0,0,0,.5);
+    color: rgba(0, 0, 0, .5);
     background-color: #ccc;
 }
-footer p{
+
+footer p {
     line-height: 30px;
     margin: 0;
     padding: 0;
 }
+
 a {
     color: #515a6e;
 }
+
 footer h3:hover {
     color: #2d8cf0;
     cursor: pointer;
 }
+
 .ivu-layout-sider {
-    min-width: 310px!important;
+    min-width: 310px !important;
 }
 
 .md-strong {
     color: #c82333;
 }
+
 .md-list {
     padding-left: 35px;
 }
+
 .md-header:hover {
     color: #333;
 }
+
 .bug-div {
     padding-top: 15px;
+}
+
+.ivu-menu-horizontal.ivu-menu-light:after {
+    height: 0px;
+}
+
+.wecoding-logo {
+    position: absolute;
+    left: 70px;
+    font-size: 23px;
+    color: #c82333;
 }

@@ -17,11 +17,11 @@ public class AccountService {
     private AccountMapper accountMapper;
 
     public Account getAccountByUsernameInService(String username) {
-        return this.accountMapper.getAccountByUsernameInMapper(username);
+        return accountMapper.selectByStuUsername(username);
     }
 
-//    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void addUserPasswordInService(Account account) {
-        this.accountMapper.addUserPassword(account);
+        accountMapper.addUserPassword(account);
     }
 }

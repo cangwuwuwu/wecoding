@@ -41,8 +41,4 @@ gen
 /.gitignore
 /src/main/resources/static/md/
 /src/main/resources/static/images/mdpics/
-/src/main/resources/dist/
-/package.json
-/package-lock.json
 /src/main/resources/main.js
-/node_modules

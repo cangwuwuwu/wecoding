@@ -5,78 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>校园指南-Wecoding:便捷的校内信息交流网站</title>
-    <link href="https://cdn.bootcss.com/iview/3.4.2/styles/iview.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/5.8.0/css/all.css" rel="stylesheet"/>
+    <link href="../static/css/iview.css" th:href="@{css/iview.css}" rel="stylesheet">
     <link href="../static/css/back-top.css" th:href="@{css/back-top.css}" rel="stylesheet" />
     <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/a11y-light.min.css" rel="stylesheet">
     <link href="../static/css/guide.css" th:href="@{css/guide.css}" rel="stylesheet" />
+    <link href="//at.alicdn.com/t/font_1298080_miz4ew750vg.css" rel="stylesheet"/>
 </head>
 <body>
+
 <div id="all-home" class="wrapper">
     <template>
-        <div class="layout">
-            <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-                <i-Menu theme="light" style="width: 310px;"
-                        @on-select="getmdpage"  @on-open-change="addbread">
-                    <Submenu name="学校信息">
-                        <template slot="title">
-                            <Icon type="ios-navigate"></Icon>
-                            学校信息
-                        </template>
-                        <Menu-Item name="college-website">学校官网</Menu-Item>
-                        <Menu-Item name="college-address">学校地址/路线</Menu-Item>
-                        <Menu-Item name="map">学校地图</Menu-Item>
-                    </Submenu>
-                    <!--<Submenu name="1-1">
-                        <template slot="title">
-                            <Icon type=""></Icon>
-                            Item 1-1
-                        </template>
-                        <Menu-Item name="1-1-1">Option 1</Menu-Item>
-                        <Menu-Item name="1-2-2">Option 2</Menu-Item>
-                        <Menu-Item name="1-3-3">Option 3</Menu-Item>
-                    </Submenu>-->
-                    <Submenu name="校园指南">
-                        <template slot="title">
-                            <Icon type="ios-keypad"></Icon>
-                            校园指南
-                        </template>
-                        <Menu-Group title="新生专区">
-                            <Menu-Item name="wel-new">自助迎新</Menu-Item>
-                            <Menu-Item name="military-training">军训安排</Menu-Item>
-                            <Menu-Item name="dormitory">宿舍环境</Menu-Item>
-                            <Menu-Item name="wifi">宽带配置</Menu-Item>
-                            <Menu-Item name="start-test">开学考试</Menu-Item>
-                        </Menu-Group>
-                        <Menu-Group title="A-E">
-                            <Menu-Item name="score">成绩查询</Menu-Item>
-                            <Menu-Item name="electric">电费缴纳</Menu-Item>
-                        </Menu-Group>
-                        <Menu-Group title="F-J">
-                            <Menu-Item name="edu-email">教育邮箱</Menu-Item>
-                        </Menu-Group>
-                        <Menu-Group title="K-O">
-                            <Menu-Item name="cet">四六级</Menu-Item>
-                            <Menu-Item name="repair">社区报修</Menu-Item>
-                        </Menu-Group>
-                    </Submenu>
-                </i-Menu>
-            </Sider>
+        <Row>
+            <div class="wrapper-header">
+                <ul class="ivu-menu ivu-menu-light ivu-menu-horizontal">
+                    <div class="wrapper-header-nav">
+                        <div class="wrapper-header-nav-list" style="float: right; padding: 0 65px">
+                            <a href="/" class="wecoding-logo"><Icon custom="iconfont icon-WE" size="32" ></Icon>coding</a>
+                            <a href="/home" target="_self" class="ivu-menu-item">返回首页</a>
+                            <a href="/guide" target="_self" class="ivu-menu-item ivu-menu-item-selected ivu-menu-item-active">校园指南</a>
+                            <a href="/resources" target="_blank" class="ivu-menu-item">
+                                资源分享 
+                                <sup class="ivu-badge-dot" style="margin-top: 20px; margin-right: 20px;"></sup>
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </Row>
+        <Row>
+            <i-col>
+                <div class="layout">
+                    <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
+                        <i-Menu theme="light" style="width: 310px;"
+                                @on-select="getmdpage"  @on-open-change="addbread">
+                            <Submenu name="学校信息">
+                                <template slot="title">
+                                    <Icon type="ios-navigate"></Icon>
+                                    学校信息
+                                </template>
+                                <Menu-Item name="college-website">学校官网</Menu-Item>
+                                <Menu-Item name="college-address">学校地址/路线</Menu-Item>
+                                <Menu-Item name="map">学校地图</Menu-Item>
+                            </Submenu>
+                            <Submenu name="校园指南">
+                                <template slot="title">
+                                    <Icon type="ios-keypad"></Icon>
+                                    校园指南
+                                </template>
+                                <Menu-Group title="新生专区">
+                                    <Menu-Item name="wel-new">自助迎新</Menu-Item>
+                                    <Menu-Item name="military-training">军训安排</Menu-Item>
+                                    <Menu-Item name="dormitory">宿舍环境</Menu-Item>
+                                    <Menu-Item name="wifi">宽带配置</Menu-Item>
+                                    <Menu-Item name="start-test">开学考试</Menu-Item>
+                                </Menu-Group>
+                                <Menu-Group title="A-E">
+                                    <Menu-Item name="score">成绩查询</Menu-Item>
+                                    <Menu-Item name="electric">电费缴纳</Menu-Item>
+                                </Menu-Group>
+                                <Menu-Group title="F-J">
+                                    <Menu-Item name="edu-email">教育邮箱</Menu-Item>
+                                </Menu-Group>
+                                <Menu-Group title="K-O">
+                                    <Menu-Item name="cet">四六级</Menu-Item>
+                                    <Menu-Item name="repair">社区报修</Menu-Item>
+                                </Menu-Group>
+                            </Submenu>
+                        </i-Menu>
+                    </Sider>
 
-            <Layout :style="{marginLeft: '320px'}">
-                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
-                <i-Content :style="{padding: '0 16px 16px'}">
-                    <Breadcrumb :style="{margin: '16px 0'}" >
-                        <Breadcrumb-Item >{{ bread1[0] }}</Breadcrumb-Item>
-                        <Breadcrumb-Item >{{bread2}}</Breadcrumb-Item>
-<!--                        <Breadcrumb-item v-for="bread in breads">{{ bread }}</Breadcrumb-item>-->
-                    </Breadcrumb>
-                    <Card>
-                        <div style="padding-left: 15%; padding-right:15%;font-size: 20px;height: fit-content;min-height: 1000px" v-html="md"></div>
-                    </Card>
-                </i-Content>
-            </Layout>
-        </div>
+                    <Layout :style="{marginLeft: '320px'}">
+                        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
+                        <i-Content :style="{padding: '0 16px 16px'}">
+                            <Breadcrumb :style="{margin: '16px 0'}" >
+                                <Breadcrumb-Item >{{ bread1[0] }}</Breadcrumb-Item>
+                                <Breadcrumb-Item >{{bread2}}</Breadcrumb-Item>
+                            <!-- <Breadcrumb-item v-for="bread in breads">{{ bread }}</Breadcrumb-item>-->
+                            </Breadcrumb>
+                            <Card>
+                                <div style="padding-left: 15%; padding-right:15%;font-size: 20px;height: fit-content;min-height: 1000px" v-html="md"></div>
+                            </Card>
+                        </i-Content>
+                    </Layout>
+                </div>
+            </i-col>
+        </Row>
     </template>
     <div class="back-top" id="back-top">
         <Icon type="md-arrow-round-up" size="30"/>
@@ -97,7 +110,7 @@
                 <Icon type="md-help-circle" size="30"/>
             </i-col>
             <i-col span="9">
-                <Icon type="logo-buffer" size="40"/>
+                <Icon custom="iconfont icon-WE" size="45"></Icon>
             </i-col>
         </Row>
         <Row>

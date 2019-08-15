@@ -1,10 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>资源分享-Wecoding:便捷的校内信息交流网站</title>
+    <link href="../static/css/iview.css" th:href="@{css/iview.css}" rel="stylesheet">
+    <link href="../static/css/all.css" th:href="@{css/all.css}" rel="stylesheet"/>
+    <link href="../static/css/guide.css" th:href="@{css/guide.css}" rel="stylesheet"/>
+    <link href="//at.alicdn.com/t/font_1298080_miz4ew750vg.css" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #f5f7f9;
+        }
+
+        .catalogue {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 15px;
+        }
+
+        .wecoding-logo {
+            position: absolute;
+            left: 70px;
+            font-size: 23px;
+            color: #c82333;
+        }
+
+        .card-shadow {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27);
+        }
+
+        .res-content-div {
+            background-color: #fff;
+            width: auto;
+            overflow: hidden;
+            margin: 0 10px auto 5px;
+            padding: 20px 20px;
+        }
+
+        .ivu-page-item-jump-next:after,
+        .ivu-page-item-jump-prev:after {
+            content: "\2022\2022\2022";
+        }
+    </style>
 </head>
 <body>
-资源分享页面
+<div id="res-all">
+    <div class="wrapper-header card-shadow" style="margin-bottom: 20px">
+        <ul class="ivu-menu ivu-menu-light ivu-menu-horizontal">
+            <div class="wrapper-header-nav">
+                <div class="wrapper-header-nav-list" style="float: right; padding: 0 65px">
+                    <a href="/" class="wecoding-logo"><Icon custom="iconfont icon-WE" size="32"></Icon>coding</a>
+                    <a href="/home" target="_self" class="ivu-menu-item">返回首页</a>
+                    <a href="/guide" target="_blank" class="ivu-menu-item ivu-menu-item-selected">校园指南</a>
+                    <a href="/resources" target="_self" class="ivu-menu-item ivu-menu-item-active">
+                        资源分享
+                        <span class="ivu-badge-status ivu-badge"></span>
+                        <sup class="ivu-badge-dot" style="margin: 20px 20px"></sup>
+                    </a>
+                </div>
+            </div>
+        </ul>
+    </div>
+    <template>
+        <Row>
+            <i-col>
+                <div>
+                    <div class="wrapper-navigate ivu-col ivu-col-span-4 card-shadow">
+                        <div class="navigate">
+                            <ul class="ivu-menu ivu-menu-light ivu-menu-vertical" style="width: auto;">
+                                <i-menu width="310" @on-select="getRes">
+                                    <div class="navigate-group catalogue">软件工程</div>
+                                    <Menu-Group title="编程语言">
+                                        <Menu-Item name="Java">
+                                            <Icon custom="iconfont icon-java" size="20"></Icon>
+                                            Java
+                                        </Menu-Item>
+                                        <Menu-Item name="Python">
+                                            <Icon type="logo-python" size="20"></Icon>
+                                            Python
+                                        </Menu-Item>
+                                        <Menu-Item name="C/C++">
+                                            <Icon custom="iconfont icon-cpp" size="20"></Icon>
+                                            C/C++
+                                        </Menu-Item>
+                                        <Menu-Item name="C#">
+                                            <Icon custom="iconfont icon-languagecsharp" size="20"></Icon>
+                                            C#
+                                        </Menu-Item>
+                                        <Menu-Item name="Php">
+                                            <Icon custom="iconfont icon-php" size="20"></Icon>
+                                            Php
+                                        </Menu-Item>
+                                        <Menu-Item name="Kotlin">
+                                            <Icon custom="iconfont icon-kotlin" size="20"></Icon>
+                                            Kotlin
+                                        </Menu-Item>
+                                        <Menu-Item name="Android">
+                                            <Icon type="logo-android" size="20"></Icon>
+                                            Android
+                                        </Menu-Item>
+                                        <Menu-Item name="Nodejs">
+                                            <Icon type="logo-nodejs" size="20"></Icon>
+                                            Node.js
+                                        </Menu-Item>
+                                        <Menu-Item name="HTML-CSS-JS">
+                                            <Icon type="logo-javascript" size="20"></Icon>
+                                            HTML-CSS-JS
+                                        </Menu-Item>
+                                        <Menu-Item name="Vue">
+                                            <Icon custom="iconfont icon-vue" size="20"></Icon>
+                                            Vue
+                                        </Menu-Item>
+                                        <Menu-Item name="React">
+                                            <Icon custom="iconfont icon-react" size="20"></Icon>
+                                            React
+                                        </Menu-Item>
+                                        <Menu-Item name="Angular">
+                                            <Icon custom="iconfont icon-angular" size="20"></Icon>
+                                            Angular
+                                        </Menu-Item>
+                                    </Menu-Group>
+                                    <Menu-Group title="数据库/缓存">
+                                        <Menu-Item name="MySQL">
+                                            <Icon custom="iconfont icon-MYSQL" size="20"></Icon>
+                                            MySQL
+                                        </Menu-Item>
+                                        <Menu-Item name="Oracle">
+                                            <Icon custom="iconfont icon-oracle" size="20"></Icon>
+                                            Oracle
+                                        </Menu-Item>
+                                        <Menu-Item name="PostgreSQL">
+                                            <Icon custom="iconfont icon-postgresql" size="20"></Icon>
+                                            PostgreSQL
+                                        </Menu-Item>
+                                        <Menu-Item name="Redis">
+                                            <Icon custom="iconfont icon-Redis" size="20"></Icon>
+                                            Redis
+                                        </Menu-Item>
+                                        <Menu-Item name="MongoDB">
+                                            <Icon custom="iconfont icon-mongodb" size="20"></Icon>
+                                            MongoDB
+                                        </Menu-Item>
+                                        <Menu-Item name="Neo4j">
+                                            <Icon custom="iconfont icon-neo4j" size="20"></Icon>
+                                            Neo4j
+                                        </Menu-Item>
+                                    </Menu-Group>
+                                    <Menu-Group title="开发工具">
+                                        <Menu-Item name="IDEA">
+                                            <Icon custom="iconfont icon-icons-intellij_idea" size="20"></Icon>
+                                            IntelliJ IDEA
+                                        </Menu-Item>
+                                        <Menu-Item name="Maven">
+                                            <Icon custom="iconfont icon-maven" size="20"></Icon>
+                                            Maven
+                                        </Menu-Item>
+                                        <Menu-Item name="Gradle">
+                                            <Icon custom="iconfont icon-gradle" size="20"></Icon>
+                                            Gradle
+                                        </Menu-Item>
+                                        <Menu-Item name="Git">
+                                            <Icon custom="iconfont icon-git" size="20"></Icon>
+                                            Git
+                                        </Menu-Item>
+                                        <Menu-Item name="SVN">
+                                            <Icon custom="iconfont icon-SVN" size="20"></Icon>
+                                            SVN
+                                        </Menu-Item>
+                                        <Menu-Item name="Webpack">
+                                            <Icon custom="iconfont icon-webpack" size="20"></Icon>
+                                            Webpack
+                                        </Menu-Item>
+                                        <Menu-Item name="Vim">
+                                            <Icon custom="iconfont icon-vim" size="20"></Icon>
+                                            Vim
+                                        </Menu-Item>
+                                        <Menu-Item name="Docker">
+                                            <Icon custom="iconfont icon-docker" size="20"></Icon>
+                                            Docker
+                                        </Menu-Item>
+                                    </Menu-Group>
+                                    <div class="navigate-group catalogue">其他</div>
+                                </i-menu>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </i-col>
+            <i-col span="20">
+                <div class="card-shadow res-content-div">
+                    <div>
+                        <div style="font-size: 25px;font-weight: bold">学习视频/PDF</div>
+                        <card>
+                            <i-Table highlight-row stripe :loading="loading" no-filtered-data-text="暂无筛选结果,换一页试试" :columns="table_columns" :data="data_video"></i-Table>
+                        </card>
+                        <div style="float: right;padding-top: 15px;">
+                            <Page :total="total" :current="page" @on-change="changePage" show-elevator show-total></Page>
+                        </div>
+                    </div>
+                </div>
+            </i-col>
+        </Row>
+    </template>
+</div>
+<script src="../static/js/vue.js" th:src="@{js/vue.js}"></script>
+<script src="../static/js/iview.min.js" th:src="@{js/iview.min.js}"></script>
+<script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+<script type="module" src="../static/js/resource.js" th:src="@{js/resource.js}"></script>
 </body>
 </html>

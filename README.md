@@ -41,6 +41,7 @@
 |IDEA	| 开发IDE |	https://www.jetbrains.com/idea/download|
 |RedisView| redis可视化工具|https://github.com/cc20110101/RedisView|
 |Navicat|数据库连接工具	|http://www.formysql.com/xiazai.html|
+| Robo 3T | MongoDB数据库管理软件 | https://robomongo.org/ |
 |X-shell|	Linux远程连接工具	|http://www.netsarang.com/download/software.html|
 |postman| 网页调试与发送网页HTTP请求工具 |https://www.getpostman.com/ |
   
@@ -100,3 +101,5 @@
 * 添加事物支持
 * 整合RabbitMQ, stomp消息插件
 * 用户广播消息模块: 历史消息/实时接收在线消息
+#### 2019/8/15 Resource Model
+* 暂未做完整的资源分享模块

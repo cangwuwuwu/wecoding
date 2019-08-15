@@ -16,10 +16,10 @@ import work.niter.wecoding.entity.Account;
 public interface AccountMapper {
 
     @Transactional(readOnly = true)
-    @Select({"select * from account where stu_username=#{stuUsername}"})
-    Account getAccountByUsernameInMapper(String stuUsername);
+    @Select("select * from account where stu_username=#{stuUsername}")
+    Account selectByStuUsername(String stuUsername);
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @Insert({"insert into account values(#{stuUsername}, #{stuPassword})"})
+    @Insert("insert into account values(#{stuUsername}, #{stuPassword})")
     int addUserPassword(Account account);
 }

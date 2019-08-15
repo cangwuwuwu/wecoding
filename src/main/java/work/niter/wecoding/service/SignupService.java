@@ -35,7 +35,7 @@ public class SignupService {
      * @return userlist
      */
     public UserList getFiveStudentsInService() {
-        List<Student> allStudents = this.studentService.getAllStudentsInService();
+        List<Student> allStudents = studentService.getAllStudentsInService();
         int len = allStudents.size();
         HashSet set = new HashSet();
 
