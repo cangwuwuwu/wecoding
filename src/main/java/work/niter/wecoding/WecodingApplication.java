@@ -8,16 +8,15 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import tk.mybatis.spring.annotation.MapperScan;
 
 @EnableCaching
 @EnableAsync
 @EnableRabbit
-//@MapperScan(basePackages = "work.niter.wecoding.mapper")
+@MapperScan(basePackages = "work.niter.wecoding.mapper")
 @EnableTransactionManagement
 @SpringBootApplication
 public class WecodingApplication extends SpringBootServletInitializer {
-    public WecodingApplication() {
-    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

@@ -2,6 +2,8 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,7 +12,9 @@ import java.util.Date;
  * @Description: 资源信息
  */
 @Data
+@Table(name = "resources")
 public class Resource {
+    @Id
     private Integer resId;
     private Integer resForm;
     private String resType;

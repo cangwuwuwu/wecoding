@@ -17,7 +17,7 @@ public class AccountService {
     private AccountMapper accountMapper;
 
     public Account getAccountByUsernameInService(String username) {
-        return accountMapper.selectByStuUsername(username);
+        return accountMapper.selectByPrimaryKey(username);
     }
 
     @Transactional(rollbackFor = Exception.class)

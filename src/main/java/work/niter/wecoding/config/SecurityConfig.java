@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-                    .antMatchers("/login", "/index", "/signup/**", "/").permitAll()
+                    .antMatchers("/login/**", "/index", "/signup/**", "/").permitAll()
                     .antMatchers("/home", "/guide", "/allstus", "/help","/chatroom").permitAll()
                     .antMatchers("/submit", "/sendmail/**", "/stu/**").permitAll()
                     .antMatchers("/css/**", "/images/**", "/js/**", "/md/**", "/fonts/**").permitAll()
@@ -48,6 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsService(this.userDetailService)
                 .and()
                     .logout()
+                    .logoutSuccessUrl("/login?logout")
+                .and()
+                    .sessionManagement()
+                    .invalidSessionUrl("/login/timeout")
                 .and()
                     .headers().frameOptions().disable()
                 .and()

@@ -1,3 +1,7 @@
+body {
+    background: #f5f7f9;
+}
+
 .ivu-layout-sider {
     background: #f5f7f9;
 }
@@ -17,6 +21,7 @@
 
 /*页脚*/
 .footer {
+    margin-top: 20px;
     width: 100%;
     position: relative;
     bottom: 0;
@@ -79,5 +84,73 @@ footer h3:hover {
     position: absolute;
     left: 70px;
     font-size: 23px;
-    color: #c82333;
+    color: #2d8cf0;
+}
+
+.ivu-table-cell > .ivu-input-wrapper {
+    width: 110px;
+}
+.card-shadow {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27);
+}
+.ivu-card-body {
+    padding: 0;
+}
+.res-content-div {
+    background-color: #fff;
+    width: auto;
+    overflow: hidden;
+    margin: 0 10px auto 5px;
+    padding: 20px 20px;
+}
+
+.wrapper-header {
+    margin-bottom: 20px;
+}
+.catalogue {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 15px;
+}
+
+.top {
+    background: #ef6d6d;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    padding-top: 4px;
+    width: 48px;
+    height: 48px;
+}
+
+.path-hidden-half {
+    position: relative;
+    overflow: hidden;
+    transition: height .2s ease-in-out;
+}
+
+.path-pic-more {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    right: 4px;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.path-pic-more::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    box-shadow: inset 0 -15px 30px #fff;
+}
+
+.sencond-div-position {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

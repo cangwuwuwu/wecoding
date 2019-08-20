@@ -2,6 +2,9 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  * @Author: Cangwu
@@ -9,7 +12,9 @@ import lombok.Data;
  * @Description:
  */
 @Data
+@Table(name = "account")
 public class Account {
+    @Id
     private String stuUsername;
     private String stuPassword;
 }

@@ -40,5 +40,7 @@ gen
 /src/main/java/work/niter/wecoding/config/DruidConfig.java
 /.gitignore
 /src/main/resources/static/md/
-/src/main/resources/static/images/mdpics/
-/src/main/resources/main.js
+/src/main/resources/static/images/
+/src/main/resources/templates/allstus.html
+/src/main/resources/templates/photos.html
+/src/main/resources/templates/personal.html

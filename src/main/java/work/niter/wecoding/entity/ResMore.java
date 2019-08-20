@@ -2,6 +2,8 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
@@ -10,7 +12,9 @@ import lombok.Data;
  * @Description:
  */
 @Data
+@Table(name = "resource_more")
 public class ResMore {
+    @Id
     private Integer resId;
     private Integer resStatus;
     private Double resPoint;

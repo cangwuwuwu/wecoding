@@ -169,11 +169,11 @@
         </dependency>
 
         <!-- 通用Mapper -->
-        <!--<dependency>
+        <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>RELEASE</version>
-        </dependency>-->
+        </dependency>
         <!--        elasticsearch-->
         <!-- <dependency>
              <groupId>org.springframework.boot</groupId>

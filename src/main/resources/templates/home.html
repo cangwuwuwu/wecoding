@@ -20,11 +20,11 @@
                 <Icon type="md-backspace" size="30"></Icon>
                 <span>返回封面</span>
             </Menu-Item>
-            <Menu-Item to="guide" name="guide">
+            <Menu-Item to="guide" target="_blank" name="guide">
                 <Icon type="ios-paper"></Icon>
                 校园指南
             </Menu-Item>
-            <Menu-Item to="resources" name="resources">
+            <Menu-Item to="resources" target="_blank" name="resources">
                 <Icon type="logo-buffer" size="16"></Icon>
                 资源分享
             </Menu-Item>
@@ -34,24 +34,24 @@
                     交流讨论
                 </template>
                 <Menu-Group title="现在开始">
-                    <Menu-Item to="forum" name="forum">
+                    <Menu-Item to="forum" target="_blank" name="forum">
                         <Icon type="md-chatboxes"></Icon>
                         论坛
                     </Menu-Item>
-                    <Menu-Item to="chatroom" name="chatroom">
+                    <Menu-Item to="chatroom" target="_blank" name="chatroom">
                         <Icon type="ios-chatbubbles"></Icon>
                         聊天室
                     </Menu-Item>
                 </Menu-Group>
             </Submenu>
-            <Menu-Item to="allstus" name="allstus">
+            <!--<Menu-Item to="allstus" name="allstus">
                 <Icon type="ios-people" size="18"></Icon>
                 参观一下
             </Menu-Item>
             <Menu-Item to="photos" name="photos">
                 <Icon type="md-images"></Icon>
                 照片墙
-            </Menu-Item>
+            </Menu-Item>-->
             <Menu-Item to="help" name="help">
                 <Icon type="md-help-circle" size="16"></Icon>
                 帮助
@@ -99,7 +99,7 @@
                     <Dropdown @on-click="go">
                         <template>
                             <badge :count="msgcount">
-                                <Avatar style="background-color: #1E90FF" icon="ios-person"/>
+                                <Avatar style="background-color: #1E90FF" icon="ios-person"></Avatar>
                             </badge>
                         </template>
                         <a class="ios-arrow-down" href="javascript:void(0)">
@@ -132,7 +132,7 @@
                 <template sec:authorize="!isAuthenticated()">
                     <Dropdown @on-click="go">
                         <template>
-                            <Avatar style="background-color: #1E90FF" icon="ios-person"/>
+                            <Avatar style="background-color: #1E90FF" icon="ios-person"></Avatar>
                         </template>
                         <a class="ios-arrow-down" href="javascript:void(0)">
                             <Icon type="ios-arrow-down"></Icon>
@@ -178,14 +178,14 @@
                                 交流讨论
                                 <p slot="content">在论坛发帖提问或者聊天室讨论，文明发言，共同进步。(虽然我知道没人就是了:) <br>(暂未开放)</p>
                             </Panel>
-                            <Panel name="3">
+                            <!--<Panel name="3">
                                 参观一下
                                 <p slot="content">走过路过，8要错过~可以查看所有注册用户的列表，查看个人主页，关注并私聊他们。 <br>(暂未开放)</p>
                             </Panel>
                             <Panel name="4">
                                 照片墙
                                 <p slot="content">汇聚最光辉的时刻(你最糗的样子都在这里:)<br>旨在收藏一些有纪念意义的照片或视频。<br>(暂未开放)</p>
-                            </Panel>
+                            </Panel>-->
                         </Collapse>
                     </Card>
                 </i-col>
@@ -257,12 +257,13 @@
             <Divider orientation="left">我的信息</Divider>
             <div class="card-surround-gray">
                 <Card :bordered="false">
-                    <Row>
+                    <Row type="flex" align="middle">
                         <i-Col span="4">
-                            <img :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuImg"/>
-                            <div class="ivu-head" @click="handleView">
-                                <Icon title="查看大图" type="ios-eye-outline" size="15"></Icon>
-                                查看大图
+                            <div class="demo-upload-list">
+                                <img :src="'http://39.106.85.24:9000/wecoding/M00/00/00/' + myinfo.stuImg"/>
+                                <div class="demo-upload-list-cover">
+                                    <Icon type="ios-eye-outline" @click.native="handleView"></Icon>
+                                </div>
                             </div>
                         </i-Col>
                         <i-Col span="20">
@@ -280,40 +281,39 @@
                                  v-if="visible" style="width: 100%">
                         </Modal>
                     </Row>
-                    <div>
-                        {{ myinfo.stuId }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuName }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>{{ myinfo.stuGender }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuEmail }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuArea }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuPhone }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuBirthday }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
-                    <div>
-                        {{ myinfo.stuRegistTime }}
-                    </div>
-                    <div>
-                        {{ myinfo.stuInfo }}
-                        <Icon type="ios-create-outline"/>
-                    </div>
+                    <Row>
+                        <Card>
+                            <div style="border: 1px solid #dcdee2;">
+                                <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+                                    <thead>
+                                    <tr class="tr-height" v-for="(my, index) in myinfo">
+                                        <th class="table-title-color" style="width: 30%;">
+                                            <div class="ivu-table-cell"><span class="">{{ my.title }}</span></div>
+                                        </th>
+                                        <th class="" style="width: 55%;">
+                                            <div v-if="index === editInput">
+                                                <i-Input :type="index === 9 ? 'textarea' : 'text'" :placeholder="index === 7 ? '格式: yyyy-MM-dd' : ''"
+                                                         v-model="my.value" autofocus :autosize="{minRows: 2,maxRows: 5}"/>
+                                            </div>
+                                            <span class="" v-else> {{ my.value }}</span>
+                                        </th>
+                                        <th class="" style="width: 15%;">
+                                            <div>
+                                                <div v-if="index === editInput" :class="'ivu-table-cell ' + my.class">
+                                                    <Icon type="md-checkmark-circle-outline" size="20" @click.native="saveInfo(index, my.value)"></Icon>
+                                                    <Icon type="md-close-circle" size="20" @click.native="cancelInfo(index)"></Icon>
+                                                </div>
+                                                <div v-else :class="'ivu-table-cell ' + my.class">
+                                                    <Icon type="ios-create-outline" size="20" @click.native="modifyInfo(index, my.value)"></Icon>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </Card>
+                    </Row>
                     <Spin fix v-if="spinShow">
                         <Icon type="ios-loading" size=25 class="demo-spin-icon-load"></Icon>
                         <div>加载中...</div>
@@ -448,7 +448,7 @@
                     <span>纰漏/指正/建议</span>
                 </Radio>
             </Radio-Group>
-            <div>反馈内容</div>
+            <div class="bug-div">反馈内容</div>
             <div class="bug-div">
                 <i-Input v-model="bugcontent" type="textarea" :autosize="{minRows: 3,maxRows: 5}"
                          placeholder="Enter something..."/>
@@ -463,6 +463,6 @@
 <script src="../static/js/iview.min.js" th:src="@{js/iview.min.js}"></script>
 <script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
 <script src="../static/js/stomp.min.js" th:src="@{js/stomp.min.js}"></script>
-<script src="../static/js/home.js" th:src="@{js/home.js}"></script>
+<script type="module" src="../static/js/home.js" th:src="@{js/home.js}"></script>
 </body>
 </html>

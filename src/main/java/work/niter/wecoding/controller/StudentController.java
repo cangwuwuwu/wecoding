@@ -24,7 +24,7 @@ import work.niter.wecoding.utils.FileUtils;
  * @Description:
  */
 @RestController
-@RequestMapping({"/stu"})
+@RequestMapping("/stu")
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -33,12 +33,12 @@ public class StudentController {
     @Autowired
     private ThumbImageConfig thumbImageConfig;
 
-    @GetMapping({"/stu-id/{id}"})
+    @GetMapping("/stu-id/{id}")
     public Student checkStudentAccountById(@PathVariable(value = "id",required = false) Integer id) {
         Student result = null;
 
         try {
-            result = this.studentService.getOne(id);
+            result = studentService.getOne(id);
         } catch (NullPointerException var4) {
             var4.printStackTrace();
         }
@@ -46,12 +46,11 @@ public class StudentController {
         return result;
     }
 
-    @GetMapping({"/stu-username/{username}"})
+    @GetMapping("/stu-username/{username}")
     public Student checkStudentAccountByUsername(@PathVariable(value = "username",required = false) String username) {
         Student result = null;
-
         try {
-            result = this.studentService.getByUsername(username);
+            result = studentService.getByUsername(username);
         } catch (SpelEvaluationException var4) {
             System.out.println("用户名 " + username + " 正在被注册");
         }
@@ -61,12 +60,17 @@ public class StudentController {
 
     @GetMapping
     public List<Student> findAllStudentsForREST() {
-        return this.studentService.getAllStudentsInService();
+        return studentService.getAllStudentsInService();
     }
 
     @PostMapping
     public int addAStudentForREST(Student student) {
-        return this.studentService.addAStudent(student);
+        return studentService.addOneStudent(student);
+    }
+
+    @PostMapping("/stu-id")
+    public int updateInfoById(Student student) {
+        return studentService.updateStuInfoById(student);
     }
 
     @PostMapping("/uploadheadimg")

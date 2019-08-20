@@ -2,6 +2,8 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,8 +12,10 @@ import java.util.Date;
  * @Description:
  */
 @Data
+@Table(name = "fanout_msg")
 public class MyMessage {
-    private int msgId;
+    @Id
+    private Integer msgId;
     private String msgType;
     private String msgHead;
     private String msgContent;

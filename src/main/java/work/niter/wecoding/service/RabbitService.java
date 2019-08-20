@@ -33,7 +33,7 @@ public class RabbitService {
      */
     @Cacheable(cacheNames = "msg", key = "#key")
     public List<MyMessage> getAllHistoryMessageInService(String key) {
-        return messageMapper.getAllHistoryMessage();
+        return messageMapper.selectAll();
     }
 
     /**

@@ -3,6 +3,8 @@ package work.niter.wecoding.entity;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -11,7 +13,9 @@ import java.util.Date;
  * @Description:
  */
 @Data
+@Table(name = "tb_stu")
 public class Student {
+    @Id
     private Integer stuId;
     private String stuName;
     private String stuUsername;
