@@ -1,11 +1,7 @@
 package work.niter.wecoding.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
-import java.util.Set;
 
-import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.fdfs.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -13,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.entity.Student;
-import work.niter.wecoding.entity.StusBO;
+import work.niter.wecoding.service.AccountService;
 import work.niter.wecoding.service.StudentService;
-import work.niter.wecoding.utils.FileUtils;
 
 /**
  * @Author: Cangwu
@@ -28,6 +24,8 @@ import work.niter.wecoding.utils.FileUtils;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private AccountService accountService;
     @Autowired
     private FastFileStorageClient storageClient;
     @Autowired
@@ -59,35 +57,46 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> findAllStudentsForREST() {
+    public List<Student> findAllStudents() {
         return studentService.getAllStudentsInService();
     }
 
     @PostMapping
-    public int addAStudentForREST(Student student) {
+    public int addOneStudent(Student student) {
         return studentService.addOneStudent(student);
     }
 
-    @PostMapping("/stu-id")
+    @PutMapping
     public int updateInfoById(Student student) {
         return studentService.updateStuInfoById(student);
     }
 
-    @PostMapping("/uploadheadimg")
-    public Student uploadHeadImg(@RequestBody StusBO stusBO) throws Exception {
+    /*@PostMapping("/uploadheadimg1")
+    public Student uploadHeadImgBase(@RequestBody StusBO stusBO) throws Exception {
         String bace64Data = stusBO.getBaceData();
         String stusBacePath = "F:\\" + stusBO.getStuId() + "stusHeadImg.png";
         FileUtils.base64ToFile(stusBacePath, bace64Data);
 
         MultipartFile file = FileUtils.fileToMultipart(stusBacePath);
-        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
-        String thumbPath = thumbImageConfig.getThumbImagePath(storePath.getPath());
-        String bigPath = storePath.getPath();
+    }*/
 
-        Student student = studentService.getOne(stusBO.getStuId());
-        student.setStuImg(thumbPath);
-        student.setStuBigImg(bigPath);
-        studentService.updateStudent(student);
+    @PostMapping("/uploadheadimg")
+    public Student uploadHeadImgBlob(@RequestParam MultipartFile file,
+                                     @RequestParam Integer stuId) throws Exception {
+        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
+        String bigPath = storePath.getPath();
+        String thumbPath = thumbImageConfig.getThumbImagePath(storePath.getPath());
+
+        Student student = new Student();
+        student.setStuId(stuId);
+        student.setStuImg(thumbPath.replaceAll("M00/00/00/", ""));
+        student.setStuBigImg(bigPath.replaceAll("M00/00/00/", ""));
+        studentService.updateStuInfoById(student);
         return student;
+    }
+
+    @PutMapping("/account")
+    public int updateMyPassword(Account account, @RequestParam String newPassword) {
+        return accountService.updateAccountPassword(account, newPassword);
     }
 }

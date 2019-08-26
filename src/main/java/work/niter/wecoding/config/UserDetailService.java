@@ -27,11 +27,10 @@ public class UserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String stuUsername) throws UsernameNotFoundException {
         Account account = this.accountService.getAccountByUsernameInService(stuUsername);
         if (account != null) {
-            List<GrantedAuthority> authorities = new ArrayList();
+            List<GrantedAuthority> authorities = new ArrayList<>();
             if ("admin".equals(stuUsername)) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
             }
-
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             return new User(
                     stuUsername,

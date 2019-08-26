@@ -16,7 +16,6 @@ import java.util.List;
  */
 public interface MessageMapper extends Mapper<MyMessage> {
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Insert("insert into fanout_msg values(#{msgId}, #{msgType}, #{msgHead}, #{msgContent}, #{msgSender}, #{msgTime})")
     int insertNewHistoryMessage(MyMessage message);
 }

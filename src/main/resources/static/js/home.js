@@ -105,6 +105,7 @@ var vmhome = new Vue({
                     return;
                 }
                 $.get("stu/stu-username/" + username, function (data_my) {
+                    console.log(data_my);
                     vmhome.myinfo = vmhome.changeinfo2list(data_my);
                     vmhome.myinfo.stuImg = data_my.stuImg;
                     vmhome.myinfo.stuBigImg = data_my.stuBigImg;

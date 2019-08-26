@@ -20,9 +20,9 @@
     </fileNamePattern>
     <timeBasedFileNamingAndTriggeringPolicy
     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-    <maxFileSize>50MB</maxFileSize>
+    <maxFileSize>10MB</maxFileSize>
     </timeBasedFileNamingAndTriggeringPolicy>
-    <maxHistory>30</maxHistory>
+    <maxHistory>15</maxHistory>
     </rollingPolicy>
     <layout class="ch.qos.logback.classic.PatternLayout">
     <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}
@@ -39,9 +39,9 @@
     </fileNamePattern>
     <timeBasedFileNamingAndTriggeringPolicy
     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-    <maxFileSize>50MB</maxFileSize>
+    <maxFileSize>10MB</maxFileSize>
     </timeBasedFileNamingAndTriggeringPolicy>
-    <maxHistory>30</maxHistory>
+    <maxHistory>15</maxHistory>
     </rollingPolicy>
     <layout class="ch.qos.logback.classic.PatternLayout">
     <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}
@@ -61,9 +61,9 @@
     </fileNamePattern>
     <timeBasedFileNamingAndTriggeringPolicy
     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-    <maxFileSize>50MB</maxFileSize>
+    <maxFileSize>10MB</maxFileSize>
     </timeBasedFileNamingAndTriggeringPolicy>
-    <maxHistory>30</maxHistory>
+    <maxHistory>15</maxHistory>
     </rollingPolicy>
     <layout class="ch.qos.logback.classic.PatternLayout">
     <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}

@@ -1,6 +1,5 @@
 package work.niter.wecoding.controller;
 
-import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,8 @@ import work.niter.wecoding.service.SignupService;
  * @Date: 2019/7/14 1:23
  * @Description:
  */
-
 @RestController
-@RequestMapping({"/signup"})
+@RequestMapping("/signup")
 public class SignupController {
     @Autowired
     private SignupService signupService;
@@ -27,9 +25,9 @@ public class SignupController {
     }
 
     @PostMapping("/regist")
-    public String addStudentForREST(Student stu, Account account,
+    public String addStudentByRegister(Student stu, Account account,
                                     @RequestParam String stuRePassword,
-                                    @RequestParam String stuCode) throws IOException {
+                                    @RequestParam String stuCode) {
         return signupService.registerInService(stu, account, stuRePassword, stuCode);
     }
 }

@@ -35,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/home", "/guide", "/allstus", "/help","/chatroom").permitAll()
                     .antMatchers("/submit", "/sendmail/**", "/stu/**").permitAll()
                     .antMatchers("/css/**", "/images/**", "/js/**", "/md/**", "/fonts/**").permitAll()
+                    // 前后端分离临时放行
+//                    .antMatchers("").permitAll()
                     .antMatchers("/delete**", "/admin**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()

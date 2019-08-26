@@ -101,9 +101,15 @@
 * 添加事物支持
 * 整合RabbitMQ, stomp消息插件
 * 用户广播消息模块: 历史消息/实时接收在线消息
-#### 2019/8/15 Resource Model
+#### 2019/8/15 Resource Module
 * 暂未做完整的资源分享模块
 #### 2019/8/20 Perfect home/resources page
 * 完善资源分享模块,新增学习路线图/在线学习资源
 * 完善个人中心的修改个人信息
 * 资源查询分页缓存
+#### 2019/8/25 add Upload user avatar
+* 前端项目分离为vue-cli项目: [wefront](https://github.com/cangwuwuwu/wefront)
+* 整合[fastDFS](https://github.com/happyfish100/fastdfs)完成头像上传展示功能
+#### 2019/8/26 finish change User Password Module
+* 修改信息请求改写为put请求 RESTful规范化
+* 完成用户修改密码功能
