@@ -2,8 +2,10 @@
 
 #### 前言
 `wecoding`致力于打造一个便捷的小型校内信息交流网站，采用当前流行的技术实现。
+#### 前端
+前端项目地址: [wefront](https://github.com/cangwuwuwu/wefront)
 #### 项目介绍
-`wecoding`基于SpringBoot + MyBatis实现。包含欢迎、首页、学生注册、学生登录、学生信息展示、学生搜索、资源分享、校园指南、资源上传、帮助中心、论坛讨论等模块。
+`wecoding`基于SpringBoot + MyBatis + Vue实现。包含欢迎、首页、学生注册、学生登录、学生信息展示、学生搜索、资源分享、校园指南、资源上传、帮助中心、论坛讨论等模块。
 
 #### 技术选型
 ##### 后端技术
@@ -24,15 +26,7 @@
 | fastDFS | 高性能文件服务客户端 |  https://github.com/happyfish100/fastdfs |
     
 ##### 前端技术
-   
-|技术      | 说明    |  官网|  
-| ----- | ----- | ---- |
-|Vue	|前端框架	|https://vuejs.org/|
-|iView| 基于 Vue 的 UI 组件库| https://www.iviewui.com/ |
-|JQuery| JavaScript框架|https://jquery.com/|
-|Bootstrap|开源工具包|https://www.bootcss.com/|
-|Thymeleaf|模板引擎|https://www.thymeleaf.org/|
-| Marked | 在线转码md文件的JS库 | https://github.com/markedjs/marked |
+见 wefront
  
 ##### 开发工具
    
@@ -70,29 +64,17 @@
 * 注册页面  发送邮件/学号用户名校验/随机显示已注册用户/显示用户总数/查看用户信息
 * 错误页面  显示状态码/错误名称/异常信息
 * 个人页面  显示个人信息
-##### 2019/7/3  Uniform web font
-* 统一了页面使用的字体
 ##### 2019/7/6 Second commit;
 * 密码从数据库中拆分出来
-* 添加了暂未完成的页面
-* 删去了基于后台的省市联动
 ##### 2019/7/12 Third Commit:Code refactoring & improving the experience
 * 基于MVC解耦,  将业务逻辑拆分至service层
-* 使用ajax+vue,  优化注册页面,  提高了页面加载速度
-* 添加了loading
-* 主页添加了回到顶部按钮
 ##### 2019/7/14 Optimize the performance of data query and cache
 * 将Druid连接池更改为性能更强大的Hikari连接池
 * Spring Boot 2.x redis默认采用的lettuce存在连接超时错误,  已更换为jedis
 ##### 2019/7/16 front-end development
-* signup.html使用Vue双向绑定取代了JQuery的DOM操作
 * 新增通过右边的搜索框搜索学生，查看其个人信息
 ##### 2019/7/21 Use Netty for websocket and iView for view
 * 整合了Netty 编写了一个简单的聊天室，聊天、显示在线人数等功能
-* 添加了iView 美化注册页面,  添加了省市联动、显示性别、头像等
-#### 2019/7/25 finished school-guide model
-* 使用iView编写了home/guide/help页面,  用来展示主页和校园指南信息
-* guide/help页面使用marked.js+highlight.js 将md文件转化成 html并高亮显示
 #### 2019/7/29 fastDFS Support
 * 添加的fastDFS头像上传的后端代码
 * 部分大图片配置到nginx静态资源服务器
@@ -101,8 +83,6 @@
 * 添加事物支持
 * 整合RabbitMQ, stomp消息插件
 * 用户广播消息模块: 历史消息/实时接收在线消息
-#### 2019/8/15 Resource Module
-* 暂未做完整的资源分享模块
 #### 2019/8/20 Perfect home/resources page
 * 完善资源分享模块,新增学习路线图/在线学习资源
 * 完善个人中心的修改个人信息
@@ -113,3 +93,6 @@
 #### 2019/8/26 finish change User Password Module
 * 修改信息请求改写为put请求 RESTful规范化
 * 完成用户修改密码功能
+
+---
+Thank you for your read.

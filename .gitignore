@@ -38,5 +38,8 @@ gen
 
 /src/main/java/work/niter/wecoding/config/DruidConfig.java
 /.gitignore
-/src/main/resources/
-
+/src/main/resources/i18n/
+/src/main/resources/public/
+/src/main/resources/static/
+/src/main/resources/templates/
+/src/main/resources/application.yml
