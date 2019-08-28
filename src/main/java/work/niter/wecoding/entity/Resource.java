@@ -23,7 +23,6 @@ public class Resource {
     private String resUrl;
     private String resPassword;
     private Date resUpTime;
-    private Date resFailTime;
     private ResMore resMore;
     private String resUploader;
 }

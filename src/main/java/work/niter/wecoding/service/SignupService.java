@@ -34,12 +34,18 @@ public class SignupService {
      * 获取所有用户和随机挑选五个用户展示
      * @return userlist
      */
-    public UserList getFiveStudentsInService() {
+    public UserList getEightStudentsInService() {
         List<Student> allStudents = studentService.getAllStudentsInService();
         int len = allStudents.size();
+        int displaynum;
         HashSet set = new HashSet();
+        if (len < 8) {
+            displaynum = len;
+        } else {
+            displaynum = 8;
+        }
 
-        while(set.size() < 5) {
+        while(set.size() < displaynum) {
             set.add((int)(Math.random() * (double)len));
         }
 

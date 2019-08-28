@@ -22,7 +22,7 @@ public interface StudentMapper extends Mapper<Student> {
     int addStudent(Student student);
 
     @Delete("delete from tb_stu where stu_id=#{stuId}")
-    int deleteStudentById(Integer stuId);
+    int deleteStudentById(String stuId);
 
     @Update("update tb_stu set stu_name=#{stuName}," +
             "stu_username=#{stuUsername},stu_phone=#{stuPhone},stu_gender=#{stuGender}," +

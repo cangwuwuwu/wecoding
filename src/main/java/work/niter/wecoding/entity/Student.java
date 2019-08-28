@@ -16,24 +16,16 @@ import java.util.Date;
 @Table(name = "tb_stu")
 public class Student {
     @Id
-    private Integer stuId;
+    private String stuId;
     private String stuName;
     private String stuUsername;
     private String stuPhone;
     private String stuGender;
     private String stuEmail;
-    @DateTimeFormat(
-            pattern = "yyyy-MM-dd"
-    )
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date stuBirthday;
     private String stuArea;
-    @DateTimeFormat(
-            pattern = "yyyy-MM-dd"
-    )
     private Date stuRegistTime;
-    @DateTimeFormat(
-            pattern = "yyyy-MM-dd"
-    )
     private Date stuModifyTime;
     private String stuInfo;
     private String stuImg;

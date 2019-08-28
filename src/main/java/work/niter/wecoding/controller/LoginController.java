@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
+    /*@GetMapping("/login")
     public String login(@RequestParam(value = "error",required = false) String error,
                         @RequestParam(value = "logout",required = false) String logout,
                         @RequestParam(value = "timeout",required = false) String timeout,
@@ -41,12 +41,12 @@ public class LoginController {
         }
 
         return "login";
-    }
+    }*/
 
 
-    @GetMapping("/login/timeout")
+    /*@GetMapping("/login/timeout")
     public void timeout(HttpServletRequest request,
                         HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath()+"/login?timeout");
-    }
+    }*/
 }

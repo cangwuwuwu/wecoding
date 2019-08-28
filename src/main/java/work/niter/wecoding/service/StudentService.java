@@ -22,7 +22,7 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public Student getOne(Integer stuId) {
+    public Student getOne(String stuId) {
         return studentMapper.selectByPrimaryKey(stuId);
     }
 
@@ -40,7 +40,7 @@ public class StudentService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int deleteOneStudent(Integer stuId) {
+    public int deleteOneStudent(String stuId) {
         return studentMapper.deleteStudentById(stuId);
     }
 

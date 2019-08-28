@@ -23,7 +23,6 @@ public interface ResourceMapper extends Mapper<Resource> {
             @Result(property = "resUrl", column = "res_url"),
             @Result(property = "resPassword", column = "res_password"),
             @Result(property = "resUpTime", column = "res_up_time"),
-            @Result(property = "resFailTime", column = "res_fail_time"),
             @Result(property = "resMore", column = "res_id",
             one = @One(select = "work.niter.wecoding.mapper.ResMoreMapper.selectByPrimaryKey")),
             @Result(property = "resUploader", column = "res_uploader")

@@ -21,13 +21,13 @@ public class SignupController {
 
     @GetMapping("/getFive")
     public UserList toSignUpPage1() {
-        return signupService.getFiveStudentsInService();
+        return signupService.getEightStudentsInService();
     }
 
     @PostMapping("/regist")
     public String addStudentByRegister(Student stu, Account account,
-                                    @RequestParam String stuRePassword,
-                                    @RequestParam String stuCode) {
+                                     String stuRePassword,
+                                     String stuCode) {
         return signupService.registerInService(stu, account, stuRePassword, stuCode);
     }
 }

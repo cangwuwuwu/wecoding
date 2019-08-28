@@ -31,8 +31,8 @@ public class StudentController {
     @Autowired
     private ThumbImageConfig thumbImageConfig;
 
-    @GetMapping("/stu-id/{id}")
-    public Student checkStudentAccountById(@PathVariable(value = "id",required = false) Integer id) {
+    @GetMapping("/id/{id}")
+    public Student checkStudentAccountById(@PathVariable(value = "id",required = false) String id) {
         Student result = null;
 
         try {
@@ -44,7 +44,7 @@ public class StudentController {
         return result;
     }
 
-    @GetMapping("/stu-username/{username}")
+    @GetMapping("/username/{username}")
     public Student checkStudentAccountByUsername(@PathVariable(value = "username",required = false) String username) {
         Student result = null;
         try {
@@ -82,7 +82,7 @@ public class StudentController {
 
     @PostMapping("/uploadheadimg")
     public Student uploadHeadImgBlob(@RequestParam MultipartFile file,
-                                     @RequestParam Integer stuId) throws Exception {
+                                     @RequestParam String stuId) throws Exception {
         StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
         String bigPath = storePath.getPath();
         String thumbPath = thumbImageConfig.getThumbImagePath(storePath.getPath());

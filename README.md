@@ -93,6 +93,8 @@
 #### 2019/8/26 finish change User Password Module
 * 修改信息请求改写为put请求 RESTful规范化
 * 完成用户修改密码功能
+#### 2019/8/28 return json by SpringSecurity
+* 前后端分离 Spring Security 返回JSON配置
 
 ---
 Thank you for your read.
