@@ -41,13 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+//        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /*.authenticationProvider(authenticationProvider())
+                .authenticationProvider(authenticationProvider())
                 .httpBasic()
                 // 未登录/无权限 提示
                 .authenticationEntryPoint(((request, response, e) -> {
@@ -55,17 +55,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     PrintWriter out = response.getWriter();
                     Map<String, Object> map = new HashMap<>(4);
-                    map.put("code", 403);
+                    map.put("status", 403);
                     map.put("message", "未登录");
                     out.write(JSON.toJSONString(map));
                     out.flush();
                     out.close();
                 }))
-                .and()*/
+                .and()
                     .authorizeRequests()
                     .antMatchers("/login/**", "/signup/**").permitAll()
                     .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**").permitAll()
-                    .antMatchers("/delete**", "/admin**").hasRole("ADMIN")
+//                    .antMatchers("/delete**", "/admin**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -91,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     out.close();
                 }))
                 .successHandler((request,response,authentication) -> {
-                    Map<String,Object> map = new HashMap<>(5);
+                    Map<String,Object> map = new HashMap<>(8);
                     map.put("status",200);
                     map.put("message","登录成功");
                     map.put("data",authentication);
@@ -124,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                 //退出成功，返回json
                 .logoutSuccessHandler((request,response,authentication) -> {
-                    Map<String,Object> map = new HashMap<>(5);
+                    Map<String,Object> map = new HashMap<>(8);
                     map.put("status",200);
                     map.put("message","退出成功");
                     map.put("data",authentication);

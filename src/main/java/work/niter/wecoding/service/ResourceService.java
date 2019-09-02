@@ -1,8 +1,13 @@
 package work.niter.wecoding.service;
 
 import com.github.pagehelper.PageHelper;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.entity.ResMore;
@@ -12,6 +17,7 @@ import work.niter.wecoding.mapper.ResMoreMapper;
 import work.niter.wecoding.mapper.ResWebMapper;
 import work.niter.wecoding.mapper.ResourceMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +55,31 @@ public class ResourceService {
     @Cacheable(value = "res", key = "'web_' + #resWebType")
     public List<ResWeb> getLanguageWebService(String resWebType) {
         return resWebMapper.getResourcesWeb(resWebType);
+    }
+
+    /**
+     * 每天三点检查资源是否仍有效
+     * 秒 分 时 日 月 周几
+     * *  *  *  *  *  *
+     */
+    @Scheduled(cron = "0 0 3 * * *")
+    @Async("taskExecutor")
+    public void checkResourcesStatus() {
+        List<Resource> resources = resourceMapper.selectAll();
+        resources.forEach(resource -> {
+            try {
+                Document document = Jsoup.connect("https://" + resource.getResUrl()).get();
+                Element element = document.getElementById("share_nofound_des");
+                if (element != null) {
+                    System.out.println("RESID" + resource.getResId() + "Error ::: URL is :" + resource.getResUrl());
+                    ResMore resMore = new ResMore();
+                    resMore.setResId(resource.getResId());
+                    resMore.setResStatus(0);
+                    resMoreMapper.updateByPrimaryKeySelective(resMore);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

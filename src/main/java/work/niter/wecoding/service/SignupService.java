@@ -1,8 +1,8 @@
 package work.niter.wecoding.service;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,9 +68,12 @@ public class SignupService {
      */
     @Transactional(rollbackFor = Exception.class)
     public String registerInService(Student student, Account account, String stuRePassword, String stuCode) {
+        Map<String,Object> map = new HashMap<>(4);
+
         String stuPassword = account.getStuPassword();
         if (!stuPassword.equals(stuRePassword)) {
-            return "确认密码和密码不一致!";
+            map.put("message", "确认密码和密码不一致");
+            return JSON.toJSONString(map);
         } else {
             String email = student.getStuEmail();
             String code = this.redisTemplate.opsForValue().get(email);
@@ -79,12 +82,18 @@ public class SignupService {
                 account.setStuPassword((new BCryptPasswordEncoder()).encode(account.getStuPassword()));
                 int addUserPassword = this.accountMapper.addUserPassword(account);
                 if (addResult == 1 && addUserPassword == 1) {
-                    return "注册成功!";
+                    map.put("status", 200);
+                    map.put("message", "注册成功");
+                    return JSON.toJSONString(map);
                 } else {
-                    return "注册失败，请重试!";
+                    map.put("status", 500);
+                    map.put("message", "服务器异常");
+                    return JSON.toJSONString(map);
                 }
             } else {
-                return "验证码错误!";
+                map.put("status", 401);
+                map.put("message", "验证码错误!");
+                return JSON.toJSONString(map);
             }
         }
     }

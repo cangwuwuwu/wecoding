@@ -7,6 +7,10 @@ import com.github.tobato.fastdfs.domain.fdfs.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import work.niter.wecoding.entity.Account;
@@ -56,6 +60,18 @@ public class StudentController {
         return result;
     }
 
+    @GetMapping("/current")
+    public Student findCurrentStudent() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Student student = new Student();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            student = studentService.getByUsername(userDetails.getUsername());
+        }
+        return student;
+    }
+
+
     @GetMapping
     public List<Student> findAllStudents() {
         return studentService.getAllStudentsInService();
@@ -66,19 +82,6 @@ public class StudentController {
         return studentService.addOneStudent(student);
     }
 
-    @PutMapping
-    public int updateInfoById(Student student) {
-        return studentService.updateStuInfoById(student);
-    }
-
-    /*@PostMapping("/uploadheadimg1")
-    public Student uploadHeadImgBase(@RequestBody StusBO stusBO) throws Exception {
-        String bace64Data = stusBO.getBaceData();
-        String stusBacePath = "F:\\" + stusBO.getStuId() + "stusHeadImg.png";
-        FileUtils.base64ToFile(stusBacePath, bace64Data);
-
-        MultipartFile file = FileUtils.fileToMultipart(stusBacePath);
-    }*/
 
     @PostMapping("/uploadheadimg")
     public Student uploadHeadImgBlob(@RequestParam MultipartFile file,
@@ -93,6 +96,11 @@ public class StudentController {
         student.setStuBigImg(bigPath.replaceAll("M00/00/00/", ""));
         studentService.updateStuInfoById(student);
         return student;
+    }
+
+    @PutMapping
+    public int updateInfoById(Student student) {
+        return studentService.updateStuInfoById(student);
     }
 
     @PutMapping("/account")

@@ -95,6 +95,9 @@
 * 完成用户修改密码功能
 #### 2019/8/28 return json by SpringSecurity
 * 前后端分离 Spring Security 返回JSON配置
+#### 2019/9/2 timing check resources status  
+* 定时任务每天检查资源可用性并更新到数据库
+* 更新了一些请求和响应的数据类型
 
 ---
 Thank you for your read.
