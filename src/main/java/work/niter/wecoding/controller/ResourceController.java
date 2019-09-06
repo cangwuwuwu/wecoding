@@ -3,9 +3,13 @@ package work.niter.wecoding.controller;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.entity.ResWeb;
 import work.niter.wecoding.entity.Resource;
+import work.niter.wecoding.enums.ExceptionEnum;
+import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.service.ResourceService;
 
 import java.util.List;
@@ -30,6 +34,16 @@ public class ResourceController {
             @RequestParam(value="limit", defaultValue = "10") Integer limit) {
         List<Resource> reslist = resourceService.getLanguageResInService(language, page, limit);
         return new PageInfo<>(reslist);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> postLanguageRes(Resource resource) {
+        int i = resourceService.uploadResource(resource);
+        if (i == 1) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        } else {
+            throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_ERROR);
+        }
     }
 
     @GetMapping("/web/{language}")

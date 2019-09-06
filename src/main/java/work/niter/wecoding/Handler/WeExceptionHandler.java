@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 @ControllerAdvice
 public class WeExceptionHandler {
 
-    @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public Map<String, Object> SQLIntegrityConstraintViolationExceptionHandle(
             SQLIntegrityConstraintViolationException e
     ) {

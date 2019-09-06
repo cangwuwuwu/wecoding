@@ -11,8 +11,6 @@ import work.niter.wecoding.service.MailService;
  * @Date: 2019/7/14 1:25
  * @Description:
  */
-//@CrossOrigin(origins = "*")
-
 @RestController
 @RequestMapping("/sendmail")
 public class MailController {

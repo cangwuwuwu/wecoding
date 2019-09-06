@@ -98,6 +98,10 @@
 #### 2019/9/2 timing check resources status  
 * 定时任务每天检查资源可用性并更新到数据库
 * 更新了一些请求和响应的数据类型
+#### 2019/9/6 add upload resources
+* 新增资源伤上传功能
+* 创建了统一的异常枚举类ExceptionEnum
+* 控制器接口使用ResponseEntity<>
 
 ---
 Thank you for your read.

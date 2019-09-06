@@ -57,6 +57,10 @@ public class ResourceService {
         return resWebMapper.getResourcesWeb(resWebType);
     }
 
+    public int uploadResource(Resource resource) {
+        return resourceMapper.insertSelective(resource);
+    }
+
     /**
      * 每天三点检查资源是否仍有效
      * 秒 分 时 日 月 周几
@@ -82,4 +86,15 @@ public class ResourceService {
             }
         });
     }
+
+
+    /**
+     * 每周检查是否有未清理的过期资源并通知管理员
+     */
+
+    /**
+     * 每天检查是否有用户过生日发送生日祝福
+     */
+
+
 }

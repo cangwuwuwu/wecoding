@@ -2,6 +2,7 @@ package work.niter.wecoding.mapper;
 
 import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
+import work.niter.wecoding.entity.ResMore;
 import work.niter.wecoding.entity.Resource;
 
 import java.util.List;
@@ -37,4 +38,7 @@ public interface ResourceMapper extends Mapper<Resource> {
     @Select("select * from resources where instr(res_name,#{resName})")
     @ResultMap("res_result_map")
     List<Resource> getSearchResByNameService(String resName);
+
+    @Insert("insert into resource_more values(last_insert_id(),#{resStatus},#{resPoint},#{resHeat}")
+    int insertResMore(ResMore resMore);
 }
