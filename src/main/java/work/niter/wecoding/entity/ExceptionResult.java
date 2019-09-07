@@ -1,6 +1,8 @@
 package work.niter.wecoding.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import work.niter.wecoding.enums.ExceptionEnum;
 
 /**

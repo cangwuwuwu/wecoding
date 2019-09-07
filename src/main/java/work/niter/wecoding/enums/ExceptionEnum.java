@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 public enum ExceptionEnum {
     // 返回资源上传失败信息
     RESOURCE_UPLOAD_ERROR(400, "资源上传失败！"),
+    SAVE_COMPSTUDENT_ERROR(500, "学生信息存储失败"),
+    NOT_FIND_STUDENT_MSG(404, "没有查询到学生信息"),
     ;
     private int code;
     private String msg;
