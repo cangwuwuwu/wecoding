@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,6 +34,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailService userDetailService;
@@ -64,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/login/**", "/signup/**").permitAll()
-                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**").permitAll()
-//                    .antMatchers("/delete**", "/admin**").hasRole("ADMIN")
+                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**","/comp","/comp/search").permitAll()
+//                    .antMatchers("/comp/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -134,9 +136,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     out.flush();
                     out.close();
                 })
-                /*.and()
+                .and()
                     .sessionManagement()
-                    .invalidSessionUrl("/login/timeout")*/
+                    .invalidSessionUrl("/login/timeout")
                 .and()
                     .headers().frameOptions().disable()
                 .and()

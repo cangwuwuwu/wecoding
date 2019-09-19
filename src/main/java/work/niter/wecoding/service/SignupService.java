@@ -31,7 +31,7 @@ public class SignupService {
     private StringRedisTemplate redisTemplate;
 
     /**
-     * 获取所有用户和随机挑选五个用户展示
+     * 获取所有用户和随机挑选8个用户展示
      * @return userlist
      */
     public UserList getEightStudentsInService() {

@@ -25,7 +25,7 @@ public class WeExceptionHandler {
     public Map<String, Object> SQLIntegrityConstraintViolationExceptionHandle(
             SQLIntegrityConstraintViolationException e
     ) {
-        Map<String, Object> result = new HashMap<>(3);
+        Map<String, Object> result = new HashMap<>();
         result.put("message", "数据库操作错误");
         return result;
     }

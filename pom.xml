@@ -10,7 +10,7 @@
     </parent>
     <groupId>work.niter</groupId>
     <artifactId>wecoding</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>wecoding</name>
     <description>Demo project for Spring Boot</description>
 
@@ -30,11 +30,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
 
         <dependency>
@@ -183,10 +178,14 @@
         </dependency>
 
         <!--        elasticsearch-->
-        <!-- <dependency>
+         <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-         </dependency>-->
+         </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
