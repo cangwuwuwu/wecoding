@@ -66,7 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/login/**", "/signup/**").permitAll()
-                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**","/comp","/comp/search").permitAll()
+                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**").permitAll()
+                    .antMatchers("/comp","/comp/search", "/comp/spend/**").permitAll()
 //                    .antMatchers("/comp/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
@@ -136,9 +137,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     out.flush();
                     out.close();
                 })
-                .and()
-                    .sessionManagement()
-                    .invalidSessionUrl("/login/timeout")
+//                .and()
+//                    .sessionManagement()
+//                    .invalidSessionUrl("/login/timeout")
                 .and()
                     .headers().frameOptions().disable()
                 .and()

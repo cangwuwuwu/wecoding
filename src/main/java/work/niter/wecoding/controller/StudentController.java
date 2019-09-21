@@ -84,16 +84,18 @@ public class StudentController {
 
 
     @PostMapping("/uploadheadimg")
-    public Student uploadHeadImgBlob(@RequestParam MultipartFile file,
-                                     @RequestParam String stuId) throws Exception {
-        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), "png", null);
+    public Student uploadHeadImgBlob(
+            @RequestParam MultipartFile file,
+            @RequestParam String stuId) throws Exception {
+        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(
+                file.getInputStream(), file.getSize(), "png", null);
         String bigPath = storePath.getPath();
         String thumbPath = thumbImageConfig.getThumbImagePath(storePath.getPath());
 
         Student student = new Student();
         student.setStuId(stuId);
-        student.setStuImg(thumbPath.replaceAll("M00/00/00/", ""));
-        student.setStuBigImg(bigPath.replaceAll("M00/00/00/", ""));
+        student.setStuImg(thumbPath);
+        student.setStuBigImg(bigPath);
         studentService.updateStuInfoById(student);
         return student;
     }

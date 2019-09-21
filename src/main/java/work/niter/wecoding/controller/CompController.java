@@ -99,7 +99,6 @@ public class CompController {
     public ResponseEntity<List<Map<String, Object>>> getStuInfoByOthers(
             @RequestParam(name = "keywords", required = false) String keywords
     ) {
-//        System.out.println(keywords);
         MultiMatchQueryBuilder multiMatchQuery =
                 QueryBuilders.multiMatchQuery(keywords,
                         "stu_id", "stu_gender",
@@ -117,7 +116,7 @@ public class CompController {
                 .setFrom(0)
                 .setSize(10);
 
-        System.out.println(builder);
+//        System.out.println(builder);
         SearchResponse response = builder.get();
         List<Map<String, Object>> result = new ArrayList<>();
 

@@ -21,7 +21,9 @@ public enum ExceptionEnum {
     USER_ALSO_EXIST(500, "该用户信息已存在"),
     INFO_NOT_FOUND(500, "您要查询的结果不存在"),
     ARGS_NOT_FOUND_ERROR(500, "参数传入错误"),
-    UNKNOWN_ERROR(500, "未知错误")
+    UNKNOWN_ERROR(500, "未知错误"),
+
+    DELETE_FAILED_ERROR(500, "删除失败")
     ;
     private int code;
     private String msg;
