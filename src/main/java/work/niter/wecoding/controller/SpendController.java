@@ -1,5 +1,6 @@
 package work.niter.wecoding.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.fdfs.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import work.niter.wecoding.entity.CompSpend;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
+import work.niter.wecoding.service.SpendService;
 
 /**
  * @Author: Cangwu
@@ -17,12 +19,14 @@ import work.niter.wecoding.exception.RestException;
  * @Description: 财务收支模块
  */
 @RestController
-@RequestMapping("/spend")
+@RequestMapping("/comp/spend")
 public class SpendController {
     @Autowired
     private FastFileStorageClient storageClient;
     @Autowired
     private ThumbImageConfig thumbImageConfig;
+    @Autowired
+    private SpendService spendService;
 
     @PostMapping("/uploadimg")
     public ResponseEntity<CompSpend> uploadMoneyImg(
@@ -51,4 +55,17 @@ public class SpendController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping
+    public ResponseEntity<Void> addSpend(@RequestBody CompSpend compSpend) {
+        System.out.println(compSpend);
+        spendService.insertSpend(compSpend);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<PageInfo<CompSpend>> getAllSpendByPage(
+            @RequestParam(name = "page", defaultValue = "1") Integer page,
+            @RequestParam(name = "size", defaultValue = "5") Integer size) {
+        return ResponseEntity.ok(spendService.findAllSpendByPage(page, size));
+    }
 }

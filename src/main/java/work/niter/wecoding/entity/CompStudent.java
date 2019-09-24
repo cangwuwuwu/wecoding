@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "compasso_stu")
+@Table(name = "comp_stu")
 @Document(indexName = "wecoding", type = "stu")
 public class CompStudent {
 
@@ -20,6 +20,9 @@ public class CompStudent {
     private String stuName;
     private String stuPhone;
     private String stuEmail;
+    private String stuClass;
+    private String stuNation;
+    private String stuStatus;
     private String stuInfo;
     private String stuDept;
     private String stuGender;

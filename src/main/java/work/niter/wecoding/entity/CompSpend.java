@@ -2,7 +2,10 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @Author: Cangwu
@@ -10,12 +13,16 @@ import javax.persistence.Id;
  * @Description:
  */
 @Data
+@Table(name = "comp_spend")
 public class CompSpend {
     @Id
     private Integer id;
+    @Column(name = "`number`")
+    private Integer number;
     private String type;
-    private String time;
-    private String describe;
+    private Date time;
+    @Column(name = "`desc`")
+    private String desc;
     private String small;
     private String big;
     private String name;

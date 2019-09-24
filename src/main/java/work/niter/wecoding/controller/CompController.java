@@ -15,10 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import work.niter.wecoding.entity.CompSpend;
 import work.niter.wecoding.entity.CompStudent;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.service.CompService;
+import work.niter.wecoding.service.SpendService;
 
 import java.util.ArrayList;
 import java.util.List;

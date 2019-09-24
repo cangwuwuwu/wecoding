@@ -7,17 +7,12 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.AuthorizedUrl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -42,23 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authenticationProvider(authenticationProvider())
-                .httpBasic()
+//                .authenticationProvider(authenticationProvider())
+                .exceptionHandling()
                 // 未登录/无权限 提示
                 .authenticationEntryPoint(((request, response, e) -> {
                     response.setContentType("application/json;charset=utf-8");
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     PrintWriter out = response.getWriter();
                     Map<String, Object> map = new HashMap<>(4);
-                    map.put("status", 403);
-                    map.put("message", "未登录");
+                    map.put("status", 401);
+                    map.put("message", "未登录或登录过期！");
                     out.write(JSON.toJSONString(map));
                     out.flush();
                     out.close();
@@ -66,58 +56,58 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/login/**", "/signup/**").permitAll()
-                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**").permitAll()
-                    .antMatchers("/comp","/comp/search", "/comp/spend/**").permitAll()
+                    .antMatchers("/submit", "/sendmail/**", "/stu/id/**", "/stu/username/**", "/resources/**").permitAll()
+                    .antMatchers("/comp","/comp/search").permitAll()
 //                    .antMatchers("/comp/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .defaultSuccessUrl("/home")
                     .loginProcessingUrl("/login")
-                .usernameParameter("stuUsername")
-                .passwordParameter("stuPassword")
-                .failureHandler(((request, response, e) -> {
-                    response.setContentType("application/json;charset=utf-8");
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    PrintWriter out = response.getWriter();
-                    Map<String,Object> map = new HashMap<>(4);
-                    map.put("status", 401);
-                    if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-                        map.put("message","用户名或密码错误");
-                    } else if (e instanceof CredentialsExpiredException) {
-                        map.put("message","登录过期");
-                    } else {
-                        map.put("message","登录失败!");
-                    }
-                    out.write(JSON.toJSONString(map));
-                    out.flush();
-                    out.close();
-                }))
-                .successHandler((request,response,authentication) -> {
-                    Map<String,Object> map = new HashMap<>(8);
-                    map.put("status",200);
-                    map.put("message","登录成功");
-                    map.put("data",authentication);
-                    response.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = response.getWriter();
-                    out.write(JSON.toJSONString(map));
-                    out.flush();
-                    out.close();
-                })
+                    .usernameParameter("stuUsername")
+                    .passwordParameter("stuPassword")
+                    .failureHandler(((request, response, e) -> {
+                        response.setContentType("application/json;charset=utf-8");
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        PrintWriter out = response.getWriter();
+                        Map<String,Object> map = new HashMap<>(4);
+                        map.put("status", 401);
+                        if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+                            map.put("message","用户名或密码错误");
+                        } else if (e instanceof CredentialsExpiredException) {
+                            map.put("message","登录过期");
+                        } else {
+                            map.put("message","登录失败!");
+                        }
+                        out.write(JSON.toJSONString(map));
+                        out.flush();
+                        out.close();
+                    }))
+                    .successHandler((request,response,authentication) -> {
+                        Map<String,Object> map = new HashMap<>(8);
+                        map.put("status",200);
+                        map.put("message","登录成功");
+                        map.put("data",authentication);
+                        response.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = response.getWriter();
+                        out.write(JSON.toJSONString(map));
+                        out.flush();
+                        out.close();
+                    })
                 .and()
-                .exceptionHandling()
-                //没有权限，返回json
-                .accessDeniedHandler((request,response,ex) -> {
-                    response.setContentType("application/json;charset=utf-8");
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    PrintWriter out = response.getWriter();
-                    Map<String,Object> map = new HashMap<>(4);
-                    map.put("status",403);
-                    map.put("message", "权限不足");
-                    out.write(JSON.toJSONString(map));
-                    out.flush();
-                    out.close();
-                })
+                    .exceptionHandling()
+                    //没有权限，返回json
+                    .accessDeniedHandler((request,response,ex) -> {
+                        response.setContentType("application/json;charset=utf-8");
+                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        PrintWriter out = response.getWriter();
+                        Map<String,Object> map = new HashMap<>(4);
+                        map.put("status",403);
+                        map.put("message", "权限不足");
+                        out.write(JSON.toJSONString(map));
+                        out.flush();
+                        out.close();
+                    })
                 /*.and()
                     .rememberMe()
                     .tokenRepository(this.persistentTokenRepository())
@@ -126,17 +116,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                 //退出成功，返回json
-                .logoutSuccessHandler((request,response,authentication) -> {
-                    Map<String,Object> map = new HashMap<>(8);
-                    map.put("status",200);
-                    map.put("message","退出成功");
-                    map.put("data",authentication);
-                    response.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = response.getWriter();
-                    out.write(JSON.toJSONString(map));
-                    out.flush();
-                    out.close();
-                })
+                    .logoutSuccessHandler((request,response,authentication) -> {
+                        Map<String,Object> map = new HashMap<>(8);
+                        map.put("status",200);
+                        map.put("message","退出成功");
+                        map.put("data",authentication);
+                        response.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = response.getWriter();
+                        out.write(JSON.toJSONString(map));
+                        out.flush();
+                        out.close();
+                    })
 //                .and()
 //                    .sessionManagement()
 //                    .invalidSessionUrl("/login/timeout")
@@ -153,14 +143,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return persistentTokenRepository;
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        //对默认的UserDetailsService进行覆盖
-        authenticationProvider.setUserDetailsService(userDetailService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        //对默认的UserDetailsService进行覆盖
+//        authenticationProvider.setUserDetailsService(userDetailService);
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        return authenticationProvider;
+//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
