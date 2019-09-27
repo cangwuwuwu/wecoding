@@ -2,23 +2,28 @@ package work.niter.wecoding.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
+import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.entity.CompStudent;
+import work.niter.wecoding.entity.UserList;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
+import work.niter.wecoding.mapper.AccountMapper;
 import work.niter.wecoding.mapper.CompMapper;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -26,6 +31,8 @@ public class CompService {
 
     @Autowired
     private CompMapper compMapper;
+    @Autowired
+    private AccountMapper accountMapper;
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
@@ -35,13 +42,18 @@ public class CompService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void saveStudentMsg(CompStudent compStudent) {
-        int i;
+        int i, j;
         try {
             i = compMapper.insert(compStudent);
+            Account account = new Account();
+            account.setStuId(compStudent.getStuId());
+            account.setStuPassword((new BCryptPasswordEncoder())
+                    .encode("123456"));
+            j = accountMapper.insertSelective(account);
         } catch (DuplicateKeyException e) {
             throw new RestException(ExceptionEnum.USER_ALSO_EXIST);
         }
-        if (i != 1){
+        if (i != 1 || j != 1){
             throw new RestException(ExceptionEnum.SAVE_COMPSTUDENT_ERROR);
         }
     }
@@ -63,9 +75,9 @@ public class CompService {
      * 查询所有数据不分页
      * @return
      */
+    @Cacheable(value = "stu")
     public List<CompStudent> findAllStuMsg() {
-        List<CompStudent> students = compMapper.selectAll();
-        return students;
+        return compMapper.selectAll();
     }
 
     /**
@@ -77,6 +89,7 @@ public class CompService {
                 .build();
         return elasticsearchTemplate.queryForIds(query);
     }
+
     /**
      * 根据名字进行模糊查询
      */
@@ -87,11 +100,35 @@ public class CompService {
         Example example = new Example(CompStudent.class);
         Example.Criteria criteria = example.createCriteria();
         //判断name是否为空
-        if (StringUtils.isNotBlank(name)){
+        if (StringUtils.isNotBlank(name)) {
             criteria.andLike("stuName", "%" + name + "%");
         }
         List<CompStudent> students = compMapper.selectByExample(example);
         return new PageInfo<>(students);
+    }
+
+    /**
+     * 根据学号查询
+     * @param stuId
+     * @return
+     */
+    public CompStudent getStudentById(String stuId) {
+        Example example = new Example(CompStudent.class);
+        example.createCriteria()
+                .andEqualTo("stuId", stuId);
+        return compMapper.selectOneByExample(example);
+    }
+
+    /**
+     * 根据学号查询条数
+     * @param stuId
+     * @return
+     */
+    public int getStudentCountById(String stuId) {
+        Example example = new Example(CompStudent.class);
+        example.createCriteria()
+                .andEqualTo("stuId", stuId);
+        return compMapper.selectCountByExample(example);
     }
 
     /**
@@ -115,6 +152,14 @@ public class CompService {
         int i = compMapper.delete(compStudent);
         if (i != 1){
             throw new RestException(ExceptionEnum.DELETE_MSG_ERROR);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void updateStuInfoById(CompStudent student) {
+        int i = compMapper.updateByPrimaryKeySelective(student);
+        if (i == 0) {
+            throw new RestException(ExceptionEnum.UPDATE_MSG_ERROR);
         }
     }
 }

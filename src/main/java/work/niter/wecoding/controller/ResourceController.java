@@ -20,48 +20,42 @@ import java.util.List;
  * @Description:
  */
 @RestController
-@RequestMapping("/resources")
+@RequestMapping("/res")
 public class ResourceController {
 
     @Autowired
     private ResourceService resourceService;
 
-    @Cacheable(value = "res", key = "#language + '-' + #page")
-    @GetMapping("/res/{language}")
-    public PageInfo<Resource> getLanguageRes(
+    @GetMapping("/video/{language}")
+    public ResponseEntity<PageInfo<Resource>> getLanguageRes(
             @PathVariable String language,
             @RequestParam(value="page", defaultValue = "1") Integer page,
             @RequestParam(value="limit", defaultValue = "10") Integer limit) {
-        List<Resource> reslist = resourceService.getLanguageResInService(language, page, limit);
-        return new PageInfo<>(reslist);
+        return ResponseEntity.ok(resourceService.getLanguageResInService(language, page, limit));
     }
 
     @PostMapping
-    public ResponseEntity<String> postLanguageRes(Resource resource) {
-        int i = resourceService.uploadResource(resource);
-        if (i == 1) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
-        } else {
-            throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_ERROR);
-        }
+    public ResponseEntity<Void> postLanguageRes(Resource resource) {
+        resourceService.uploadResource(resource);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/web/{language}")
-    public List<ResWeb> getLanguageWeb(@PathVariable String language) {
-        return resourceService.getLanguageWebService(language);
+    public ResponseEntity<List<ResWeb>> getLanguageWeb(@PathVariable String language) {
+        return ResponseEntity.ok(resourceService.getLanguageWebService(language));
     }
 
     @GetMapping("/search")
-    public PageInfo<Resource> getResBySearchName(
+    public ResponseEntity<PageInfo<Resource>> getResBySearchName(
             @RequestParam(value = "resName") String resName,
             @RequestParam(value="page", defaultValue = "1") Integer page,
             @RequestParam(value="limit", defaultValue = "10") Integer limit) {
-        List<Resource> resSearch = resourceService.getResBySearchName(resName, page, limit);
-        return new PageInfo<>(resSearch);
+        return ResponseEntity.ok(resourceService.getResBySearchName(resName, page, limit));
     }
 
     @PostMapping("/count")
-    public int resCountPlus(@RequestParam(value = "resId") Integer resId) {
-        return resourceService.resCountPlusInService(resId);
+    public ResponseEntity<Void> resCountPlus(@RequestParam(value = "resId") Integer resId) {
+        resourceService.resCountPlusInService(resId);
+        return ResponseEntity.ok().build();
     }
 }

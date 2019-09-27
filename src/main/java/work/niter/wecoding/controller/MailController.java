@@ -1,9 +1,11 @@
 package work.niter.wecoding.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.entity.FeedBack;
-import work.niter.wecoding.exception.NullEmailRequestException;
+import work.niter.wecoding.enums.ExceptionEnum;
+import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.service.MailService;
 
 /**
@@ -18,29 +20,19 @@ public class MailController {
     private MailService mailService;
 
     @PostMapping("/sign")
-    public String sendMail(@RequestParam String email) {
-        try {
-            if ("".equals(email)) {
-                throw new NullEmailRequestException();
-            } else {
-                mailService.sendMailForSign(email);
-                return "已发送,验证码五分钟内有效!";
-            }
-        } catch (Exception var4) {
-            var4.printStackTrace();
-            return "发送失败,请填写邮箱!";
+    public ResponseEntity<Void> sendMail(@RequestParam String email) {
+        if ("".equals(email)) {
+            throw new RestException(ExceptionEnum.EMAIL_NULL_EXCEPTION);
+        } else {
+            mailService.sendMailForSign(email);
+            return ResponseEntity.ok().build();
         }
     }
 
     @PostMapping("/feedback")
-    public String feedBackMail(FeedBack feedBack) {
-        try {
-            mailService.sendMailForFeedBack(feedBack);
-        } catch (Exception var10) {
-            var10.printStackTrace();;
-            return "反馈发送出错...";
-        }
-        return "谢谢您的反馈";
+    public ResponseEntity<Void> feedBackMail(@RequestBody FeedBack feedBack) {
+        mailService.sendMailForFeedBack(feedBack);
+        return ResponseEntity.ok().build();
     }
 }
 

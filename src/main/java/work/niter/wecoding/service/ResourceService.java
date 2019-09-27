@@ -1,6 +1,7 @@
 package work.niter.wecoding.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.entity.ResMore;
 import work.niter.wecoding.entity.ResWeb;
 import work.niter.wecoding.entity.Resource;
+import work.niter.wecoding.enums.ExceptionEnum;
+import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.mapper.ResMoreMapper;
 import work.niter.wecoding.mapper.ResWebMapper;
 import work.niter.wecoding.mapper.ResourceMapper;
@@ -35,21 +38,35 @@ public class ResourceService {
     @Autowired
     private ResWebMapper resWebMapper;
 
-    public List<Resource> getLanguageResInService(String resType, Integer page, Integer limit) {
+    /**
+     * 分页查询资源列表
+     * @param resType
+     * @param page
+     * @param limit
+     * @return
+     */
+    @Cacheable(value = "res", key = "#resType + '-' + #page")
+    public PageInfo<Resource> getLanguageResInService(
+            String resType, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        return resourceMapper.getResources(resType);
+        List<Resource> resources = resourceMapper.getResources(resType);
+        return new PageInfo<>(resources);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int resCountPlusInService(Integer resId) {
+    public void resCountPlusInService(Integer resId) {
         ResMore resMore = resMoreMapper.selectByPrimaryKey(resId);
         resMore.setResHeat(resMore.getResHeat() + 1);
-        return resMoreMapper.updateByPrimaryKeySelective(resMore);
+        int i = resMoreMapper.updateByPrimaryKeySelective(resMore);
+        if (i == 0) {
+            throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
+        }
     }
 
-    public List<Resource> getResBySearchName(String resName, Integer page, Integer limit) {
+    public PageInfo<Resource> getResBySearchName(String resName, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        return resourceMapper.getSearchResByNameService(resName);
+        List<Resource> resources = resourceMapper.getSearchResByNameService(resName);
+        return new PageInfo<>(resources);
     }
 
     @Cacheable(value = "res", key = "'web_' + #resWebType")
@@ -57,8 +74,11 @@ public class ResourceService {
         return resWebMapper.getResourcesWeb(resWebType);
     }
 
-    public int uploadResource(Resource resource) {
-        return resourceMapper.insertSelective(resource);
+    public void uploadResource(Resource resource) {
+        int i = resourceMapper.insertSelective(resource);
+        if (i == 0 ) {
+            throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_ERROR);
+        }
     }
 
     /**

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import work.niter.wecoding.entity.CompSpend;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
+import work.niter.wecoding.service.MailService;
 import work.niter.wecoding.service.SpendService;
 
 /**
@@ -22,43 +23,17 @@ import work.niter.wecoding.service.SpendService;
 @RequestMapping("/comp/spend")
 public class SpendController {
     @Autowired
-    private FastFileStorageClient storageClient;
-    @Autowired
-    private ThumbImageConfig thumbImageConfig;
-    @Autowired
     private SpendService spendService;
+    @Autowired
+    private MailService mailService;
 
-    @PostMapping("/uploadimg")
-    public ResponseEntity<CompSpend> uploadMoneyImg(
-            @RequestParam MultipartFile file
-    ) throws Exception {
-        StorePath storePath = storageClient.uploadImageAndCrtThumbImage(
-                file.getInputStream(), file.getSize(), "png", null);
-        String smallPath = thumbImageConfig.getThumbImagePath(storePath.getPath());
-        String bigPath = storePath.getPath();
-
-        CompSpend spend = new CompSpend();
-        spend.setBig(bigPath);
-        spend.setSmall(smallPath);
-
-        return ResponseEntity.ok(spend);
-    }
-
-    @DeleteMapping("/uploadimg")
-    public ResponseEntity<Void> deleteMoneyImg(@RequestBody CompSpend spend) {
-        try {
-            storageClient.deleteFile("wecoding", spend.getSmall());
-            storageClient.deleteFile("wecoding", spend.getBig());
-        } catch (Exception e) {
-            throw new RestException(ExceptionEnum.DELETE_FAILED_ERROR);
-        }
-        return ResponseEntity.ok().build();
-    }
 
     @PostMapping
     public ResponseEntity<Void> addSpend(@RequestBody CompSpend compSpend) {
-        System.out.println(compSpend);
         spendService.insertSpend(compSpend);
+        mailService.sendMailForSpend(
+                compSpend.getName(),
+                compSpend.getNumber());
         return ResponseEntity.ok().build();
     }
 

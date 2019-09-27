@@ -6,21 +6,17 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import work.niter.wecoding.entity.CompSpend;
 import work.niter.wecoding.entity.CompStudent;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.service.CompService;
-import work.niter.wecoding.service.SpendService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,10 +101,6 @@ public class CompController {
                 QueryBuilders.multiMatchQuery(keywords,
                         "stu_id", "stu_gender",
                         "stu_name", "stu_dept");
-//            boolQuery.must(QueryBuilders.matchQuery("stu_id", keywords));
-//            boolQuery.must(QueryBuilders.matchQuery("stu_gender", keywords));
-//            boolQuery.must(QueryBuilders.matchQuery("stu_name", keywords));
-//            boolQuery.must(QueryBuilders.matchQuery("stu_dept", keywords));
         SearchRequestBuilder builder =
                 client
                 .prepareSearch("wecoding")
@@ -118,7 +110,6 @@ public class CompController {
                 .setFrom(0)
                 .setSize(10);
 
-//        System.out.println(builder);
         SearchResponse response = builder.get();
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -127,6 +118,4 @@ public class CompController {
         }
         return ResponseEntity.ok(result);
     }
-
-
 }

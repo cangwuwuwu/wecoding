@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class UserList {
-    private List<Student> randomList;
-    private List<Student> allList;
+    private List<CompStudent> randomList;
+    private List<CompStudent> allList;
     private int len;
 }

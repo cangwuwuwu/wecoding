@@ -7,19 +7,26 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import work.niter.wecoding.entity.User;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,83 +38,50 @@ import java.util.Map;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailService userDetailService;
+
     @Autowired
     private DataSource dataSource;
+
+    @Bean
+    UserDetailService userDetails() {
+        return new UserDetailService();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//                .authenticationProvider(authenticationProvider())
                 .exceptionHandling()
-                // 未登录/无权限 提示
-                .authenticationEntryPoint(((request, response, e) -> {
-                    response.setContentType("application/json;charset=utf-8");
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    PrintWriter out = response.getWriter();
-                    Map<String, Object> map = new HashMap<>(4);
-                    map.put("status", 401);
-                    map.put("message", "未登录或登录过期！");
-                    out.write(JSON.toJSONString(map));
-                    out.flush();
-                    out.close();
-                }))
+                .authenticationEntryPoint((request, response, e) -> this.exceptionReturn(
+                            response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, "未登录或登录过期"))
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/login/**", "/signup/**").permitAll()
-                    .antMatchers("/submit", "/sendmail/**", "/stu/id/**", "/stu/username/**", "/resources/**").permitAll()
-                    .antMatchers("/comp","/comp/search").permitAll()
-//                    .antMatchers("/comp/admin").hasRole("ADMIN")
+                    .antMatchers().permitAll()
+                    .antMatchers("/sendmail/**", "/res/**").permitAll()
+                    .antMatchers("/stu/id/**", "/stu/getPart").permitAll()
+                    .antMatchers("/comp").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .defaultSuccessUrl("/home")
                     .loginProcessingUrl("/login")
-                    .usernameParameter("stuUsername")
+                    .usernameParameter("stuId")
                     .passwordParameter("stuPassword")
                     .failureHandler(((request, response, e) -> {
-                        response.setContentType("application/json;charset=utf-8");
-                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        PrintWriter out = response.getWriter();
-                        Map<String,Object> map = new HashMap<>(4);
-                        map.put("status", 401);
+                        String message;
                         if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-                            map.put("message","用户名或密码错误");
-                        } else if (e instanceof CredentialsExpiredException) {
-                            map.put("message","登录过期");
+                            message = "用户名或密码错误";
                         } else {
-                            map.put("message","登录失败!");
+                            message = "登录失败";
                         }
-                        out.write(JSON.toJSONString(map));
-                        out.flush();
-                        out.close();
+                        this.exceptionReturn(response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, message);
                     }))
-                    .successHandler((request,response,authentication) -> {
-                        Map<String,Object> map = new HashMap<>(8);
-                        map.put("status",200);
-                        map.put("message","登录成功");
-                        map.put("data",authentication);
-                        response.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = response.getWriter();
-                        out.write(JSON.toJSONString(map));
-                        out.flush();
-                        out.close();
-                    })
+                    .successHandler((request, response, authentication) ->
+                            this.successReturn(response, authentication, "登录成功"))
                 .and()
                     .exceptionHandling()
                     //没有权限，返回json
-                    .accessDeniedHandler((request,response,ex) -> {
-                        response.setContentType("application/json;charset=utf-8");
-                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                        PrintWriter out = response.getWriter();
-                        Map<String,Object> map = new HashMap<>(4);
-                        map.put("status",403);
-                        map.put("message", "权限不足");
-                        out.write(JSON.toJSONString(map));
-                        out.flush();
-                        out.close();
-                    })
+                    .accessDeniedHandler((request, response, e) -> this.exceptionReturn(
+                                response, e, 403, HttpServletResponse.SC_FORBIDDEN, "权限不足"))
                 /*.and()
                     .rememberMe()
                     .tokenRepository(this.persistentTokenRepository())
@@ -115,21 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userDetailsService(this.userDetailService)*/
                 .and()
                     .logout()
-                //退出成功，返回json
-                    .logoutSuccessHandler((request,response,authentication) -> {
-                        Map<String,Object> map = new HashMap<>(8);
-                        map.put("status",200);
-                        map.put("message","退出成功");
-                        map.put("data",authentication);
-                        response.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = response.getWriter();
-                        out.write(JSON.toJSONString(map));
-                        out.flush();
-                        out.close();
-                    })
-//                .and()
-//                    .sessionManagement()
-//                    .invalidSessionUrl("/login/timeout")
+                    .logoutSuccessHandler((request,response,authentication) ->
+                        this.successReturn(response, authentication, "退出成功"))
                 .and()
                     .headers().frameOptions().disable()
                 .and()
@@ -143,22 +104,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return persistentTokenRepository;
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        //对默认的UserDetailsService进行覆盖
-//        authenticationProvider.setUserDetailsService(userDetailService);
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        return authenticationProvider;
-//    }
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.userDetailService).passwordEncoder(this.passwordEncoder());
+        auth
+                .userDetailsService(this.userDetails())
+                .passwordEncoder(this.passwordEncoder());
     }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     * 未登录/无权访问
+     */
+    private void exceptionReturn(
+            HttpServletResponse response,
+            Exception e, Integer status,
+            Integer type, String message) throws IOException {
+        e.printStackTrace();
+        response.setContentType("application/json;charset=utf-8");
+        response.setStatus(type);
+        PrintWriter out = response.getWriter();
+        Map<String,Object> map = new HashMap<>(4);
+        map.put("status", status);
+        map.put("message", message);
+        out.write(JSON.toJSONString(map));
+        out.flush();
+        out.close();
+    }
+
+    /**
+     * 登录或退出成功返回状态码和信息
+     */
+    private void successReturn(
+            HttpServletResponse response, Authentication auth,
+            String message) throws IOException {
+        Map<String,Object> map = new HashMap<>(8);
+        map.put("status", 200);
+        map.put("message", message);
+        map.put("data", auth);
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.write(JSON.toJSONString(map));
+        out.flush();
+        out.close();
+    }
+
 }

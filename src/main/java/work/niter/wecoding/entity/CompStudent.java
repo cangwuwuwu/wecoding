@@ -2,11 +2,13 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestBody;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @Table(name = "comp_stu")
@@ -18,13 +20,19 @@ public class CompStudent {
     private Integer id;
     private String stuId;
     private String stuName;
+    private String stuGender;
+    private String stuDept;
     private String stuPhone;
     private String stuEmail;
-    private String stuClass;
-    private String stuNation;
-    private String stuStatus;
     private String stuInfo;
-    private String stuDept;
-    private String stuGender;
+    private String stuClass;
+    private String stuStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date stuBirthday;
+    private Date stuRegistTime;
+    private String stuNation;
+    private String stuImg;
+    private String stuBigImg;
+    private String stuArea;
 }
 

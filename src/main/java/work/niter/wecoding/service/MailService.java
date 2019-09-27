@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import work.niter.wecoding.entity.FeedBack;
+import work.niter.wecoding.enums.ExceptionEnum;
+import work.niter.wecoding.exception.RestException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,48 +34,76 @@ public class MailService {
     private String from;
     @Value("${spring.mail.url}")
     private String url;
+    @Value("${spring.mail.accDept")
+    private String accDept;
 
-    @Async("taskExecutor")
-    public void sendMailForSign(String to) {
-        int code = (int)((Math.random() * 9.0D + 1.0D) * 100000.0D);
-        redisTemplate.opsForValue().set(to, String.valueOf(code), 5L, TimeUnit.MINUTES);
+    private void sendMailMethod(
+            String from, String to,
+            Context context, String subject,
+            String tempName) throws MessagingException {
         MimeMessage mimeMessage = this.mailSender.createMimeMessage();
-
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-            helper.setFrom(from);
-            helper.setTo(to);
-            helper.setSubject("From Wecoding");
-            Context context = new Context();
-            context.setVariable("address", url);
-            context.setVariable("codes", code);
-            String template = this.templateEngine.process("email-code", context);
-            helper.setText(template, true);
-            this.mailSender.send(mimeMessage);
-        } catch (MessagingException var8) {
-            var8.printStackTrace();
-        }
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+        helper.setFrom(from);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        String template = this.templateEngine.process(tempName, context);
+        helper.setText(template, true);
+        this.mailSender.send(mimeMessage);
     }
 
+    /**
+     * 修改密码时发送验证码
+     */
+    @Async("taskExecutor")
+    public void sendMailForSign(String to) {
+            int code = (int) ((Math.random() * 9.0D + 1.0D) * 100000.0D);
+            try {
+                redisTemplate.opsForValue().set(to, String.valueOf(code), 5L, TimeUnit.MINUTES);
+                Context context = new Context();
+                context.setVariable("address", url);
+                context.setVariable("codes", code);
+                sendMailMethod(from, to, context, "From Wecoding", "email-code");
+            } catch (Exception e) {
+                throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
+            }
+    }
+
+    /**
+     * 发送反馈
+     */
     @Async("taskExecutor")
     public void sendMailForFeedBack(FeedBack feedBack) {
-        MimeMessage mimeMessage = this.mailSender.createMimeMessage();
-
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-            helper.setFrom(from);
-            helper.setTo("294352178@qq.com");
-            helper.setSubject("Wecoding : " + feedBack.getType());
             Context context = new Context();
             context.setVariable("type", feedBack.getType());
             context.setVariable("content", feedBack.getContent());
             context.setVariable("address", url);
-            String template = this.templateEngine.process("email-feedback", context);
-            helper.setText(template, true);
-            this.mailSender.send(mimeMessage);
-        } catch (MessagingException var9) {
-            var9.printStackTrace();
+            sendMailMethod(from, "294352178@qq.com", context,
+                    "Wecoding : " + feedBack.getType(),
+                    "email-feedback");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
         }
     }
+
+    /**
+     * 向财务部发一条邮件提醒
+     */
+    @Async("taskExecutor")
+    public void sendMailForSpend(String name, Integer number) {
+        try {
+            Context context = new Context();
+            context.setVariable("name", name);
+            context.setVariable("number", number);
+            sendMailMethod(from, accDept, context,
+                    "计算机协会官网|Wecoding",
+                    "email-spend");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
+        }
+    }
+
 }
 

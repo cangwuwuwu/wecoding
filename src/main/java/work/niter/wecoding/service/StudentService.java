@@ -1,61 +1,50 @@
 package work.niter.wecoding.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
-import work.niter.wecoding.entity.Student;
-import work.niter.wecoding.mapper.StudentMapper;
+import org.springframework.web.bind.annotation.RestController;
+import work.niter.wecoding.entity.CompStudent;
+import work.niter.wecoding.entity.UserList;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @Author: Cangwu
- * @Date: 2019/7/14 1:21
+ * @Date: 2019/9/27 15:24
  * @Description:
  */
-@Service("studentService")
-@CacheConfig(cacheNames = "stu")
+@RestController
 public class StudentService {
+
     @Autowired
-    private StudentMapper studentMapper;
+    private CompService compService;
 
-    public Student getOne(String stuId) {
-        return studentMapper.selectByPrimaryKey(stuId);
-    }
+    /**
+     * 获取所有用户和随机挑选8个用户展示
+     * @return userlist
+     */
+    public UserList findEightStudents() {
+        List<CompStudent> allStudents = compService.findAllStuMsg();
+        int len = allStudents.size();
+        int displaynum;
 
-    public Student getByUsername(String stuUsername) {
-        Example example = new Example(Student.class);
-        example.createCriteria()
-                .andEqualTo("stuUsername", stuUsername);
-        Student student = studentMapper.selectOneByExample(example);
-        return student;
-    }
+        HashSet set = new HashSet();
+        if (len < 8) {
+            displaynum = len;
+        } else {
+            displaynum = 8;
+        }
+        while(set.size() < displaynum) {
+            set.add((int)(Math.random() * (double)len));
+        }
 
-    @Cacheable(key = "#root.method.name")
-    public List<Student> getAllStudentsInService() {
-        return studentMapper.selectAll();
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public int deleteOneStudent(String stuId) {
-        return studentMapper.deleteStudentById(stuId);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public int updateStudent(Student student) {
-        return studentMapper.updateStudent(student);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public int addOneStudent(Student student) {
-        return studentMapper.addStudent(student);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public int updateStuInfoById(Student student) {
-        return studentMapper.updateByPrimaryKeySelective(student);
+        List<CompStudent> randomLists = new LinkedList<>();
+        set.forEach((e) -> randomLists.add(allStudents.get((Integer) e)));
+        UserList userList = new UserList();
+        userList.setRandomList(randomLists);
+        userList.setLen(len);
+        userList.setAllList(allStudents);
+        return userList;
     }
 }

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "account")
 public class Account {
     @Id
-    private String stuUsername;
+    private String stuId;
     private String stuPassword;
+    private Integer stuAuth;
 }
