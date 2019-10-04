@@ -3,7 +3,6 @@ package work.niter.wecoding.entity;
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.RequestBody;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;

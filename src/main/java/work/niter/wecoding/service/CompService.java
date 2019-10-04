@@ -16,14 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.entity.CompStudent;
-import work.niter.wecoding.entity.UserList;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.mapper.AccountMapper;
 import work.niter.wecoding.mapper.CompMapper;
 
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
