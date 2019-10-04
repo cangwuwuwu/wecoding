@@ -55,10 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, "未登录或登录过期"))
                 .and()
                     .authorizeRequests()
+<<<<<<< HEAD
                     .antMatchers().permitAll()
                     .antMatchers("/sendmail/**", "/res/**").permitAll()
                     .antMatchers("/stu/id/**", "/stu/getPart", "/stu/current").permitAll()
                     .antMatchers("/comp").permitAll()
+=======
+                    .antMatchers("/login/**", "/signup/**").permitAll()
+                    .antMatchers("/submit", "/sendmail/**", "/stu/**", "/resources/**","/comp/**").permitAll()
+//                    .antMatchers("/delete**", "/admin**").hasRole("ADMIN")
+>>>>>>> 807281550c890f5bebca4b086ba4170d69355646
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
