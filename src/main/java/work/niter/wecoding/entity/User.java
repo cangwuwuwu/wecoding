@@ -2,7 +2,6 @@ package work.niter.wecoding.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -18,7 +17,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String stuName;
-    private List<GrantedAuthority> stuRoles;
+    private List<GrantedAuthority> authorities;
     private String stuEmail;
 
     public User(
@@ -30,7 +29,7 @@ public class User implements UserDetails {
         this.username = stuId;
         this.password = stuPassword;
         this.stuName = stuName;
-        this.stuRoles = stuRoles;
+        this.authorities = stuRoles;
         this.stuEmail = stuEmail;
     }
 
@@ -44,10 +43,10 @@ public class User implements UserDetails {
         sb.append("AccountNonExpired: ").append(this.isAccountNonExpired()).append("; ");
         sb.append("credentialsNonExpired: ").append(this.isCredentialsNonExpired()).append("; ");
         sb.append("AccountNonLocked: ").append(this.isAccountNonLocked()).append("; ");
-        if (!this.stuRoles.isEmpty()) {
+        if (!this.authorities.isEmpty()) {
             sb.append("Granted Authorities: ");
             boolean first = true;
-            Iterator var3 = this.stuRoles.iterator();
+            Iterator var3 = this.authorities.iterator();
 
             while(var3.hasNext()) {
                 GrantedAuthority auth = (GrantedAuthority)var3.next();
@@ -67,7 +66,7 @@ public class User implements UserDetails {
 
     @Override
     public List<GrantedAuthority> getAuthorities() {
-        return this.stuRoles;
+        return this.authorities;
     }
 
     public void eraseCredentials() {

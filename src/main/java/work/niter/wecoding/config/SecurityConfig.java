@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers().permitAll()
                     .antMatchers("/sendmail/**", "/res/**").permitAll()
-                    .antMatchers("/stu/id/**", "/stu/getPart").permitAll()
+                    .antMatchers("/stu/id/**", "/stu/getPart", "/stu/current").permitAll()
                     .antMatchers("/comp").permitAll()
                     .anyRequest().authenticated()
                 .and()
@@ -82,11 +82,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //没有权限，返回json
                     .accessDeniedHandler((request, response, e) -> this.exceptionReturn(
                                 response, e, 403, HttpServletResponse.SC_FORBIDDEN, "权限不足"))
-                /*.and()
+                .and()
                     .rememberMe()
                     .tokenRepository(this.persistentTokenRepository())
-                    .tokenValiditySeconds(3600)
-                    .userDetailsService(this.userDetailService)*/
+                    .tokenValiditySeconds(60*60*24)
+                    .userDetailsService(this.userDetails())
                 .and()
                     .logout()
                     .logoutSuccessHandler((request,response,authentication) ->
