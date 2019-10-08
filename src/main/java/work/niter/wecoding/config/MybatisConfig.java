@@ -14,9 +14,8 @@ public class MybatisConfig {
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
-        return (configuration) -> {
-            configuration.setMapUnderscoreToCamelCase(true);
-        };
+        return (configuration) ->
+                configuration.setMapUnderscoreToCamelCase(true);
     }
 }
 

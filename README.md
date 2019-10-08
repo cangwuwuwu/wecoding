@@ -59,6 +59,8 @@
 * [Netty实战](https://book.douban.com/subject/27038538/)
 
 #### 更新日志
+##### 2019/10/8 New electricity reminder module
+* 新增NIT宿舍电量提醒模块
 ##### 2019/9/27  Refactoring interface
 * 重构了大部分接口，规范返回格式
 * 优化了超时机制，超时后访问api提示登录

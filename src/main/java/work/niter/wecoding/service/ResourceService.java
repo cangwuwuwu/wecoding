@@ -21,7 +21,6 @@ import work.niter.wecoding.mapper.ResWebMapper;
 import work.niter.wecoding.mapper.ResourceMapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,7 +76,7 @@ public class ResourceService {
     public void uploadResource(Resource resource) {
         int i = resourceMapper.insertSelective(resource);
         if (i == 0 ) {
-            throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_ERROR);
+            throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_FAILED);
         }
     }
 

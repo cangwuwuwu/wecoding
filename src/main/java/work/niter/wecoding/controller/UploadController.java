@@ -50,7 +50,7 @@ public class UploadController {
             storageClient.deleteFile("wecoding", spend.getSmall());
             storageClient.deleteFile("wecoding", spend.getBig());
         } catch (Exception e) {
-            throw new RestException(ExceptionEnum.DELETE_FAILED_ERROR);
+            throw new RestException(ExceptionEnum.DELETE_FAILED_FAILED);
         }
         return ResponseEntity.ok().build();
     }

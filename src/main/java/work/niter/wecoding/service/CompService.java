@@ -51,7 +51,7 @@ public class CompService {
             throw new RestException(ExceptionEnum.USER_ALSO_EXIST);
         }
         if (i != 1 || j != 1){
-            throw new RestException(ExceptionEnum.SAVE_COMPSTUDENT_ERROR);
+            throw new RestException(ExceptionEnum.SAVE_COMPSTUDENT_FAILED);
         }
     }
 
@@ -136,7 +136,7 @@ public class CompService {
     public void changeMsgById(CompStudent compStudent) {
         int i = compMapper.updateByPrimaryKey(compStudent);
         if (i !=1){
-            throw new RestException(ExceptionEnum.UPDATE_MSG_ERROR);
+            throw new RestException(ExceptionEnum.UPDATE_MSG_FAILED);
         }
     }
 
@@ -148,7 +148,7 @@ public class CompService {
     public void removeMsg(CompStudent compStudent) {
         int i = compMapper.delete(compStudent);
         if (i != 1){
-            throw new RestException(ExceptionEnum.DELETE_MSG_ERROR);
+            throw new RestException(ExceptionEnum.DELETE_MSG_FAILED);
         }
     }
 
@@ -156,7 +156,7 @@ public class CompService {
     public void updateStuInfoById(CompStudent student) {
         int i = compMapper.updateByPrimaryKeySelective(student);
         if (i == 0) {
-            throw new RestException(ExceptionEnum.UPDATE_MSG_ERROR);
+            throw new RestException(ExceptionEnum.UPDATE_MSG_FAILED);
         }
     }
 }

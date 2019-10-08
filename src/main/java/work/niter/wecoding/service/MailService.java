@@ -105,5 +105,24 @@ public class MailService {
         }
     }
 
+    /**
+     * 发送电费不足邮件通知
+     */
+    @Async("taskExecutor")
+    public void sendMailForElectric(
+            String roomName, String number, String email) {
+        try {
+            Context context = new Context();
+            context.setVariable("roomName", roomName);
+            context.setVariable("number", number);
+            sendMailMethod(from, email, context,
+                    "宿舍电量不足提醒-计算机协会官网|Wecoding",
+                    "email-electric");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
+        }
+    }
+
 }
 

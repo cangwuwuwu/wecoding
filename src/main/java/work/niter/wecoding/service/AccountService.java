@@ -2,7 +2,6 @@ package work.niter.wecoding.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +9,6 @@ import work.niter.wecoding.entity.Account;
 import work.niter.wecoding.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.mapper.AccountMapper;
-
-import java.security.Principal;
 
 /**
  * @Author: Cangwu
@@ -40,7 +37,7 @@ public class AccountService {
                 throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
             }
         } else {
-            throw new RestException(ExceptionEnum.CODE_MATCH_FAILD);
+            throw new RestException(ExceptionEnum.CODE_MATCH_ERROR);
         }
     }
 
