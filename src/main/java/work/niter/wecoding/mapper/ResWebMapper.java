@@ -22,7 +22,9 @@ public interface ResWebMapper extends Mapper<ResWeb> {
             @Result(property = "resWebName", column = "res_web_name"),
             @Result(property = "resWebDescribe", column = "res_web_describe"),
             @Result(property = "resWebUrl", column = "res_web_url"),
-            @Result(property = "resWebUper", column = "res_web_uper")
+            @Result(property = "resWebUper", column = "res_web_uper"),
+            @Result(property = "resWebNum", column = "res_web_num"),
+            @Result(property = "resWebPoster", column = "res_web_poster"),
     })
     List<ResWeb> getResourcesWeb(String resWebType);
 }

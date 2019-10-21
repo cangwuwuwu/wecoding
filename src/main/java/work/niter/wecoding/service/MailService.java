@@ -110,10 +110,12 @@ public class MailService {
      */
     @Async("taskExecutor")
     public void sendMailForElectric(
-            String roomName, String number, String email) {
+            String roomName, String number,
+            String email, String id) {
         try {
             Context context = new Context();
             context.setVariable("roomName", roomName);
+            context.setVariable("id", id);
             context.setVariable("number", number);
             sendMailMethod(from, email, context,
                     "宿舍电量不足提醒-计算机协会官网|Wecoding",

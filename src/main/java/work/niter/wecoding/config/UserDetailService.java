@@ -42,7 +42,8 @@ public class UserDetailService implements UserDetailsService {
                     account.getStuPassword(),
                     student.getStuName(),
                     authorities,
-                    student.getStuEmail());
+                    student.getStuEmail(),
+                    student.getStuImg());
         } else {
             throw new UsernameNotFoundException("User '" + stuId + "' not found.");
         }

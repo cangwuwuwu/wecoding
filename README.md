@@ -59,6 +59,8 @@
 * [Netty实战](https://book.douban.com/subject/27038538/)
 
 #### 更新日志
+##### 2019/10/21 Add Course List Page 
+* 课程列表模块，redis实现点赞系统，报名课程系统
 ##### 2019/10/8 New electricity reminder module
 * 新增NIT宿舍电量提醒模块
 ##### 2019/9/27  Refactoring interface

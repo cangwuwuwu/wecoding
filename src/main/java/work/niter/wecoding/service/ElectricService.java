@@ -40,7 +40,7 @@ public class ElectricService {
     private static final String URL = "http://pay.nit.edu.cn/Pay/CheckRoom";
     private static final HttpMethod METHOD = HttpMethod.POST;
     private static final MultiValueMap<String, String> PARAMS = new LinkedMultiValueMap<>();
-    private static final double UPPER = 20D;
+    private static final double UPPER = 10D;
 
     /**
      * 查询楼栋宿舍列表
@@ -111,7 +111,9 @@ public class ElectricService {
                 number = msg.split(",");
                 if (Double.valueOf(number[2]) < UPPER) {
                     System.out.println(account.getStuRoom() + "电量余额还剩：" + number[2]);
-                    mailService.sendMailForElectric(account.getStuRoom(), number[2], account.getStuEmail());
+                    mailService.sendMailForElectric(
+                            account.getStuRoom(), number[2],
+                            account.getStuEmail(), account.getStuId());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

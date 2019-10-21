@@ -9,6 +9,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,7 +22,11 @@ import work.niter.wecoding.service.CompService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
+/**
+ * @author ZHAI
+ */
 @RestController
 @RequestMapping("/comp")
 public class CompController {

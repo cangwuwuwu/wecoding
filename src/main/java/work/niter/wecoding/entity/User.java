@@ -19,18 +19,21 @@ public class User implements UserDetails {
     private String stuName;
     private List<GrantedAuthority> authorities;
     private String stuEmail;
+    private String stuImg;
 
     public User(
             String stuId,
             String stuPassword,
             String stuName,
             List<GrantedAuthority> stuRoles,
-            String stuEmail) {
+            String stuEmail,
+            String stuImg) {
         this.username = stuId;
         this.password = stuPassword;
         this.stuName = stuName;
         this.authorities = stuRoles;
         this.stuEmail = stuEmail;
+        this.stuImg = stuImg;
     }
 
     @Override
