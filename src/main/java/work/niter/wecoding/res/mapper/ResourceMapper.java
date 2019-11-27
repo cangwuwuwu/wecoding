@@ -41,4 +41,9 @@ public interface ResourceMapper extends Mapper<Resource> {
 
     @Insert("insert into resource_more values(last_insert_id(),#{resStatus},#{resPoint},#{resHeat}")
     int insertResMore(ResMore resMore);
+
+    /*模糊查询资源网盘信息*/
+    @Select("select * from resources where CONCAT( res_name,res_uploader,res_type,res_describe,res_up_time) LIKE CONCAT('%',#{search},'%')")
+    @ResultMap("res_result_map")
+    List<Resource> searchResource(String search);
 }
