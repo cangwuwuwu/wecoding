@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,18 +14,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import work.niter.wecoding.entity.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/stu/id/**", "/stu/getPart").permitAll()
                     .antMatchers("/comp").permitAll()
                     .antMatchers("/ele/**").permitAll()
+                    .antMatchers("/comp/spend", "/course", "/course/apply/**").permitAll()
+                    .antMatchers("/pay/notify").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -124,7 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletResponse response,
             Exception e, Integer status,
             Integer type, String message) throws IOException {
-        e.printStackTrace();
+//        e.printStackTrace();
         response.setContentType("application/json;charset=utf-8");
         response.setStatus(type);
         PrintWriter out = response.getWriter();

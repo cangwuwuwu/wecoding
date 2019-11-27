@@ -1,0 +1,17 @@
+package work.niter.wecoding.alipay.entity;
+
+import lombok.Data;
+
+/**
+ * @Author: Cangwu
+ * @Date: 2019/10/31 15:53
+ * @Description:
+ */
+@Data
+public class PreOrder {
+    private String out_trade_no;
+    private String product_code;
+    private String total_amount;
+    private String subject;
+    private String body;
+}

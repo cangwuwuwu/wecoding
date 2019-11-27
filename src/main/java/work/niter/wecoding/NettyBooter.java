@@ -10,7 +10,6 @@ import work.niter.wecoding.netty.WebSocketServer;
  * @Date: 2019/7/17 13:37
  * @Description:
  */
-@Component
 public class NettyBooter implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override

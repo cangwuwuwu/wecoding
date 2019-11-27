@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import work.niter.wecoding.entity.Account;
-import work.niter.wecoding.entity.CompStudent;
-import work.niter.wecoding.entity.User;
-import work.niter.wecoding.service.AccountService;
-import work.niter.wecoding.service.CompService;
+import work.niter.wecoding.user.entity.Account;
+import work.niter.wecoding.user.entity.CompStudent;
+import work.niter.wecoding.user.entity.User;
+import work.niter.wecoding.user.service.AccountService;
+import work.niter.wecoding.user.service.CompService;
 
 /**
  * @Author: Cangwu

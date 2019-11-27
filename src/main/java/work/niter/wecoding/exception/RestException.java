@@ -3,7 +3,7 @@ package work.niter.wecoding.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import work.niter.wecoding.enums.ExceptionEnum;
+import work.niter.wecoding.exception.enums.ExceptionEnum;
 
 /**
  * @Author: Cangwu

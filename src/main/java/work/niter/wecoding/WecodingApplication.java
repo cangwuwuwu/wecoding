@@ -15,7 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableAsync
 @EnableRabbit
 @EnableScheduling
-@MapperScan(basePackages = "work.niter.wecoding.mapper")
+@MapperScan(basePackages = "work.niter.wecoding")
 @EnableTransactionManagement
 @SpringBootApplication
 public class WecodingApplication extends SpringBootServletInitializer {

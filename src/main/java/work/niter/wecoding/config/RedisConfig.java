@@ -1,6 +1,5 @@
 package work.niter.wecoding.config;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,8 +16,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import work.niter.wecoding.entity.Course;
-import work.niter.wecoding.entity.ResWeb;
+import work.niter.wecoding.course.entity.Course;
+import work.niter.wecoding.res.entity.ResWeb;
 
 /**
  * @Author: Cangwu
@@ -40,27 +39,11 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, ResWeb> redisTemplate(RedisConnectionFactory factory) {
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
         //设置序列化
-        Jackson2JsonRedisSerializer redisSerializer = new Jackson2JsonRedisSerializer<>(ResWeb.class);
+        Jackson2JsonRedisSerializer redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         // 配置redisTemplate
-        RedisTemplate<String, ResWeb> redisTemplate = new RedisTemplate<>();
-        return setTemplate(factory, redisTemplate, redisSerializer);
-    }
-
-    @Bean
-    public RedisTemplate<String, Course> courseRedisTemplate(RedisConnectionFactory factory) {
-        //设置序列化
-        Jackson2JsonRedisSerializer redisSerializer = new Jackson2JsonRedisSerializer<>(Course.class);
-        // 配置redisTemplate
-        RedisTemplate<String, Course> redisTemplate = new RedisTemplate<>();
-        return setTemplate(factory, redisTemplate, redisSerializer);
-
-    }
-
-    private RedisTemplate setTemplate(
-            RedisConnectionFactory factory, RedisTemplate redisTemplate,
-            Jackson2JsonRedisSerializer redisSerializer) {
+        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.ALL, Visibility.ANY);
         mapper.enableDefaultTyping(DefaultTyping.NON_FINAL);
