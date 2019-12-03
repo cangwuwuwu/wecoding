@@ -1,5 +1,7 @@
 package work.niter.wecoding.msg.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +53,17 @@ public class RabbitService {
     public void send2AllClient(MyMessage message) {
         rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", message);
     }
+
+    /**
+     * 查询所有历史消息，并分页。后台消息管理会调用
+     * @param page
+     * @param size
+     * @return
+     */
+   public PageInfo<MyMessage> getAllMessageAndPage(int page, int size){
+       PageHelper.startPage(page, size);
+       List<MyMessage> messages = messageMapper.selectAll();
+       PageInfo<MyMessage> pageInfo = new PageInfo<>(messages);
+       return pageInfo;
+   }
 }

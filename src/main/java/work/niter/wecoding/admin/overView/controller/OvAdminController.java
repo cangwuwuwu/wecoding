@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import work.niter.wecoding.admin.overView.service.OvAdminService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +38,15 @@ public class OvAdminController {
     public ResponseEntity<Map<String, Integer>> getGenderDis(){
         Map<String, Integer> map = adminService.findGenderDis();
         return ResponseEntity.ok(map);
+    }
+
+    /**
+     * 后台管理管理-协会概览管理 -- 查询学生资源分布和年级分布情况
+     */
+    @GetMapping("/getResAndGrade")
+    public ResponseEntity<List<Map<String, Integer>>> getResAndGrade(){
+        List<Map<String, Integer>> list = adminService.getResAndGrade();
+        return ResponseEntity.ok(list);
     }
 
 }

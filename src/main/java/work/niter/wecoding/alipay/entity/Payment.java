@@ -3,6 +3,7 @@ package work.niter.wecoding.alipay.entity;
 import lombok.Data;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -22,4 +23,7 @@ public class Payment {
     private Date createTime;
     private Date closeTime;
     private Date finishTime;
+
+    @Transient
+    private String stuName;
 }

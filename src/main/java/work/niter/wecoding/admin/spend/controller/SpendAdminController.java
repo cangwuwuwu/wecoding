@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.admin.spend.service.SpendAdminService;
+import work.niter.wecoding.alipay.entity.Payment;
 import work.niter.wecoding.spend.entity.CompSpend;
 
 /**
@@ -46,6 +47,17 @@ public class SpendAdminController {
     public ResponseEntity<Void> deleteSpendById(@PathVariable Integer id){
         adminService.removeSpend(id);
         return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 后台管理管理-财务管理 --分页插叙所有会费缴纳信息
+     */
+    @GetMapping("getSpendDuesInfo")
+    public ResponseEntity<PageInfo<Payment>> getSpendDuesInfo(@RequestParam(value = "page", defaultValue = "1")Integer page,
+                                                              @RequestParam(value = "size", defaultValue = "5") Integer size,
+                                                              @RequestParam(value = "search", required = false) String search){
+        PageInfo<Payment> PaymentInfo = adminService.getSpendDuesInfo(page, size, search);
+        return ResponseEntity.ok(PaymentInfo);
     }
 
 }

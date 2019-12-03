@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 public class Account {
     @Id
     private String stuId;
+
+    @JsonIgnore
     private String stuPassword;
     private Integer stuAuth;
 

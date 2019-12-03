@@ -46,4 +46,8 @@ public interface ResourceMapper extends Mapper<Resource> {
     @Select("select * from resources where CONCAT( res_name,res_uploader,res_type,res_describe,res_up_time) LIKE CONCAT('%',#{search},'%')")
     @ResultMap("res_result_map")
     List<Resource> searchResource(String search);
+
+    /*查询资源分类*/
+    @Select("select res_type from resources")
+    List<String> searchResType();
 }

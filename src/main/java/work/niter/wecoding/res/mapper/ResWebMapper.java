@@ -38,4 +38,8 @@ public interface ResWebMapper extends Mapper<ResWeb> {
     @Select("select * from resource_web where CONCAT( res_web_type,res_web_name,res_web_uper) LIKE CONCAT('%',#{search},'%')")
     @ResultMap("web_result_map")
     List<ResWeb> searchResourceWeb(String search);
+
+    /*查询资源分类*/
+    @Select("select res_web_type from resource_web")
+    List<String> searchResWebType();
 }

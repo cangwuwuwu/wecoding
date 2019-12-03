@@ -41,4 +41,10 @@ public interface CompMapper extends Mapper<CompStudent> {
      */
     @Select("select count(*) from comp_stu")
     Integer findStudentCount();
+
+    /**
+     * 根据学号查询学生的名字
+     */
+    @Select("select stu_name from comp_stu where stu_id = #{userId}")
+    String findStuName(String userId);
 }
