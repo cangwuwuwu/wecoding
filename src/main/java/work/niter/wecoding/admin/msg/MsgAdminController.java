@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.msg.entity.MyMessage;
 import work.niter.wecoding.msg.service.RabbitService;
@@ -16,6 +17,7 @@ import java.util.List;
  * @Date 2019/12/3 11:37
  * @Description:
  */
+@PreAuthorize("hasRole('ADMIN')")
 @RestController
 @RequestMapping("/admin/comp/msg")
 public class MsgAdminController {

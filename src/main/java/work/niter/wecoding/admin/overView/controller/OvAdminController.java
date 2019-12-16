@@ -2,6 +2,7 @@ package work.niter.wecoding.admin.overView.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @Date 2019/11/27 10:56
  * @Description:
  */
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/ov")
 @RestController
 public class OvAdminController {

@@ -3,6 +3,7 @@ package work.niter.wecoding.admin.account.controller;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.admin.account.service.AccountAdminService;
 import work.niter.wecoding.user.entity.Account;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @Date 2019/11/27 11:11
  * @Description:
  */
-
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/account")
 @RestController
 public class AccountAdminController {

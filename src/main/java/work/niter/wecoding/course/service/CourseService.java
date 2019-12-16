@@ -50,19 +50,15 @@ public class CourseService {
     public Map<String, Object> selectAllCourseList(Integer page, Integer size) {
         List<Course> courses;
         List<ResWeb> resWebs;
-        if (redisTemplate.hasKey(COURSE_KEY)) {
-            PageHelper.startPage(page, 5);
-            courses = object2Course();
-        } else {
+        if(!redisTemplate.hasKey(COURSE_KEY) || !redisTemplate.hasKey(WEB_KEY)) {
             courses = courseMapper.selectAllCourse();
             courses.forEach(course -> redisTemplate.opsForList().rightPush(COURSE_KEY, course));
-        }
-        if (redisTemplate.hasKey(WEB_KEY)) {
-            resWebs = object2ResWeb();
-        } else {
             resWebs = resWebMapper.selectAll();
             resWebs.forEach(web -> redisTemplate.opsForList().rightPush(WEB_KEY, web));
         }
+        PageHelper.startPage(page, size);
+        courses = object2Course();
+        resWebs = object2ResWeb();
         Map<String, Object> map = new HashMap<>(4);
         map.put("courseList", new PageInfo<>(courses));
         map.put("recommend", resWebs);

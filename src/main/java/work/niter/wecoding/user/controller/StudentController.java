@@ -27,6 +27,12 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @PostMapping("/signup")
+    public ResponseEntity<Void> postStudentInfo(CompStudent compStudent) {
+        compService.saveStudentMsg(compStudent);
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * 根据学号查询条数
      * @param id

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.admin.resource.service.ResAdminService;
 import work.niter.wecoding.res.entity.ResWeb;
@@ -16,6 +17,7 @@ import work.niter.wecoding.res.entity.ResourceAudit;
  * @Date 2019/11/27 10:50
  * @Description:
  */
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/res")
 @RestController
 public class ResAdminController {

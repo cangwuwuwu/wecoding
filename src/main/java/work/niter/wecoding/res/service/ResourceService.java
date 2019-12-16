@@ -16,6 +16,8 @@ import work.niter.wecoding.res.entity.ResWeb;
 import work.niter.wecoding.res.entity.Resource;
 import work.niter.wecoding.exception.enums.ExceptionEnum;
 import work.niter.wecoding.exception.RestException;
+import work.niter.wecoding.res.entity.ResourceAudit;
+import work.niter.wecoding.res.mapper.ResAuditMapper;
 import work.niter.wecoding.res.mapper.ResMoreMapper;
 import work.niter.wecoding.res.mapper.ResWebMapper;
 import work.niter.wecoding.res.mapper.ResourceMapper;
@@ -36,6 +38,8 @@ public class ResourceService {
     private ResMoreMapper resMoreMapper;
     @Autowired
     private ResWebMapper resWebMapper;
+    @Autowired
+    private ResAuditMapper resAuditMapper;
 
     /**
      * 分页查询资源列表
@@ -72,9 +76,9 @@ public class ResourceService {
         return resWebMapper.getResourcesWeb(resWebType);
     }
 
-    public void uploadResource(Resource resource) {
-        int i = resourceMapper.insertSelective(resource);
-        if (i == 0 ) {
+    public void uploadResource(ResourceAudit resource) {
+        int i = resAuditMapper.insertSelective(resource);
+        if (i == 0) {
             throw new RestException(ExceptionEnum.RESOURCE_UPLOAD_FAILED);
         }
     }

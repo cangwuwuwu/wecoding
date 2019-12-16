@@ -3,6 +3,7 @@ package work.niter.wecoding.admin.spend.controller;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.admin.spend.service.SpendAdminService;
 import work.niter.wecoding.alipay.entity.Payment;
@@ -13,6 +14,7 @@ import work.niter.wecoding.spend.entity.CompSpend;
  * @Date 2019/11/27 11:02
  * @Description:
  */
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/spend")
 @RestController
 public class SpendAdminController {

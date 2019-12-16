@@ -33,8 +33,11 @@ public class UserDetailService implements UserDetailsService {
         CompStudent student = compService.getStudentById(stuId);
         if (account != null) {
             List<GrantedAuthority> authorities = new ArrayList<>();
-            if (account.getStuAuth() == 1) {
+            if (account.getStuAuth() >= 1) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                if (account.getStuAuth() == 2) {
+                    authorities.add(new SimpleGrantedAuthority("ROLE_SUPER"));
+                }
             }
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             return new User(

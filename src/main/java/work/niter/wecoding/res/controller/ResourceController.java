@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.res.entity.ResRate;
 import work.niter.wecoding.res.entity.ResWeb;
 import work.niter.wecoding.res.entity.Resource;
+import work.niter.wecoding.res.entity.ResourceAudit;
 import work.niter.wecoding.res.service.ResRateService;
 import work.niter.wecoding.res.service.ResourceService;
 
@@ -36,7 +37,7 @@ public class ResourceController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> postLanguageRes(Resource resource) {
+    public ResponseEntity<Void> postLanguageRes(ResourceAudit resource) {
         resourceService.uploadResource(resource);
         return ResponseEntity.ok().build();
     }
@@ -62,7 +63,6 @@ public class ResourceController {
 
     @PostMapping("/rate")
     public ResponseEntity<Void> putResRate(ResRate resRate) {
-        System.out.println(resRate);
         resRateService.newRate(resRate);
         return ResponseEntity.ok().build();
     }

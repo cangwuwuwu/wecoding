@@ -28,7 +28,6 @@ import java.util.Map;
  * @Date 2019/11/27 11:22
  * @Description:
  */
-
 @RestController
 @RequestMapping("/admin/comp/stu")
 public class StuAdminController {
