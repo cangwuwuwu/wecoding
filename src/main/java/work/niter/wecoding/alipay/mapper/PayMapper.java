@@ -34,14 +34,14 @@ public interface PayMapper extends Mapper<Payment> {
      * 模糊查询会费缴纳信息，并根据学号查询学生姓名
      * @return
      */
-    @Select("select * from payment where CONCAT( userId,payment,paymentType) LIKE CONCAT('%',#{search},'%')")
+    @Select("select * from payment where CONCAT( user_id,payment,payment_type) LIKE CONCAT('%',#{search},'%') order by finish_time desc")
     @ResultMap("payment_results")
     List<Payment> searchPayment(String search);
 
     /**
      * 不模糊查询
      */
-    @Select("select * from payment")
+    @Select("select * from payment order by finish_time desc")
     @Results(id = "payment_results", value = {
             @Result(id = true, property = "id", column = "id"),
             @Result(property = "orderNo", column = "order_no"),

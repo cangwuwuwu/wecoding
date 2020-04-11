@@ -61,7 +61,8 @@ public class RabbitService {
      * @return
      */
    public PageInfo<MyMessage> getAllMessageAndPage(int page, int size){
-       PageHelper.startPage(page, size);
+       String orderBy = "msg_time" + " desc";
+       PageHelper.startPage(page, size, orderBy);
        List<MyMessage> messages = messageMapper.selectAll();
        PageInfo<MyMessage> pageInfo = new PageInfo<>(messages);
        return pageInfo;

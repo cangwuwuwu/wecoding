@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.msg.entity.MyMessage;
 import work.niter.wecoding.msg.service.RabbitService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +42,10 @@ public class MsgAdminController {
     @PostMapping("/sendMsg")
     public ResponseEntity<Void> sendMsg(@RequestBody  String message){
         MyMessage myMessage = JSONObject.parseObject(message, MyMessage.class);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String s = format.format(date);
+        myMessage.setMsgTime(s);
         rabbitService.insertNewHistoryMessageInService(myMessage);
         rabbitService.send2AllClient(myMessage);
         return ResponseEntity.ok().build();

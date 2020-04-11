@@ -28,6 +28,7 @@ public enum ExceptionEnum {
     USER_ALSO_EXIST(500, "重复录入信息"),
     EMAIL_NULL_EXCEPTION(500, "邮箱不能为空"),
     INFO_NOT_FOUND(500, "您要查询的结果不存在"),
+    STU_NOT_IN_INSTITUTE(500, "该学生不是协会成员"),
 
     CREATE_PAYMENT_ERROR(500, "订单创建错误"),
     CREATE_QRCODE_ERROR(500, "二维码生成错误"),

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import work.niter.wecoding.exception.enums.ExceptionEnum;
@@ -40,10 +41,9 @@ public class AccountAdminService {
         PageHelper.startPage(page, size);
         List<CompStudent> students = null;
         if (StringUtils.isNotBlank(search)) {
-            students = compMapper.findInfoWithSearch(search);
-            System.out.println(students);
+            students = compMapper.findInfoWithSearchAndSort(search);
         }else {
-            students = compMapper.selectAll();
+            students = compMapper.findInfoAndSort();
         }
         PageInfo<CompStudent> info = new PageInfo<>(students);
         List<Account> accounts = new ArrayList<>();
@@ -103,6 +103,7 @@ public class AccountAdminService {
     /**
      * 后台管理管理-账户管理 --根据学号修改权限
      */
+    @PreAuthorize("hasRole('SUPER')")
     @Transactional
     public void updateAuth(String stuId, String stuAuthString) {
         Account account = new Account();
@@ -126,6 +127,7 @@ public class AccountAdminService {
     /**
      * 后台管理管理-账户管理 --根据学号删除账号
      */
+    @PreAuthorize("hasRole('SUPER')")
     @Transactional
     public void removeAccount(String stuId) {
         if (stuId == null){

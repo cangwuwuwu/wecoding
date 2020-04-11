@@ -18,6 +18,11 @@ public interface SpendMapper extends Mapper<CompSpend> {
      * @param search
      * @return
      */
-    @Select("SELECT * FROM comp_spend WHERE CONCAT( NAME,`desc`,time) LIKE CONCAT('%',#{search},'%') ")
+    @Select("SELECT * FROM comp_spend WHERE CONCAT( NAME,`desc`,time) LIKE CONCAT('%',#{search},'%') order by time desc ")
     public List<CompSpend> searchSpend(String search);
+
+    /*查询会费收支*/
+    @Select("select number, type from comp_spend")
+    List<CompSpend> selectSpend();
+
 }

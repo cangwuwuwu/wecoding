@@ -47,4 +47,27 @@ public interface CompMapper extends Mapper<CompStudent> {
      */
     @Select("select stu_name from comp_stu where stu_id = #{userId}")
     String findStuName(String userId);
+
+
+    /*
+    *  模糊查询， 学生姓名、学生电话,并根据账号权限排序
+    * */
+    @Select("select c.stu_id,c.stu_name,c.stu_phone from comp_stu c join account a on(c.stu_id = a.stu_id) where CONCAT( c.stu_name,c.stu_phone) like  CONCAT('%',#{name},'%') order by a.stu_auth desc")
+    @Results(id = "stuResultByAuth", value = {
+            @Result(id = true, property = "stuId", column = "stu_id"),
+            @Result(property = "stuName", column = "stu_name"),
+            @Result(property = "stuPhone", column = "stu_phone")
+    })
+    List<CompStudent> findInfoWithSearchAndSort(String name);
+
+    /*
+     *  模糊查询， 学生姓名、学生电话,并根据账号权限排序
+     * */
+    @Select("select c.stu_id,c.stu_name,c.stu_phone from comp_stu c join account a on(c.stu_id = a.stu_id)  order by a.stu_auth desc")
+    @Results(id = "stuInfoByAuth", value = {
+            @Result(id = true, property = "stuId", column = "stu_id"),
+            @Result(property = "stuName", column = "stu_name"),
+            @Result(property = "stuPhone", column = "stu_phone")
+    })
+    List<CompStudent> findInfoAndSort();
 }

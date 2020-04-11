@@ -9,6 +9,8 @@ import work.niter.wecoding.admin.spend.service.SpendAdminService;
 import work.niter.wecoding.alipay.entity.Payment;
 import work.niter.wecoding.spend.entity.CompSpend;
 
+import javax.script.ScriptException;
+
 /**
  * @Author xiaozhai
  * @Date 2019/11/27 11:02
@@ -31,6 +33,15 @@ public class SpendAdminController {
                                                             @RequestParam(value = "search", required = false) String search){
         PageInfo<CompSpend> spendInfo = adminService.findSpendInfo(page, size, search);
         return ResponseEntity.ok(spendInfo);
+    }
+
+    /**
+     * 后台管理管理-财务管理 --查询协会经费余额
+     */
+    @GetMapping("getSpendBalance")
+    public ResponseEntity<String> getSpendBalance() throws ScriptException {
+        double balance = adminService.findSpendBalance();
+        return ResponseEntity.ok(String.valueOf(balance));
     }
 
     /**
@@ -60,6 +71,15 @@ public class SpendAdminController {
                                                               @RequestParam(value = "search", required = false) String search){
         PageInfo<Payment> PaymentInfo = adminService.getSpendDuesInfo(page, size, search);
         return ResponseEntity.ok(PaymentInfo);
+    }
+
+    /**
+     * 后台管理管理-财务管理 --手动添加会费缴纳信息
+     */
+    @PostMapping("updatePaymentInfo")
+    public ResponseEntity<Void> updatePaymentInfo(@RequestBody Payment payment){
+        adminService.insertPaymentInfo(payment);
+        return ResponseEntity.ok().build();
     }
 
 }
