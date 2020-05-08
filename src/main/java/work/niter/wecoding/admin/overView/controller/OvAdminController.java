@@ -6,6 +6,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import work.niter.wecoding.admin.access.annotation.AccessView;
+import work.niter.wecoding.admin.access.annotation.PageView;
 import work.niter.wecoding.admin.overView.service.OvAdminService;
 
 import java.util.List;

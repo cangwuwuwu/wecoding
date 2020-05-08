@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import work.niter.wecoding.admin.access.annotation.PageView;
 import work.niter.wecoding.admin.spend.service.SpendAdminService;
 import work.niter.wecoding.alipay.entity.Payment;
 import work.niter.wecoding.spend.entity.CompSpend;

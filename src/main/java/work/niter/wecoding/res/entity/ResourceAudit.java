@@ -25,4 +25,5 @@ public class ResourceAudit {
     private String resPassword;
     private Date resUpTime;
     private String resUploader;
+    private String resUpEmail;
 }

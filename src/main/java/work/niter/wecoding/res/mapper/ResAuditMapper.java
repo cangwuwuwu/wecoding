@@ -25,7 +25,8 @@ public interface ResAuditMapper extends Mapper<ResourceAudit> {
             @Result(property = "resUrl", column = "res_url"),
             @Result(property = "resPassword", column = "res_password"),
             @Result(property = "resUpTime", column = "res_up_time"),
-            @Result(property = "resUploader", column = "res_uploader")
+            @Result(property = "resUploader", column = "res_uploader"),
+            @Result(property = "resUpEmail", column = "res_up_email"),
 
     })
     List<ResourceAudit> searchResourceAudit(String search);

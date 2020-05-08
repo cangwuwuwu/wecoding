@@ -126,5 +126,23 @@ public class MailService {
         }
     }
 
+    /*审核资源-资源审核结果给资源上传者发送邮件*/
+    @Async("taskExecutor")
+    public void sendMailForRes(
+            String uper, String resName, String resType, String result, String email) {
+        try {
+            Context context = new Context();
+            context.setVariable("resName", resName);
+            context.setVariable("uper", uper);
+            context.setVariable("result", result);
+            context.setVariable("type", resType);
+            String subject = "资源审核-计算机协会官网|Wecoding";
+            sendMailMethod(from, email, context, subject, "email-resourceAudit");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
+        }
+    }
+
 }
 

@@ -28,6 +28,7 @@ public interface ResWebAuditMapper extends Mapper<ResWebAudit> {
             @Result(property = "resWebUper", column = "res_web_uper"),
             @Result(property = "resWebNum", column = "res_web_num"),
             @Result(property = "resWebPoster", column = "res_web_poster"),
+            @Result(property = "resWebEmail", column = "res_web_email"),
     })
     List<ResWebAudit> searchResourceAuditWeb(String search);
 }

@@ -66,7 +66,7 @@ public class SpendAdminService {
         double totalPayCount = payMapper.selectCount(new Payment());
         double  totalPay = totalPayCount * 10;
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("nashorn");
+        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
         for (CompSpend s : spends) {
             String expression = String.valueOf(totalPay) + s.getType() + s.getNumber();
             totalPay = (double)scriptEngine.eval(expression);

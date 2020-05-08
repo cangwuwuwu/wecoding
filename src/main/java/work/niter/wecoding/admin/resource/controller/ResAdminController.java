@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import work.niter.wecoding.admin.access.annotation.PageView;
 import work.niter.wecoding.admin.resource.service.ResAdminService;
 import work.niter.wecoding.res.entity.ResWeb;
 import work.niter.wecoding.res.entity.ResWebAudit;

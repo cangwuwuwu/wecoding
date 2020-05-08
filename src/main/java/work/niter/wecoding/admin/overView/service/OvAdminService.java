@@ -82,12 +82,14 @@ public class OvAdminService {
             try{
                 String[] split = item.split(",");
                 for (String s : split) {
-                    Integer count = resMap.get(s);
-                    resMap.put(s, (count == null) ? 1 : count + 1);
+                    String s2 = s.trim();
+                    Integer count = resMap.get(s2);
+                    resMap.put(s2, (count == null) ? 1 : count + 1);
                 }
             }catch (Exception e){
-                Integer count = resMap.get(item);
-                resMap.put(item, (count == null) ? 1 : count + 1);
+                String s3 = item.trim();
+                Integer count = resMap.get(s3);
+                resMap.put(s3, (count == null) ? 1 : count + 1);
             }
         });
 

@@ -25,5 +25,6 @@ public class ResWebAudit {
     private String resWebUper;
     private Integer resWebNum;
     private String resWebPoster;
+    private String resWebEmail;
 
 }
