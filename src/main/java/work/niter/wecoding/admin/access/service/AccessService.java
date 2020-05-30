@@ -57,15 +57,14 @@ public class AccessService {
             for (int month = 1; month < currentMonth; month++) {
                 LocalDate localDate = nowTime.minusMonths(month);
                 LocalDate lastDay = localDate.with(TemporalAdjusters.lastDayOfMonth());
-                dateList.add(lastDay.toString());
-            }
-            accessTrend = accessMapper.getAccessTrend(StringUtils.join(dateList, ","));
-            //把当月之前没有数据的月份访问量设为0
-            if (accessTrend.size() != currentMonth -1){
-                for (int i = (currentMonth - accessTrend.size() - 1); i>0; i--){
-                    accessTrend.add(0L);
+                LocalDate startDay = localDate.with(TemporalAdjusters.firstDayOfMonth());
+                Integer value = accessMapper.getMonthLastValue(startDay.toString(), lastDay.toString());
+                if (value == null){
+                    value = 0;
                 }
+                accessTrend.add(value.longValue());
             }
+
             Collections.reverse(accessTrend);
             accessTrend.add(accessData.getAccessMonth());
             //把当月之后的月份访问量设为0

@@ -47,6 +47,10 @@ public interface AccessMapper extends Mapper<Access> {
     @Select("select count(*) from comp_stu")
     Integer getNewUserA();
 
+    //获取某个月的最后一条记录
+    @Select("select access_month from access where access_time >= #{start} and access_time <= #{end} order by access_time desc limit 1;")
+    Integer getMonthLastValue(String start, String end);
+
     //获取截止当前日期的访问趋势
     @Select("select access_month from access where FIND_IN_SET(access_time, #{date}) order by access_time desc")
     List<Long> getAccessTrend(String date);

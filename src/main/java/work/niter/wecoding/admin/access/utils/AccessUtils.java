@@ -10,6 +10,7 @@ import work.niter.wecoding.admin.entity.AccessPage;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,7 @@ public class AccessUtils {
         accessT.setAccessTime(date);
         //从数据库中获取离当前时间之前的最近的一天中access最终的数据
         Access accessY = accessMapper.getAccessY(dateS); //获取昨天输入的数据
+        System.out.println(accessY);
         //如果数据库没有之前的数据，则把今天的数据当成最终的数据
         if (accessY == null){
             accessT = initAccess(accessT);
@@ -56,11 +58,23 @@ public class AccessUtils {
             accessT.setAccessYear(dayValue + accessY.getAccessYear());
             accessT.setAccessAll(dayValue + accessY.getAccessAll());
             accessT.setAccessUvMonth(uvDayValue + accessY.getAccessUvMonth());
-            //判断今天是否是每个月第一天、每一年第一天
-            if (nowTime.getDayOfMonth() == 1){
+
+//            //判断今天是否是每个月第一天、每一年第一天
+//            if (nowTime.getDayOfMonth() == 1){
+//                accessT.setAccessMonth(dayValue);
+//                accessT.setAccessUvMonth(uvDayValue);
+//                if (nowTime.getDayOfYear() == 1){
+//                    accessT.setAccessYear(dayValue);
+//                }
+//            }
+
+            //判断今天是否与最近一天不在同一个月，或者同一年
+            Date lasAccessTime = accessY.getAccessTime();
+            LocalDate lasAccess = lasAccessTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (nowTime.getMonthValue() != lasAccess.getMonthValue()){
                 accessT.setAccessMonth(dayValue);
                 accessT.setAccessUvMonth(uvDayValue);
-                if (nowTime.getDayOfYear() == 1){
+                if (nowTime.getYear() != lasAccess.getYear()){
                     accessT.setAccessYear(dayValue);
                 }
             }
@@ -91,6 +105,7 @@ public class AccessUtils {
         accessPage.setPageViewTime(date);
         //从数据库中获取离当前时间之前的最近的一天中页面访问最终的数据
         AccessPage accessPageY = accessPageMapper.getAccessPageY(dateS);
+        System.out.println(accessPageY);
         //如果数据库没有之前的数据，则把今天的数据当成最终的数据
         if (accessPageY == null){
             accessPageY = initAccessPage(accessPage);
@@ -107,15 +122,18 @@ public class AccessUtils {
             accessPage.setCourseYear(courseDayValue + accessPageY.getCourseYear());
             accessPage.setHelpMonth(helpDayValue + accessPageY.getHelpMonth());
             accessPage.setHelpYear(helpDayValue + accessPageY.getHelpYear());
-            //判断今天是否是每个月第一天、每一年第一天
-            if (nowTime.getDayOfMonth() == 1){
+
+            //判断今天是否与最近一天不在同一个月，或者同一年
+            Date lastViewTime = accessPageY.getPageViewTime();
+            LocalDate lastView = lastViewTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (nowTime.getMonthValue() != lastView.getMonthValue()){
                 accessPage.setGuideMonth(guideDayValue);
                 accessPage.setResMonth(resDayValue);
                 accessPage.setFinanceMonth(financeDayValue);
                 accessPage.setElectricMonth(electricDayValue);
                 accessPage.setCourseMonth(courseDayValue);
                 accessPage.setHelpMonth(helpDayValue);
-                if (nowTime.getDayOfYear() == 1){
+                if (nowTime.getYear()  != lastView.getMonthValue()){
                     accessPage.setGuideYear(guideDayValue);
                     accessPage.setResYear(resDayValue);
                     accessPage.setFinanceYear(financeDayValue);

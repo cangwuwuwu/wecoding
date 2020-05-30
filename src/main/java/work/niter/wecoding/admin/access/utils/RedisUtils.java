@@ -30,11 +30,14 @@ public class RedisUtils {
      * @param value
      * @return
      */
-    public Long add(String key, Long... value){
+    public void add(String key, Long value){
         if (redisTemplate.opsForHyperLogLog().size(key) == 0){
+            redisTemplate.opsForHyperLogLog().add(key, value);
             redisTemplate.expire(key, 1, TimeUnit.DAYS);
+        }else {
+            redisTemplate.opsForHyperLogLog().add(key, value);
         }
-        return redisTemplate.opsForHyperLogLog().add(key, value);
+
     }
 
     /**
