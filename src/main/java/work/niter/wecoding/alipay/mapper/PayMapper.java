@@ -34,7 +34,10 @@ public interface PayMapper extends Mapper<Payment> {
      * 模糊查询会费缴纳信息，并根据学号查询学生姓名
      * @return
      */
-    @Select("select * from payment where CONCAT( user_id,payment,payment_type) LIKE CONCAT('%',#{search},'%') order by finish_time desc")
+    @Select("select * from " +
+            "(select p.*,s.stu_name from payment p left join comp_stu s ON p.user_id = s.stu_id) a " +
+            "where CONCAT(a.stu_name, a.user_id, a.payment, a.payment_type) " +
+            "LIKE CONCAT('%',#{search},'%') order by finish_time desc")
     @ResultMap("payment_results")
     List<Payment> searchPayment(String search);
 

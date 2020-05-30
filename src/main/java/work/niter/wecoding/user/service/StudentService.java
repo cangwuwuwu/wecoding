@@ -29,12 +29,8 @@ public class StudentService {
         int len = allStudents.size();
         int displaynum;
 
-        HashSet set = new HashSet();
-        if (len < 8) {
-            displaynum = len;
-        } else {
-            displaynum = 8;
-        }
+        HashSet<Integer> set = new HashSet<>();
+        displaynum = Math.min(len, 8);
         while(set.size() < displaynum) {
             set.add((int)(Math.random() * (double)len));
         }
