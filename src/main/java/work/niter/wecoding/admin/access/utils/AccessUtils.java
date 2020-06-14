@@ -1,6 +1,6 @@
 package work.niter.wecoding.admin.access.utils;
 
-import org.aspectj.lang.annotation.After;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import work.niter.wecoding.admin.access.mapper.AccessMapper;
@@ -11,9 +11,8 @@ import work.niter.wecoding.admin.entity.AccessPage;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * @Author xiaozhai
@@ -105,7 +104,6 @@ public class AccessUtils {
         accessPage.setPageViewTime(date);
         //从数据库中获取离当前时间之前的最近的一天中页面访问最终的数据
         AccessPage accessPageY = accessPageMapper.getAccessPageY(dateS);
-        System.out.println(accessPageY);
         //如果数据库没有之前的数据，则把今天的数据当成最终的数据
         if (accessPageY == null){
             accessPageY = initAccessPage(accessPage);
@@ -133,7 +131,7 @@ public class AccessUtils {
                 accessPage.setElectricMonth(electricDayValue);
                 accessPage.setCourseMonth(courseDayValue);
                 accessPage.setHelpMonth(helpDayValue);
-                if (nowTime.getYear()  != lastView.getMonthValue()){
+                if (nowTime.getYear()  != lastView.getYear()){
                     accessPage.setGuideYear(guideDayValue);
                     accessPage.setResYear(resDayValue);
                     accessPage.setFinanceYear(financeDayValue);

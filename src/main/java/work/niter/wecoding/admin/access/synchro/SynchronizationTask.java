@@ -39,7 +39,7 @@ public class SynchronizationTask {
     private RedisUtils redisUtils;
 
     /*每天十二点将访问量同步到数据库中*/
-    @Scheduled(cron = "* * 12 * * ? ")
+    @Scheduled(cron = "0 50 23 * * ? ")
     public void task1() throws ScriptException {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();

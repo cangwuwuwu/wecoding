@@ -38,7 +38,7 @@ public class AccessAspect {
 
     //用户访问量
     @After("accessView()")
-    public void doAccessViewAfter(JoinPoint joinPoint){
+    public void doAccessViewAfter(){
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String dateS = format.format(date);

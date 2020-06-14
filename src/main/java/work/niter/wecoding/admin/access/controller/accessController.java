@@ -17,7 +17,6 @@ import work.niter.wecoding.admin.entity.Access;
  * @Description:
  */
 
-@PreAuthorize("hasRole('ADMIN')")
 @RestController
 @RequestMapping("/admin/comp/access")
 public class accessController {

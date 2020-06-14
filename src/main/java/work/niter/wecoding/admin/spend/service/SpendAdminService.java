@@ -63,8 +63,8 @@ public class SpendAdminService {
     /*查询协会余额*/
     public double findSpendBalance() throws ScriptException {
         List<CompSpend> spends = spendMapper.selectSpend();
-        double totalPayCount = payMapper.selectCount(new Payment());
-        double  totalPay = totalPayCount * 10;
+//        double totalPayCount = payMapper.selectCount(new Payment());
+        double  totalPay = 0;
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
         for (CompSpend s : spends) {

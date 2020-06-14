@@ -25,8 +25,6 @@ import java.util.*;
 @Service
 public class AccessService {
 
-    @Autowired
-    private RedisUtils redisUtils;
 
     @Autowired
     private AccessMapper accessMapper;
@@ -47,7 +45,6 @@ public class AccessService {
         accessData.setNewUserAll(newUserA);
         //获取用户访问量趋势
         List<Long> accessTrend = new ArrayList<Long>();
-        List<String> dateList = new ArrayList<String>();
         int currentMonth = nowTime.getMonthValue();
         //如果本月是一月份则只返回这个月的访问量
         if (currentMonth == 1){
@@ -82,7 +79,6 @@ public class AccessService {
     }
 
     private Access getPageViewData(Access accessData, AccessPage pageData) {
-        List<String> nameList = new ArrayList<>();
         List<Map<String, Object>> pageDayList = new ArrayList<>();
         List<Map<String, Object>> pageMonthList = new ArrayList<>();
         List<Map<String, Object>> pageYearList = new ArrayList<>();
@@ -156,7 +152,6 @@ public class AccessService {
         pageMonthList.add(electricMap2);
         electricMap3.put("name", electricName);
         electricMap3.put("value", pageData.getElectricYear());
-        pageYearList.add(electricMap3);
         //帮助
         Map<String, Object> helpMap1 = new HashMap<>();
         Map<String, Object> helpMap2 = new HashMap<>();
@@ -170,7 +165,6 @@ public class AccessService {
         helpMap3.put("name", HelpName);
         helpMap3.put("value", pageData.getHelpYear());
         pageYearList.add(helpMap3);
-
         accessData.setPageViewDay(pageDayList);
         accessData.setPageViewMonth(pageMonthList);
         accessData.setPageViewYear(pageYearList);
