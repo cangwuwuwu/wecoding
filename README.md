@@ -59,6 +59,10 @@
 * [Netty实战](https://book.douban.com/subject/27038538/)
 
 #### 更新日志
+##### 2021/5/11 update notes, merge develop/xiaozhai/v1.1.5 branch
+* 修改头部注释格式
+* 修改了些许代码
+* 合并其他分支到master分支
 ##### 2019/10/21 Add Course List Page 
 * 课程列表模块，redis实现点赞系统，报名课程系统
 ##### 2019/10/8 New electricity reminder module
