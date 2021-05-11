@@ -5,9 +5,9 @@ import tk.mybatis.mapper.common.Mapper;
 import work.niter.wecoding.res.entity.ResRate;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/11/11 22:49
- * @Description:
+ * @author Cangwu
+ * @date 2019/11/11 22:49
+ * @description
  */
 public interface ResRateMapper extends Mapper<ResRate> {
 

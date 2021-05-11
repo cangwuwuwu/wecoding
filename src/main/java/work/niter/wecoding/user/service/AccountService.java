@@ -11,9 +11,9 @@ import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.user.mapper.AccountMapper;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:32
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:32
+ * @description
  */
 @Service
 public class AccountService {

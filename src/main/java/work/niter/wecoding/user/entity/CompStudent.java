@@ -1,7 +1,6 @@
 package work.niter.wecoding.user.entity;
 
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -11,7 +10,7 @@ import java.util.Date;
 
 @Data
 @Table(name = "comp_stu")
-@Document(indexName = "wecoding", type = "stu")
+//@Document(indexName = "wecoding", type = "stu")
 public class CompStudent {
 
     @Id

@@ -22,9 +22,9 @@ import work.niter.wecoding.res.mapper.ResWebMapper;
 import java.util.*;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/11 17:03
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/11 17:03
+ * @description
  */
 @Service
 public class CourseService {

@@ -7,9 +7,9 @@ import tk.mybatis.mapper.common.Mapper;
 import work.niter.wecoding.admin.entity.AccessPage;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/19 16:18
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/19 16:18
+ * @description
  */
 public interface AccessPageMapper extends Mapper<AccessPage> {
 

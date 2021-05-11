@@ -8,9 +8,9 @@ import work.niter.wecoding.course.entity.Course;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/11 17:02
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/11 17:02
+ * @description
  */
 public interface CourseMapper extends Mapper<Course> {
 

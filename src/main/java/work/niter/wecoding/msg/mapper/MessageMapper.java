@@ -5,9 +5,9 @@ import tk.mybatis.mapper.common.Mapper;
 import work.niter.wecoding.msg.entity.MyMessage;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/3 23:55
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/3 23:55
+ * @description
  */
 public interface MessageMapper extends Mapper<MyMessage> {
 

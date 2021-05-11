@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/11 12:18
- * @Description: 访问量实体类
+ * @author xiaozhai
+ * @date 2020/4/11 12:18
+ * @description 访问量实体类
  */
 @Table(name = "access")
 @Data

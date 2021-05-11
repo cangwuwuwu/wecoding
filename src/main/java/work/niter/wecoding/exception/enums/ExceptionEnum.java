@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/6 8:05
- * @Description: 异常枚举类
+ * @author Cangwu
+ * @date 2019/9/6 8:05
+ * @description 异常枚举类
  */
 @Getter
 @NoArgsConstructor

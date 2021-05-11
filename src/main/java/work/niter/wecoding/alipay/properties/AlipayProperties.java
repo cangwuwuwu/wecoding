@@ -4,9 +4,9 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/27 14:50
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/27 14:50
+ * @description
  */
 @Data
 @ConfigurationProperties(prefix = "pay.alipay")

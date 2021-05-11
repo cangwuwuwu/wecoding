@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/25 21:46
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/25 21:46
+ * @description
  */
 @RestController
 @RequestMapping("/pay")

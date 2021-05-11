@@ -7,9 +7,9 @@ import javax.persistence.Transient;
 import java.util.Date;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/30 13:22
- * @Description: 会费支付订单表
+ * @author Cangwu
+ * @date 2019/10/30 13:22
+ * @description 会费支付订单表
  */
 @Data
 @Table(name = "payment")

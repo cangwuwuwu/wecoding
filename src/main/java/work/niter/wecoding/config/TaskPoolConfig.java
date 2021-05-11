@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:05
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:05
+ * @description
  */
 @Configuration
 public class TaskPoolConfig {

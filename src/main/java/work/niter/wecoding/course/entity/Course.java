@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.Table;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/11 16:47
- * @Description: 课程实体类
+ * @author Cangwu
+ * @date 2019/10/11 16:47
+ * @description 课程实体类
  */
 @Data
 @Table(name = "course")

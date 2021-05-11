@@ -6,9 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/24 12:08
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/24 12:08
+ * @description
  * 未审核在线资源实体类
  */
 

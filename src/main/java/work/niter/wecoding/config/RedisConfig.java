@@ -20,9 +20,9 @@ import work.niter.wecoding.course.entity.Course;
 import work.niter.wecoding.res.entity.ResWeb;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:04
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:04
+ * @description
  */
 @Configuration
 public class RedisConfig {

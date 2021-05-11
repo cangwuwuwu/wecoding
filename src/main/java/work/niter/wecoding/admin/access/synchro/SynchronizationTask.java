@@ -19,9 +19,9 @@ import java.time.LocalDate;
 import java.util.Date;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/11 19:09
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/11 19:09
+ * @description
  */
 @Component
 public class SynchronizationTask {

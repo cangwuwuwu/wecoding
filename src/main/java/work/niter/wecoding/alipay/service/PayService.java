@@ -29,9 +29,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/25 16:27
- * @Description: https://docs.open.alipay.com/194/106078 扫码支付 跳转支付
+ * @author Cangwu
+ * @date 2019/10/25 16:27
+ * @description https://docs.open.alipay.com/194/106078 扫码支付 跳转支付
  */
 @Service
 @EnableConfigurationProperties(AlipayProperties.class)

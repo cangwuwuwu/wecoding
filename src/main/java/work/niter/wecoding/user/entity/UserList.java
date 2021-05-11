@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:23
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:23
+ * @description
  */
 @Data
 public class UserList {

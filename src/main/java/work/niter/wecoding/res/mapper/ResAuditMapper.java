@@ -7,9 +7,9 @@ import work.niter.wecoding.res.entity.ResourceAudit;
 import java.util.List;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/24 12:17
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/24 12:17
+ * @description
  *  未审核网盘资源mapper
  */
 public interface ResAuditMapper extends Mapper<ResourceAudit> {

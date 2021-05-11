@@ -20,10 +20,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 public class WecodingApplication extends SpringBootServletInitializer {
 
-    @Override
+    /*@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(WecodingApplication.class);
-    }
+    }*/
 
     public static void main(String[] args) {
 //        System.setProperty("es.set.netty.runtime.available.processors", "false");

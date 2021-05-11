@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/11 17:00
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/11 17:00
+ * @description
  */
 @RestController
 @RequestMapping("/course")

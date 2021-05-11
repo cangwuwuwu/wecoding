@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/27 14:08
- * @Description: 自定义UserDetails
+ * @author Cangwu
+ * @date 2019/9/27 14:08
+ * @description 自定义UserDetails
  */
 @Data
 public class User implements UserDetails {

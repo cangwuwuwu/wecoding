@@ -14,9 +14,9 @@ import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.user.service.CompService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/26 18:01
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/26 18:01
+ * @description
  */
 @RestController
 @RequestMapping("/upload")

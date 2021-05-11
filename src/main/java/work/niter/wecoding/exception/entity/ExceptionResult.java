@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import work.niter.wecoding.exception.enums.ExceptionEnum;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/6 12:59
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/6 12:59
+ * @description
  */
 @Data
 public class ExceptionResult {

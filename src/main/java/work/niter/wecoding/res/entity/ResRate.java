@@ -6,9 +6,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/11/9 10:47
- * @Description: 资源评分实体类
+ * @author Cangwu
+ * @date 2019/11/9 10:47
+ * @description 资源评分实体类
  */
 @Data
 @Table(name = "resource_rate")

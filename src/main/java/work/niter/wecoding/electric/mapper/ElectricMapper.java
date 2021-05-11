@@ -5,9 +5,9 @@ import tk.mybatis.mapper.common.Mapper;
 import work.niter.wecoding.electric.entity.EleAccount;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/6 11:41
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/6 11:41
+ * @description
  */
 public interface ElectricMapper extends Mapper<EleAccount> {
 

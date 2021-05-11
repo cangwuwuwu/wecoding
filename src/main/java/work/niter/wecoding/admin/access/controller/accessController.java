@@ -12,9 +12,9 @@ import work.niter.wecoding.admin.access.service.AccessService;
 import work.niter.wecoding.admin.entity.Access;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/15 16:33
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/15 16:33
+ * @description
  */
 
 @RestController

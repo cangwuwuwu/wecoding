@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/7 1:17
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/7 1:17
+ * @description
  */
 @Service
 public class ResourceService {

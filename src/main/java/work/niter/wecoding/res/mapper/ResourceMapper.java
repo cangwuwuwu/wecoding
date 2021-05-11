@@ -8,9 +8,9 @@ import work.niter.wecoding.res.entity.Resource;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/7 1:14
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/7 1:14
+ * @description
  */
 public interface ResourceMapper extends Mapper<Resource> {
 

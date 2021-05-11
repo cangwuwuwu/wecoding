@@ -9,9 +9,9 @@ import javax.persistence.Transient;
 
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:24
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:24
+ * @description
  */
 @Data
 @Table(name = "account")

@@ -13,9 +13,9 @@ import work.niter.wecoding.msg.mapper.MessageMapper;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/2 23:12
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/2 23:12
+ * @description
  */
 @Service
 public class RabbitService {

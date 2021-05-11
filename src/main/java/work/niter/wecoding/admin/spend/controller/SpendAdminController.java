@@ -13,9 +13,9 @@ import work.niter.wecoding.spend.entity.CompSpend;
 import javax.script.ScriptException;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/27 11:02
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/27 11:02
+ * @description
  */
 @PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/spend")

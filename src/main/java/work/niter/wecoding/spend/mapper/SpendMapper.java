@@ -7,9 +7,9 @@ import work.niter.wecoding.spend.entity.CompSpend;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/23 23:04
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/23 23:04
+ * @description
  */
 public interface SpendMapper extends Mapper<CompSpend> {
 

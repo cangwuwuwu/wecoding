@@ -8,9 +8,9 @@ import work.niter.wecoding.alipay.entity.Payment;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/30 13:34
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/30 13:34
+ * @description
  */
 public interface PayMapper extends Mapper<Payment> {
 

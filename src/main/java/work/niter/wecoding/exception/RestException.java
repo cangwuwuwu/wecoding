@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import work.niter.wecoding.exception.enums.ExceptionEnum;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/6 12:51
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/6 12:51
+ * @description
  */
 @AllArgsConstructor
 @NoArgsConstructor

@@ -14,9 +14,9 @@ import work.niter.wecoding.res.entity.Resource;
 import work.niter.wecoding.res.entity.ResourceAudit;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/27 10:50
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/27 10:50
+ * @description
  */
 @PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin/comp/res")

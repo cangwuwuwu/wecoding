@@ -9,9 +9,9 @@ import work.niter.wecoding.msg.service.MailService;
 import work.niter.wecoding.spend.service.SpendService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/20 16:28
- * @Description: 财务收支模块
+ * @author Cangwu
+ * @date 2019/9/20 16:28
+ * @description 财务收支模块
  */
 @RestController
 @RequestMapping("/comp/spend")

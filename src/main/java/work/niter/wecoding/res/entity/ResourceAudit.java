@@ -7,9 +7,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/24 12:10
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/24 12:10
+ * @description
  *  未审核网盘实体类
  */
 @Data

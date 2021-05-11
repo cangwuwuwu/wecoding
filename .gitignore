@@ -32,7 +32,7 @@ hs_err_pid*
 *.iml
 out
 gen
-/LOG_PATH_IS_UNDEFINED/
+/logs
 /src/test/
 /target/
 

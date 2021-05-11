@@ -25,9 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:05
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:05
+ * @description
  */
 @Configuration
 @EnableWebSecurity
@@ -42,6 +42,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new UserDetailService();
     }
 
+    /**
+     * 不需要认证的路径
+     */
+    public static final String[] NO_NEED_AUTH_URL= {
+            "/login/**", "/signup/**",
+            "/sendmail/**",
+            "/res/**",
+            "/stu/id/**", "/stu/getPart", "/stu/signup",
+            "/ele/**",
+            "/comp/spend", "/course", "/course/apply/**",
+            "/pay/notify"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -50,13 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, "未登录或登录过期"))
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/login/**", "/signup/**").permitAll()
-                    .antMatchers("/sendmail/**", "/res/**").permitAll()
-                    .antMatchers("/stu/id/**", "/stu/getPart", "/stu/signup").permitAll()
-                    .antMatchers("/ele/**").permitAll()
-                    .antMatchers("/comp/spend", "/course", "/course/apply/**").permitAll()
-                    .antMatchers("/pay/notify").permitAll()
-                    .antMatchers("/admin/comp/access/**").permitAll()
+                    .antMatchers(NO_NEED_AUTH_URL).permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()

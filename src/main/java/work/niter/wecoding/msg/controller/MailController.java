@@ -9,9 +9,9 @@ import work.niter.wecoding.exception.RestException;
 import work.niter.wecoding.msg.service.MailService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:25
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:25
+ * @description
  */
 @RestController
 @RequestMapping("/sendmail")

@@ -18,9 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/11 12:34
- * @Description: 统计用户的切面类
+ * @author xiaozhai
+ * @date 2020/4/11 12:34
+ * @description 统计用户的切面类
  */
 @Aspect
 @Configuration

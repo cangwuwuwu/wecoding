@@ -8,9 +8,9 @@ import work.niter.wecoding.res.entity.ResRate;
 import work.niter.wecoding.res.mapper.ResRateMapper;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/11/11 23:00
- * @Description:
+ * @author Cangwu
+ * @date 2019/11/11 23:00
+ * @description
  */
 @Service
 public class ResRateService {

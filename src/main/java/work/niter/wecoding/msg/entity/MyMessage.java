@@ -7,9 +7,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/2 16:07
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/2 16:07
+ * @description
  */
 @Data
 @Table(name = "fanout_msg")

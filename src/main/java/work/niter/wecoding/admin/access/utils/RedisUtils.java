@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/11 14:56
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/11 14:56
+ * @description
  */
 @Component
 public class RedisUtils {

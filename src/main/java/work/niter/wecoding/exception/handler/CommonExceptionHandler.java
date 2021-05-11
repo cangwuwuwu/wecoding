@@ -9,9 +9,9 @@ import work.niter.wecoding.exception.RestException;
 
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/6 7:56
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/6 7:56
+ * @description
  */
 @ControllerAdvice
 public class CommonExceptionHandler {

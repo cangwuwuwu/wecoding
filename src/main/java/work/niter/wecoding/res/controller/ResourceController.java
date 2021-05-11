@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/7 0:54
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/7 0:54
+ * @description
  */
 @RestController
 @RequestMapping("/res")

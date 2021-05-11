@@ -1,32 +1,21 @@
 package work.niter.wecoding.admin.student.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import work.niter.wecoding.user.entity.CompStudent;
 import work.niter.wecoding.user.service.CompService;
-import work.niter.wecoding.exception.enums.ExceptionEnum;
-import work.niter.wecoding.exception.RestException;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/27 11:22
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/27 11:22
+ * @description
  */
 @RestController
 @RequestMapping("/admin/comp/stu")
@@ -34,8 +23,8 @@ public class StuAdminController {
 
     @Autowired
     private CompService compService;
-    @Autowired
-    private TransportClient client;
+    /*@Autowired
+    private TransportClient client;*/
 
     @PostMapping
     public ResponseEntity<Void> postStudentMsg(CompStudent compStudent) {
@@ -85,7 +74,7 @@ public class StuAdminController {
     public ResponseEntity<Map<String, Object>> getStuById(
             @RequestParam(name = "id") String id
     ) {
-        if (id.isEmpty()) {
+        /*if (id.isEmpty()) {
             throw new RestException(ExceptionEnum.ARGS_NOT_FOUND_ERROR);
         }
         GetResponse result =
@@ -95,7 +84,8 @@ public class StuAdminController {
             throw new RestException(ExceptionEnum.INFO_NOT_FOUND);
         }
 
-        return ResponseEntity.ok(result.getSource());
+        return ResponseEntity.ok(result.getSource());*/
+        return null;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -103,7 +93,7 @@ public class StuAdminController {
     public ResponseEntity<List<Map<String, Object>>> getStuInfoByOthers(
             @RequestParam(name = "keywords", required = false) String keywords
     ) {
-        MultiMatchQueryBuilder multiMatchQuery =
+        /*MultiMatchQueryBuilder multiMatchQuery =
                 QueryBuilders.multiMatchQuery(keywords,
                         "stu_id", "stu_gender",
                         "stu_name", "stu_dept");
@@ -122,7 +112,8 @@ public class StuAdminController {
         for (SearchHit hit : response.getHits()) {
             result.add(hit.getSourceAsMap());
         }
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(result);*/
+        return null;
     }
 
 }

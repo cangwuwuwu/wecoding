@@ -8,9 +8,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/21 16:54
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/21 16:54
+ * @description
  */
 @Data
 @Table(name = "apply")

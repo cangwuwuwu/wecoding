@@ -8,9 +8,9 @@ import work.niter.wecoding.user.entity.Account;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:29
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:29
+ * @description
  */
 public interface AccountMapper extends Mapper<Account> {
 

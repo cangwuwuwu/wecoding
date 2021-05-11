@@ -18,9 +18,9 @@ import work.niter.wecoding.exception.RestException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:25
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:25
+ * @description
  */
 @Service
 public class MailService {

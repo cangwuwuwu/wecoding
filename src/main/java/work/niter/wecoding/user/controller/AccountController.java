@@ -7,9 +7,9 @@ import work.niter.wecoding.user.entity.Account;
 import work.niter.wecoding.user.service.AccountService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/26 17:35
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/26 17:35
+ * @description
  */
 @RestController
 @RequestMapping("/account")

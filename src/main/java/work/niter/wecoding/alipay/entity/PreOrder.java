@@ -3,9 +3,9 @@ package work.niter.wecoding.alipay.entity;
 import lombok.Data;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/31 15:53
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/31 15:53
+ * @description
  */
 @Data
 public class PreOrder {

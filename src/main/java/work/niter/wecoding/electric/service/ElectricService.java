@@ -2,6 +2,7 @@ package work.niter.wecoding.electric.service;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.*;
@@ -25,9 +26,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/10/5 11:28
- * @Description:
+ * @author Cangwu
+ * @date 2019/10/5 11:28
+ * @description
  */
 @Service
 public class ElectricService {
@@ -37,6 +38,9 @@ public class ElectricService {
     private DormMapper dormMapper;
     @Autowired
     private MailService mailService;
+
+    @Value("${electric.notice}")
+    private Boolean noticeOpen;
 
     private static final String URL = "http://pay.nit.edu.cn/Pay/CheckRoom";
     private static final HttpMethod METHOD = HttpMethod.POST;
@@ -96,8 +100,11 @@ public class ElectricService {
     /**
      * 每天12点遍历检查电费情况，小于UPPER则邮件提醒
      */
-//    @Scheduled(cron = "0 0 12 * * *")
+    @Scheduled(cron = "0 0 12 * * *")
     public void checkElectricMethod() {
+        if (!noticeOpen) {
+            return;
+        }
         // 查询表 遍历
         List<EleAccount> list = electricMapper.selectAll();
         list.forEach(account -> {

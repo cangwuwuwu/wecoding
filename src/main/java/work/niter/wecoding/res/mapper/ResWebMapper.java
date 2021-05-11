@@ -10,9 +10,9 @@ import work.niter.wecoding.res.entity.ResWeb;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/18 19:31
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/18 19:31
+ * @description
  */
 public interface ResWebMapper extends Mapper<ResWeb> {
 

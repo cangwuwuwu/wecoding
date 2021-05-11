@@ -3,13 +3,9 @@ package work.niter.wecoding.user.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +26,8 @@ public class CompService {
     private CompMapper compMapper;
     @Autowired
     private AccountMapper accountMapper;
-    @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
+    /*@Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;*/
 
     /**
      * 存储学生信息
@@ -80,12 +76,12 @@ public class CompService {
     /**
      * es名字查询
      */
-    public List<String> findStuByName(String name) {
+    /*public List<String> findStuByName(String name) {
         NativeSearchQuery query = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.queryStringQuery(name))
                 .build();
         return elasticsearchTemplate.queryForIds(query);
-    }
+    }*/
 
     /**
      * 根据名字进行模糊查询

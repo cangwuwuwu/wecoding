@@ -6,9 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/18 15:25
- * @Description: 在线资源实体类
+ * @author Cangwu
+ * @date 2019/8/18 15:25
+ * @description 在线资源实体类
  */
 @Data
 @Table(name = "resource_web")

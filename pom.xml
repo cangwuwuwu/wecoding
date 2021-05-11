@@ -10,9 +10,9 @@
     </parent>
     <groupId>work.niter</groupId>
     <artifactId>wecoding</artifactId>
-    <version>1.1.4-SNAPSHOT</version>
+    <version>1.1.5-SNAPSHOT</version>
     <name>wecoding</name>
-    <description>Demo project for Spring Boot</description>
+    <description>校园社团管理与信息交流网站</description>
 
     <properties>
         <java.version>11</java.version>
@@ -192,14 +192,14 @@
 
 
         <!--        elasticsearch-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>transport</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!--切面-->
         <dependency>

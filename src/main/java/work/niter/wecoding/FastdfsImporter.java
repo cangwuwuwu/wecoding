@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.jmx.support.RegistrationPolicy;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/25 16:15
- * @Description: 导入FastDFS-Client组件
+ * @author Cangwu
+ * @date 2019/7/25 16:15
+ * @description 导入FastDFS-Client组件
  */
 @Configuration
 @Import(FdfsClientConfig.class)

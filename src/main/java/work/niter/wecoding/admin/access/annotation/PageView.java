@@ -3,9 +3,9 @@ package work.niter.wecoding.admin.access.annotation;
 import java.lang.annotation.*;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/19 10:59
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/19 10:59
+ * @description
  */
 @Target({ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

@@ -9,9 +9,9 @@ import work.niter.wecoding.msg.service.RabbitService;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/8/2 23:25
- * @Description:
+ * @author Cangwu
+ * @date 2019/8/2 23:25
+ * @description
  */
 @RestController
 @RequestMapping("/mymsg")

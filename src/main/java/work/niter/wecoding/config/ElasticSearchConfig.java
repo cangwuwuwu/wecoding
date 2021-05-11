@@ -1,9 +1,5 @@
 package work.niter.wecoding.config;
 
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,11 +8,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/15 14:24
- * @Description: elasticsearch配置类
+ * @author Cangwu
+ * @date 2019/9/15 14:24
+ * @description elasticsearch配置类
  */
-@Configuration
+/*@Configuration
 public class ElasticSearchConfig {
     @PostConstruct
     void init() {
@@ -34,4 +30,4 @@ public class ElasticSearchConfig {
         client.addTransportAddresses(node);
         return client;
     }
-}
+}*/

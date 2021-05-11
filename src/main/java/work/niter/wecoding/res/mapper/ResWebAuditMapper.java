@@ -9,9 +9,9 @@ import work.niter.wecoding.res.entity.ResWebAudit;
 import java.util.List;
 
 /**
- * @Author xiaozhai
- * @Date 2019/11/24 12:19
- * @Description:
+ * @author xiaozhai
+ * @date 2019/11/24 12:19
+ * @description
  *  未审核在线资源mapper
  */
 public interface ResWebAuditMapper extends Mapper<ResWebAudit> {

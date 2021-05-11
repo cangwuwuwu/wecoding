@@ -12,9 +12,9 @@ import work.niter.wecoding.spend.mapper.SpendMapper;
 import java.util.List;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/9/23 23:05
- * @Description:
+ * @author Cangwu
+ * @date 2019/9/23 23:05
+ * @description
  */
 @Service
 public class SpendService {

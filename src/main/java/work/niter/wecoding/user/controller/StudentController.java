@@ -15,9 +15,9 @@ import work.niter.wecoding.user.service.CompService;
 import work.niter.wecoding.user.service.StudentService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:18
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:18
+ * @description
  */
 @RestController
 @RequestMapping("/stu")

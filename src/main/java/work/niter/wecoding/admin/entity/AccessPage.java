@@ -8,9 +8,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/19 10:35
- * @Description: 各个页面访问量统计
+ * @author xiaozhai
+ * @date 2020/4/19 10:35
+ * @description 各个页面访问量统计
  */
 @Table(name = "access_page")
 @Data

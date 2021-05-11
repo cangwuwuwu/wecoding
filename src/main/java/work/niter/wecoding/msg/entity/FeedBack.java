@@ -3,9 +3,9 @@ package work.niter.wecoding.msg.entity;
 import lombok.Data;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/28 0:57
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/28 0:57
+ * @description
  */
 @Data
 public class FeedBack {

@@ -13,9 +13,9 @@ import java.util.List;
 
 
 /**
- * @Author xiaozhai
- * @Date 2020/4/11 19:55
- * @Description:
+ * @author xiaozhai
+ * @date 2020/4/11 19:55
+ * @description
  */
 
 public interface AccessMapper extends Mapper<Access> {

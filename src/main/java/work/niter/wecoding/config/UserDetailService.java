@@ -16,9 +16,9 @@ import work.niter.wecoding.user.service.AccountService;
 import work.niter.wecoding.user.service.CompService;
 
 /**
- * @Author: Cangwu
- * @Date: 2019/7/14 1:05
- * @Description:
+ * @author Cangwu
+ * @date 2019/7/14 1:05
+ * @description
  */
 @Service
 public class UserDetailService implements UserDetailsService {
