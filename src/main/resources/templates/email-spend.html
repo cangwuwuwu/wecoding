@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h3>亲爱的财务部，收到了一条来自<span th:text="${name}"></span>的金额为<span th:text="${number}"></span> 元的上报！</h3>
+<h4>立即前往查看：<a href="http://www.niter.work/comp/spend">NIT计算机协会财务公示网站</a></h4>
+</body>
+</html>

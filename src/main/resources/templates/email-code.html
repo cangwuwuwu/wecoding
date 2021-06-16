@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码</title>
+    <style type="text/css">
+        @font-face {font-family: "iconfont";
+            src: url('//at.alicdn.com/t/font_1620416_8lfkyin66wx.eot?t=1579585998101'); /* IE9 */
+            src: url('//at.alicdn.com/t/font_1620416_8lfkyin66wx.eot?t=1579585998101#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAWwAAsAAAAAC0wAAAViAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqKCId4ATYCJAMQCwoABCAFhG0HSBtqCSMRdnNvMpH9MyEe42Ukzb8Vj2Z+Os+SIlxtYkw+37vZ38lMIJ0kMNk2VCzrUnHWBfocVszDitVyzkvCqsJz+xSxPxFl27Rfw5gI1SV7vvW/PNBAeeaF9EcA9McOU7GrNdUJ27hI3LCLN7vh/QsAFIBUZIWswvGdCgXAjlSNTCuM7BK7ukUueBH/fhoIAI4KDAIZN2HaPChgcCTC5qxavnQ+lEIarEVHoMQCxJVMJw5kKNJR6WWs0BX9PfkGHVEACTKF86xZS8YvQvRzvpDaORu3URv2fEUA0nUABTAIAAPIMrK8ADQZHgQKbkxmqAaguN1IwOd8/hcNuRwEziIUqADS6H8eCcARGlONSlLcmN+XcI+RmRso8IWBJyAYdq8A6AOQCwD5a7YFAIMEi7l7s14ayxOapuuccQ8dVny9lpen/XynCaNEhPNCbK0KvlM89FQZO/N0lQ5+zLU9U09fS13lnOiPPlspn31mGyfqQkGMpe++2/ree63vvBN75+15ONE7fvzy1ZMRIhF/u4hp8ZFMaQup/hKy967l89R4m2e7x/xUejWOX+8lrmZKyIkbvY1r2W08k2GJ6md2qteypVqLp7Ot0UEaSadTPieA1julY0v328qEfCrb17hy4zZZsAS/fL2IqRXtTs7FyV4nM9sMJnQ1wW/3vvK2m/S2G9BS2YURXkDmqa1qjMcXCj+SSqtGmwc36WdS2bYb9vWKebltqS+Yd8wnrWmzzSuY58b8SNxPq2kzZrvTNT9VqLd57sKtB5ZfVMyOX99B7BsTHZYlcirDxbHr2H624XTahH2+JiHpwnXoNLxq0UlZ1TNt93bDQNbXocPRpLTDmu3WT89LdyfJ4od5JrPdHYYs6C2DugZV5D/kiZdwFC+JHV079VxR7rn0feGisLar4KeK5Rsf7HOnF7znap/DolGjRww5UTSzdMa+2+fCRcQEC4khJ4i7zO619kAkNiD24+L4jwNKFp3ZtpS4iJicPeu1Qs2KxNYe+HbcJJJIkEmAQEEoOwcLJz4fWfv7js/4x+bHBf7dSKVFT0ad6Elq0cwwZ1im4bkyykuU2HHYj7l2VqhQrNkd7VB83nIGDXJrlvV8fSn6pzXPCOmM/hgdvWRIT+GIcItoYFGt10VJdmZ9dKgjnCGL2sMLC8Md4R7RHfYNHab30NeFDD3R8nwLuiUsL3FvPiK7133pH5MBNpb+SMeywP+zXjdKjTLf4dPgEf1IaM89r7EqFp7ZJ0mrpNBgfoVZpkGqosk+z2NVz65LhpLr5Joafq+z7vugHfx+nbioCTUwlhgORG1Watj3fkPBCrwO9zIWw8Fiwwok6ThqBb9PO0nMQDMGlC/wTzhGVsc0NdU16bihwxIetkhywNBeLBr84Qtq7xM2bAsAkPuPbqP//6NQf6aXlgg3/qaoP4B1H/bAq9GK3J2sitrAn9jf2/9vn8SqAACDZpBlGKMEokD/XjAyfunTJAAcHECO1bvh0zmipiHwf4+aGUgIohwoFPSSMdUgkKFiFASgoAU4BmLi9SrysQEUhOUBGICDHBAI3AsSQngWKARekTHVJyAjgu8gAEEocMRJ/h1V9CGX7WUsoWCcQP7BqhS1l+NLPPeGZvGC8sHI8EIqtg/aqimPjRiR5jinfEzHrEFTCjBwz0PvE2RKb1Rczcy5r2tNfVOlUlhdMJZQME4g/2BVihrX5kvl929oFi+opaPh+UIqdvfQVk0P2Shir457WVw+pmMY1KCl2SnAAEX07nCCTB/2RsXVPGIw9zWspvuKav1oeIW3AXA4ZzMiEUoYkaGssGURESfvVyVj4/UOD8gLI0lrVisAAA==') format('woff2'),
+            url('//at.alicdn.com/t/font_1620416_8lfkyin66wx.woff?t=1579585998101') format('woff'),
+            url('//at.alicdn.com/t/font_1620416_8lfkyin66wx.ttf?t=1579585998101') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+            url('//at.alicdn.com/t/font_1620416_8lfkyin66wx.svg?t=1579585998101#iconfont') format('svg'); /* iOS 4.1- */
+        }
+
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .iconcomputerbig:before {
+            content: "\e6c5";
+        }
+
+        .JFrame {
+            width: 500px;
+            height: 400px;
+            margin: 80px auto 0;
+            text-align: center;
+            border: solid 40px #FBFBFB;
+            box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+            -moz-box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+            -webkit-box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+            border-radius: 5px;
+        }
+
+        .code {
+            float: left;
+            background-color: #FAF9FA;
+            border: solid 1px #DCDAE0;
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .fontcode {
+            float: left;
+            margin: 3px 0 20px 0;
+            font-size: 17px;
+            color: #116FFF;
+        }
+    </style>
+</head>
+<body>
+<div class="JFrame">
+    <div style="margin: 80px 0 0 0;" >
+        <img src="https://gw.alicdn.com/tps/TB1W_X6OXXXXXcZXVXXXXXXXXXX-400-400.png">
+    </div>
+    <hr>
+    <p style="color:#116FFF;font-size: 20px">您好，您正在访问：<a th:href="${address}">www.niter.work</a><br>
+    <p style="letter-spacing: 3px">欢迎成为计协的一员(●ˇ∀ˇ●)</p>
+    <div style="margin: 30px 0 0 150px">
+        <div class="fontcode">验证码：</div>
+        <div id="code" class="code">[[${codes}]]</div>
+    </div>
+</div>
+</body>
+</html>

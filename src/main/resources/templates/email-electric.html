@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>电量提醒</title>
+    <style type="text/css">
+        @font-face {
+            font-family: 'iconfont';  /* project id 1542565 */
+            src: url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.eot');
+            src: url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.woff2') format('woff2'),
+            url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.woff') format('woff'),
+            url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_1542565_u3k4ac87y5.svg#iconfont') format('svg');
+        }
+        .iconfont{
+            font-family:"iconfont" !important;
+            font-size:16px;font-style:normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .JFrame {
+            width: 700px;
+            height: 500px;
+            border: #DADCE0 1px solid;
+            margin: 100px auto 0px;
+            border-radius: 14px;
+            text-align: center;
+            background-color: #FBFBFB;
+            box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+            -moz-box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+            -webkit-box-shadow: 0 8px 20px rgba(96, 118, 243, 0.2);
+        }
+
+        .Jpanel {
+            width: 650px;
+            height: 420px;
+            border: #DADCE0 1px solid;
+            border-radius: 14px;
+            margin: 50px auto 0;
+            background-color: white;
+        }
+
+        .icno1 {
+            color: #A0C3FF;
+            margin: 90px 0 20px;
+            font-size: 18px
+        }
+
+        .icno2 {
+            color: #A0C3FF;
+            margin: 20px 0 0;
+            font-size: 22px;
+            float: left;
+            margin-left: 190px
+        }
+
+        .title {
+            font-size: 25px;
+            color: #707070;
+        }
+
+        .hello {
+            color: #707070;
+            float: left;
+            margin: 10px 0 0 10px;
+        }
+
+        .fontstyle {
+            color: #707070;
+            margin: 20px 0 30px;
+            font-size: 16px;
+        }
+
+        .button {
+            float: left;
+            font-size: 14px;
+            border-radius: 2px;
+            background-color: #D83B01;
+            color: white;
+            line-height: 40px;
+            width: 160px;
+            height: 40px;
+        }
+
+        .button > a {
+            display: block;
+            color: white;
+            text-decoration: none;
+        }
+
+        .bottom {
+            color: #707070;
+            text-decoration: none
+        }
+    </style>
+</head>
+<body>
+<div class="JFrame">
+    <div class="Jpanel">
+        <div class="hello">学号为：[[ ${id} ]]的同学您好</div>
+        <div class="iconfont icno1">&#xe73b;&nbsp;&nbsp;这是一封来自计算机协会的邮件(●'◡'●)</div>
+        <div class="iconfont title">您关联的宿舍(<a style="color:#A0C3FF ">&#xe61c;&nbsp;&nbsp;[[${roomName}]]</a>)有新的提醒</div>
+        <div class="fontstyle">电量仅剩余：<span style="color: red;font-weight: bold;font-size: 30px;" th:text="${number}">10.00</span></div>
+        <div class="fontstyle">友情链接</div>
+        <div style="margin-left: 67px;overflow: hidden;">
+            <div class="button">
+                <a href="http://pay.nit.edu.cn/" target="_blank">南工电子支付平台</a>
+            </div>
+            <div class="button" style="margin: 0 0 0 20px;">
+                <a href="https://www.niter.work/home" target="_blank">计算机协会官网</a>
+            </div>
+            <div class="button" style="margin: 0 0 0 20px;">
+                <a href="https://www.niter.work/queryele" target="_blank">取消通知</a>
+            </div>
+        </div>
+        <div style="clear: both;margin-top: 75px">
+            <a href="https://jq.qq.com/?_wv=1027&k=5zj1Uf8" target="_blank" class="bottom">点我进入计算机协会QQ群(●ˇ∀ˇ●)</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

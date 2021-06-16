@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>email-code</title>
+    <style type="text/css">
+        * {
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+
+        .container div {
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div><span th:text="${uper}"></span>，NIT计算机协会通知您：</div>
+    <div style="margin-left: 30px">您上传的资源：<span th:text="${type}"></span>类、名称为<span style="margin-right: 3px;margin-left: 3px;text-decoration: underline" th:text="${resName}"></span>的审核结果是：</div>
+    <div style="font-size: 20px; font-weight: bold;margin-left: 60px"><span th:text="${result}"></span></div>
+</div>
+</body>
+</html>
