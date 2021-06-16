@@ -26,14 +26,18 @@ public enum ExceptionEnum {
     ARGS_NOT_FOUND_ERROR(500, "参数传入错误"),
     UNKNOWN_ERROR(500, "未知错误"),
     USER_ALSO_EXIST(500, "重复录入信息"),
-    EMAIL_NULL_EXCEPTION(500, "邮箱不能为空"),
     INFO_NOT_FOUND(500, "您要查询的结果不存在"),
     STU_NOT_IN_INSTITUTE(500, "该学生不是协会成员"),
 
     CREATE_PAYMENT_ERROR(500, "订单创建错误"),
     CREATE_QRCODE_ERROR(500, "二维码生成错误"),
 
-    RATE_RES_EXCEPTION(500, "出错了，评分失败")
+    RATE_RES_EXCEPTION(500, "出错了，评分失败"),
+
+    EMAIL_MUST_NOT_EMPTY(10001, "邮箱不能为空"),
+    EMAIL_FORMAT_ERROR(10002, "邮箱格式错误"),
+    EMAIL_SEND_FAILED(10003, "邮件发送失败")
+
     ;
     private int code;
     private String msg;

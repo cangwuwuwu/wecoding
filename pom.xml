@@ -10,7 +10,7 @@
     </parent>
     <groupId>work.niter</groupId>
     <artifactId>wecoding</artifactId>
-    <version>1.1.5-SNAPSHOT</version>
+    <version>1.1.6-SNAPSHOT</version>
     <name>wecoding</name>
     <description>校园社团管理与信息交流网站</description>
 

@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/sendmail/**",
             "/res/**",
             "/stu/id/**", "/stu/getPart", "/stu/signup",
-            "/ele/**",
+            "/ele/**", "/admin/comp/access/**",
             "/comp/spend", "/course", "/course/apply/**",
             "/pay/notify"
     };
