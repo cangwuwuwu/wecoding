@@ -16,8 +16,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import work.niter.wecoding.course.entity.Course;
-import work.niter.wecoding.res.entity.ResWeb;
 
 /**
  * @author Cangwu
@@ -41,7 +39,7 @@ public class RedisConfig {
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
         //设置序列化
-        Jackson2JsonRedisSerializer redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        Jackson2JsonRedisSerializer<Object> redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         // 配置redisTemplate
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         ObjectMapper mapper = new ObjectMapper();
@@ -49,7 +47,7 @@ public class RedisConfig {
         mapper.enableDefaultTyping(DefaultTyping.NON_FINAL);
         redisSerializer.setObjectMapper(mapper);
         redisTemplate.setConnectionFactory(factory);
-        RedisSerializer stringSerializer = new StringRedisSerializer();
+        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setValueSerializer(redisSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);

@@ -33,7 +33,7 @@ public class PayController {
 
     @PostMapping("/notify")
     public String notify(HttpServletRequest request) {
-        Map requestParams = request.getParameterMap();
+        Map<String, String[]> requestParams = request.getParameterMap();
         String outTradeNo = request.getParameter("out_trade_no");
         String sellerId = request.getParameter("seller_id");
         String tradeStatus = request.getParameter("trade_status");
