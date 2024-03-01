@@ -22,6 +22,7 @@ public class StudentService {
 
     /**
      * 获取所有用户和随机挑选8个用户展示
+     *
      * @return userlist
      */
     public UserList findEightStudents() {
@@ -31,12 +32,12 @@ public class StudentService {
 
         HashSet<Integer> set = new HashSet<>();
         displaynum = Math.min(len, 8);
-        while(set.size() < displaynum) {
-            set.add((int)(Math.random() * (double)len));
+        while (set.size() < displaynum) {
+            set.add((int) (Math.random() * (double) len));
         }
 
         List<CompStudent> randomLists = new LinkedList<>();
-        set.forEach((e) -> randomLists.add(allStudents.get((Integer) e)));
+        set.forEach((e) -> randomLists.add(allStudents.get(e)));
         UserList userList = new UserList();
         userList.setRandomList(randomLists);
         userList.setLen(len);

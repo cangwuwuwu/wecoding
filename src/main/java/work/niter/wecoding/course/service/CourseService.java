@@ -43,6 +43,7 @@ public class CourseService {
 
     /**
      * 获取所有课程列表并缓存到redis
+     *
      * @param page
      * @param size
      * @return
@@ -50,7 +51,7 @@ public class CourseService {
     public Map<String, Object> selectAllCourseList(Integer page, Integer size) {
         List<Course> courses;
         List<ResWeb> resWebs;
-        if(!redisTemplate.hasKey(COURSE_KEY) || !redisTemplate.hasKey(WEB_KEY)) {
+        if (Boolean.FALSE.equals(redisTemplate.hasKey(COURSE_KEY)) || Boolean.FALSE.equals(redisTemplate.hasKey(WEB_KEY))) {
             courses = courseMapper.selectAllCourse();
             courses.forEach(course -> redisTemplate.opsForList().rightPush(COURSE_KEY, course));
             resWebs = resWebMapper.selectAll();
@@ -72,7 +73,7 @@ public class CourseService {
     public void updateAndDelStarAndApply() {
         List<Course> courses = object2Course();
         List<ResWeb> resWebs = object2ResWeb();
-        if(courses != null && resWebs != null) {
+        if (courses != null && resWebs != null) {
             courses.forEach(c -> courseMapper.updateCourseByPrimaryKey(c));
             resWebs.forEach(w -> resWebMapper.updateByPrimaryKeySelective(w));
             redisTemplate.delete(COURSE_KEY);
@@ -82,6 +83,7 @@ public class CourseService {
 
     /**
      * 播放量处理
+     *
      * @param id
      */
     public void incrPlayNum(Integer id) {
@@ -97,6 +99,7 @@ public class CourseService {
 
     /**
      * 点赞处理
+     *
      * @param course
      */
     public void updateStarRedisMethod(Course course) {
@@ -105,6 +108,7 @@ public class CourseService {
 
     /**
      * 报名课程处理
+     *
      * @param apply
      */
     @Transactional(rollbackFor = Exception.class)
@@ -119,6 +123,7 @@ public class CourseService {
 
     /**
      * 获取该课程报名列表
+     *
      * @param id
      * @return
      */
@@ -147,6 +152,7 @@ public class CourseService {
 
     /**
      * 缓存中查询所有课程并解析
+     *
      * @return
      */
     private List<Course> object2Course() {
@@ -156,6 +162,7 @@ public class CourseService {
 
     /**
      * 缓存中查询所有在线课程并解析
+     *
      * @return
      */
     private List<ResWeb> object2ResWeb() {

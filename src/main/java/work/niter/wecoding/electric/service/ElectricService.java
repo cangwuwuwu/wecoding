@@ -49,6 +49,7 @@ public class ElectricService {
 
     /**
      * 查询楼栋宿舍列表
+     *
      * @return
      */
     @Cacheable(value = "ele")
@@ -61,8 +62,8 @@ public class ElectricService {
      */
     public String httpRestClient(String url, HttpMethod method, MultiValueMap<String, String> params) throws IOException {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(10*1000);
-        requestFactory.setReadTimeout(10*1000);
+        requestFactory.setConnectTimeout(10 * 1000);
+        requestFactory.setReadTimeout(10 * 1000);
         RestTemplate client = new RestTemplate(requestFactory);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -74,8 +75,9 @@ public class ElectricService {
 
     /**
      * 开通该功能时查询当前电费
+     *
      * @param buildname 楼栋名
-     * @param roomname 宿舍名
+     * @param roomname  宿舍名
      * @return 电费
      */
     public String nowCheckMethod(String buildname, String roomname) {
@@ -117,7 +119,7 @@ public class ElectricService {
                 String result = httpRestClient(URL, METHOD, PARAMS);
                 String msg = JSON.parseObject(result).getString("msg");
                 number = msg.split(",");
-                if (Double.valueOf(number[2]) < UPPER) {
+                if (Double.parseDouble(number[2]) < UPPER) {
                     System.out.println(account.getStuRoom() + "电量余额还剩：" + number[2]);
                     mailService.sendMailForElectric(
                             account.getStuRoom(), number[2],
@@ -145,6 +147,7 @@ public class ElectricService {
 
     /**
      * 取消订阅
+     *
      * @param stuId
      */
     @Transactional(rollbackFor = Exception.class)
@@ -166,6 +169,7 @@ public class ElectricService {
 
     /**
      * 查询开通总人数
+     *
      * @return count
      */
     @Transactional(rollbackFor = Exception.class)

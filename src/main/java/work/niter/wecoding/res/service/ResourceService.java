@@ -43,6 +43,7 @@ public class ResourceService {
 
     /**
      * 分页查询资源列表
+     *
      * @param resType
      * @param page
      * @param limit

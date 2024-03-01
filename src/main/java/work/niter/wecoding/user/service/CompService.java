@@ -31,6 +31,7 @@ public class CompService {
 
     /**
      * 存储学生信息
+     *
      * @param compStudent
      */
     @Transactional(rollbackFor = Exception.class)
@@ -46,13 +47,14 @@ public class CompService {
         } catch (DuplicateKeyException e) {
             throw new RestException(ExceptionEnum.USER_ALSO_EXIST);
         }
-        if (i != 1 || j != 1){
+        if (i != 1 || j != 1) {
             throw new RestException(ExceptionEnum.SAVE_COMPSTUDENT_FAILED);
         }
     }
 
     /**
      * 查询所有学生信息并分页
+     *
      * @param page
      * @param size
      * @return
@@ -66,6 +68,7 @@ public class CompService {
 
     /**
      * 查询所有数据不分页
+     *
      * @return
      */
     @Cacheable(value = "stu")
@@ -102,6 +105,7 @@ public class CompService {
 
     /**
      * 根据学号查询
+     *
      * @param stuId
      * @return
      */
@@ -114,6 +118,7 @@ public class CompService {
 
     /**
      * 根据学号查询条数
+     *
      * @param stuId
      * @return
      */
@@ -126,24 +131,26 @@ public class CompService {
 
     /**
      * 修改学生信息
+     *
      * @param compStudent
      */
     @Transactional(rollbackFor = Exception.class)
     public void changeMsgById(CompStudent compStudent) {
         int i = compMapper.updateByPrimaryKey(compStudent);
-        if (i !=1){
+        if (i != 1) {
             throw new RestException(ExceptionEnum.UPDATE_MSG_FAILED);
         }
     }
 
     /**
      * 删除学生信息
+     *
      * @param compStudent
      */
     @Transactional(rollbackFor = Exception.class)
     public void removeMsg(CompStudent compStudent) {
         int i = compMapper.delete(compStudent);
-        if (i != 1){
+        if (i != 1) {
             throw new RestException(ExceptionEnum.DELETE_MSG_FAILED);
         }
     }

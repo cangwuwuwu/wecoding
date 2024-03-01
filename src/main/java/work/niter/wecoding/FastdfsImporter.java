@@ -17,5 +17,4 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 public class FastdfsImporter {
     // 导入依赖组件
-
 }

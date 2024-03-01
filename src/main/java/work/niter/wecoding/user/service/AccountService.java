@@ -27,7 +27,7 @@ public class AccountService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void updateAccountPassword(Account account,String email, String stuCode) {
+    public void updateAccountPassword(Account account, String email, String stuCode) {
         String code = redisTemplate.opsForValue().get(email);
         if (stuCode.equals(code)) {
             String password = account.getStuPassword();
