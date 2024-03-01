@@ -1,7 +1,8 @@
 package work.niter.wecoding.course.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,7 +158,7 @@ public class CourseService {
      */
     private List<Course> object2Course() {
         String s = JSON.toJSONString(redisTemplate.opsForList().range(COURSE_KEY, 0, -1));
-        return JSONObject.parseArray(s, Course.class);
+        return JSONArray.parseArray(s, Course.class);
     }
 
     /**
@@ -167,6 +168,6 @@ public class CourseService {
      */
     private List<ResWeb> object2ResWeb() {
         String s = JSON.toJSONString(redisTemplate.opsForList().range(WEB_KEY, 0, -1));
-        return JSONObject.parseArray(s, ResWeb.class);
+        return JSONArray.parseArray(s, ResWeb.class);
     }
 }

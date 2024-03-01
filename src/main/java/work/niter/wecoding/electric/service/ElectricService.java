@@ -1,6 +1,7 @@
 package work.niter.wecoding.electric.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -91,7 +92,11 @@ public class ElectricService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String msg = JSON.parseObject(result).getString("msg");
+        JSONObject jsonObject = JSON.parseObject(result);
+        String msg = null;
+        if (jsonObject != null) {
+            msg = jsonObject.getString("msg");
+        }
         if (msg == null) {
             return "楼栋或宿舍号错误，请检查";
         }

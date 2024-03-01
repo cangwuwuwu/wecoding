@@ -1,6 +1,6 @@
 package work.niter.wecoding.alipay.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -74,10 +74,10 @@ public class PayService {
         AlipayClient alipayClient = this.getAlipayClient();
         //创建API对应的request类
         AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
-        request.setBizContent("{"+
-                "    \"out_trade_no\":\"" + outTradeNo + "\","+ //商户订单号
-                "    \"total_amount\":\"" + properties.getPayNum() + "\","+ // 会费金额
-                "    \"subject\":\" " + properties.getSubject() + "\","+ // 订单标题
+        request.setBizContent("{" +
+                "    \"out_trade_no\":\"" + outTradeNo + "\"," + //商户订单号
+                "    \"total_amount\":\"" + properties.getPayNum() + "\"," + // 会费金额
+                "    \"subject\":\" " + properties.getSubject() + "\"," + // 订单标题
                 "    \"store_id\":\"AS_001\"," + // 商户门店编号
                 "    \"timeout_express\":\"120m\"" + //订单允许的最晚付款时间
                 "}");
@@ -100,7 +100,7 @@ public class PayService {
             String sellerId,
             String tradeStatus,
             String totalAmount) {
-        Map<String,String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         for (Object o : requestParams.keySet()) {
             String name = (String) o;
             String[] values = (String[]) requestParams.get(name);

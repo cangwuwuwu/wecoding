@@ -1,6 +1,6 @@
 package work.niter.wecoding.admin.msg;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +29,20 @@ public class MsgAdminController {
     private RabbitService rabbitService;
 
     @GetMapping("getMsgList")
-    public ResponseEntity<PageInfo<MyMessage>> getAllMsgInfo(@RequestParam(value = "page", defaultValue = "1")int page,
-                                                             @RequestParam(value = "size", defaultValue = "3") int size){
+    public ResponseEntity<PageInfo<MyMessage>> getAllMsgInfo(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                             @RequestParam(value = "size", defaultValue = "3") int size) {
         PageInfo<MyMessage> pageInfo = rabbitService.getAllMessageAndPage(page, size);
         return ResponseEntity.ok(pageInfo);
     }
 
     /**
      * 发送消息，并持久化到数据库
+     *
      * @param message
      * @return
      */
     @PostMapping("/sendMsg")
-    public ResponseEntity<Void> sendMsg(@RequestBody  String message){
+    public ResponseEntity<Void> sendMsg(@RequestBody String message) {
         MyMessage myMessage = JSONObject.parseObject(message, MyMessage.class);
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");

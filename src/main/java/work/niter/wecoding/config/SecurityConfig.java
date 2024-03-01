@@ -3,7 +3,7 @@ package work.niter.wecoding.config;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 不需要认证的路径
      */
-    public static final String[] NO_NEED_AUTH_URL= {
+    public static final String[] NO_NEED_AUTH_URL = {
             "/login/**", "/signup/**",
             "/sendmail/**",
             "/res/**",
@@ -60,46 +60,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, e) -> this.exceptionReturn(
-                            response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, "未登录或登录过期"))
+                        response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, "未登录或登录过期"))
                 .and()
-                    .authorizeRequests()
-                    .antMatchers(NO_NEED_AUTH_URL).permitAll()
-                    .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers(NO_NEED_AUTH_URL).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .defaultSuccessUrl("/home")
-                    .loginProcessingUrl("/login")
-                    .usernameParameter("stuId")
-                    .passwordParameter("stuPassword")
-                    .failureHandler(((request, response, e) -> {
-                        String message;
-                        if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-                            message = "用户名或密码错误";
-                        } else {
-                            message = "登录失败";
-                        }
-                        this.exceptionReturn(response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, message);
-                    }))
-                    .successHandler((request, response, authentication) ->
-                            this.successReturn(response, authentication, "登录成功"))
+                .formLogin()
+                .defaultSuccessUrl("/home")
+                .loginProcessingUrl("/login")
+                .usernameParameter("stuId")
+                .passwordParameter("stuPassword")
+                .failureHandler(((request, response, e) -> {
+                    String message;
+                    if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+                        message = "用户名或密码错误";
+                    } else {
+                        message = "登录失败";
+                    }
+                    this.exceptionReturn(response, e, 401, HttpServletResponse.SC_UNAUTHORIZED, message);
+                }))
+                .successHandler((request, response, authentication) ->
+                        this.successReturn(response, authentication, "登录成功"))
                 .and()
-                    .exceptionHandling()
-                    //没有权限，返回json
-                    .accessDeniedHandler((request, response, e) -> this.exceptionReturn(
-                                response, e, 403, HttpServletResponse.SC_FORBIDDEN, "权限不足"))
+                .exceptionHandling()
+                //没有权限，返回json
+                .accessDeniedHandler((request, response, e) -> this.exceptionReturn(
+                        response, e, 403, HttpServletResponse.SC_FORBIDDEN, "权限不足"))
                 .and()
-                    .rememberMe()
-                    .tokenRepository(this.persistentTokenRepository())
-                    .tokenValiditySeconds(60*60*24)
-                    .userDetailsService(this.userDetails())
+                .rememberMe()
+                .tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(60 * 60 * 24)
+                .userDetailsService(this.userDetails())
                 .and()
-                    .logout()
-                    .logoutSuccessHandler((request,response,authentication) ->
+                .logout()
+                .logoutSuccessHandler((request, response, authentication) ->
                         this.successReturn(response, authentication, "退出成功"))
                 .and()
-                    .headers().frameOptions().disable()
+                .headers().frameOptions().disable()
                 .and()
-                    .csrf().disable();
+                .csrf().disable();
     }
 
     @Bean
@@ -132,7 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         response.setContentType("application/json;charset=utf-8");
         response.setStatus(type);
         PrintWriter out = response.getWriter();
-        Map<String,Object> map = new HashMap<>(4);
+        Map<String, Object> map = new HashMap<>(4);
         map.put("status", status);
         map.put("message", message);
         out.write(JSON.toJSONString(map));
@@ -146,7 +146,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private void successReturn(
             HttpServletResponse response, Authentication auth,
             String message) throws IOException {
-        Map<String,Object> map = new HashMap<>(8);
+        Map<String, Object> map = new HashMap<>(8);
         map.put("status", 200);
         map.put("message", message);
         map.put("data", auth);
