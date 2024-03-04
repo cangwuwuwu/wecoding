@@ -37,19 +37,19 @@ public class AccountAdminService {
      * 后台管理管理-账户管理 --根据搜索字段查询所有账户信息
      */
     @Transactional
-    public PageInfo<Account> findInfoWithSearch(Integer page, Integer size, String search){
+    public PageInfo<Account> findInfoWithSearch(Integer page, Integer size, String search) {
         PageHelper.startPage(page, size);
-        List<CompStudent> students = null;
+        List<CompStudent> students;
         if (StringUtils.isNotBlank(search)) {
             students = compMapper.findInfoWithSearchAndSort(search);
-        }else {
+        } else {
             students = compMapper.findInfoAndSort();
         }
         PageInfo<CompStudent> info = new PageInfo<>(students);
         List<Account> accounts = new ArrayList<>();
         students.forEach(s -> {
             Account account = accountMapper.selectByPrimaryKey(s.getStuId());
-            if (account == null){
+            if (account == null) {
                 throw new RestException(ExceptionEnum.INFO_NOT_FOUND);
             }
             account.setStuName(s.getStuName());
@@ -76,7 +76,6 @@ public class AccountAdminService {
         pageInfo.setPageNum(info.getPageNum());
         return pageInfo;
     }
-
 
 
     /**
@@ -108,7 +107,7 @@ public class AccountAdminService {
     public void updateAuth(String stuId, String stuAuthString) {
         Account account = new Account();
         account.setStuId(stuId);
-        switch (stuAuthString){
+        switch (stuAuthString) {
             case "普通用户":
                 account.setStuAuth(0);
                 break;
@@ -130,7 +129,7 @@ public class AccountAdminService {
     @PreAuthorize("hasRole('SUPER')")
     @Transactional
     public void removeAccount(String stuId) {
-        if (stuId == null){
+        if (stuId == null) {
             throw new RestException(ExceptionEnum.ARGS_NOT_FOUND_ERROR);
         }
         //在账号权限表中删除该记录

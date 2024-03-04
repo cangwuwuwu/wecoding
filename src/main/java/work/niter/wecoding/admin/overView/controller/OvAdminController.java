@@ -36,7 +36,7 @@ public class OvAdminController {
      * 后台管理管理-协会概览管理 -- 查询学生学院分布情况
      */
     @GetMapping("/getDeptDistribution")
-    public ResponseEntity<Map<String, Integer>> getDeptDistribution(){
+    public ResponseEntity<Map<String, Integer>> getDeptDistribution() {
         Map<String, Integer> infos = adminService.findDeptDistribution();
         return ResponseEntity.ok(infos);
     }
@@ -45,7 +45,7 @@ public class OvAdminController {
      * 后台管理管理-协会概览管理 -- 查询学生男女分布情况
      */
     @GetMapping("/getGenderDis")
-    public ResponseEntity<Map<String, Integer>> getGenderDis(){
+    public ResponseEntity<Map<String, Integer>> getGenderDis() {
         Map<String, Integer> map = adminService.findGenderDis();
         return ResponseEntity.ok(map);
     }
@@ -54,13 +54,13 @@ public class OvAdminController {
      * 后台管理管理-协会概览管理 -- 查询学生资源分布和年级分布情况
      */
     @GetMapping("/getResAndGrade")
-    public ResponseEntity<List<Map<String, Integer>>> getResAndGrade(){
+    public ResponseEntity<List<Map<String, Integer>>> getResAndGrade() {
         List<Map<String, Integer>> list = adminService.getResAndGrade();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/getOVInfo")
-    public ResponseEntity<Map<String ,Object>> getOVData(){
+    public ResponseEntity<Map<String, Object>> getOVData() {
         //查询学生学院分布情况
         Map<String, Integer> deptInfos = adminService.findDeptDistribution();
         //查询学生男女分布情况
@@ -69,7 +69,7 @@ public class OvAdminController {
         List<Map<String, Integer>> ResInfo = adminService.getResAndGrade();
         //查询网站访问情况
         Access accessInfo = accessService.findInfo();
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("dept", deptInfos);
         map.put("gender", genderInfo);
         map.put("res", ResInfo);
@@ -77,7 +77,5 @@ public class OvAdminController {
         return ResponseEntity.ok(map);
 
     }
-
-
 
 }

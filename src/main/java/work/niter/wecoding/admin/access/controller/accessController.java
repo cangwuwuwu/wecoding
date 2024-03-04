@@ -25,46 +25,51 @@ public class accessController {
     private AccessService accessService;
 
     @GetMapping
-    public ResponseEntity<Access> getAllAccessInfo(){
+    public ResponseEntity<Access> getAllAccessInfo() {
         return ResponseEntity.ok(accessService.findInfo());
     }
 
     //记录网站访问次数
     @AccessView
     @GetMapping("signIn")
-    public void  accessSignIn(){}
+    public void accessSignIn() {
+    }
 
     //记录校园指南页面访问次数
     @PageView("guide")
     @GetMapping("guide")
-    public void  accessGuide(){}
+    public void accessGuide() {
+    }
 
     //记录帮助页面访问次数
     @PageView("help")
     @GetMapping("help")
-    public void  accessHelp(){}
+    public void accessHelp() {
+    }
 
     //记录资源分享页面访问次数
     @PageView("res")
     @GetMapping("res")
-    public void  accessRes(){}
+    public void accessRes() {
+    }
 
     //记录课程页面访问次数
     @PageView("course")
     @GetMapping("course")
-    public void  accessCourse(){}
+    public void accessCourse() {
+    }
 
     //记录电费提醒页面访问次数
     @PageView("electric")
     @GetMapping("electric")
-    public void  accessElectric(){}
+    public void accessElectric() {
+    }
 
     //记录财务页面访问次数
     @PageView("finance")
     @GetMapping("spend")
-    public void  accessSpend(){}
-
-
+    public void accessSpend() {
+    }
 
 
 }

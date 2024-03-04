@@ -47,16 +47,16 @@ public class AccessService {
         List<Long> accessTrend = new ArrayList<Long>();
         int currentMonth = nowTime.getMonthValue();
         //如果本月是一月份则只返回这个月的访问量
-        if (currentMonth == 1){
+        if (currentMonth == 1) {
             accessTrend.add(accessData.getAccessMonth());
-        }else {
+        } else {
             //把这一年之前每个月的最后一天的日期当参数传入到mapper中查询结果
             for (int month = 1; month < currentMonth; month++) {
                 LocalDate localDate = nowTime.minusMonths(month);
                 LocalDate lastDay = localDate.with(TemporalAdjusters.lastDayOfMonth());
                 LocalDate startDay = localDate.with(TemporalAdjusters.firstDayOfMonth());
                 Integer value = accessMapper.getMonthLastValue(startDay.toString(), lastDay.toString());
-                if (value == null){
+                if (value == null) {
                     value = 0;
                 }
                 accessTrend.add(value.longValue());
@@ -65,8 +65,8 @@ public class AccessService {
             Collections.reverse(accessTrend);
             accessTrend.add(accessData.getAccessMonth());
             //把当月之后的月份访问量设为0
-            if (accessTrend.size() < 12){
-                for (int i = accessTrend.size()+1; i<= 12; i++){
+            if (accessTrend.size() < 12) {
+                for (int i = accessTrend.size() + 1; i <= 12; i++) {
                     accessTrend.add(0L);
                 }
             }

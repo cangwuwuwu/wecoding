@@ -41,7 +41,7 @@ public class OvAdminService {
         List<String> deptInfo = studentMapper.findDeptInfo();
         Map<String, Integer> map = new HashMap<>();
         deptInfo.forEach(item -> {
-            String i = null;
+            String i;
             try {
                 i = item.substring(0, item.indexOf("/"));
             } catch (Exception e) {
@@ -66,6 +66,7 @@ public class OvAdminService {
         map.put("all", all);
         return map;
     }
+
     /**
      * 后台管理管理-协会概览管理 -- 查询资源和年级分布情况
      */
@@ -79,14 +80,14 @@ public class OvAdminService {
         List<String> resWebType = resWebMapper.searchResWebType();
         resType.addAll(resWebType);
         resType.forEach(item -> {
-            try{
+            try {
                 String[] split = item.split(",");
                 for (String s : split) {
                     String s2 = s.trim();
                     Integer count = resMap.get(s2);
                     resMap.put(s2, (count == null) ? 1 : count + 1);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 String s3 = item.trim();
                 Integer count = resMap.get(s3);
                 resMap.put(s3, (count == null) ? 1 : count + 1);
@@ -96,7 +97,7 @@ public class OvAdminService {
         //查询年级分布情况
         List<String> stuIds = accountMapper.searchStuId();
         stuIds.forEach(item -> {
-            item = item.substring(2,4);
+            item = item.substring(2, 4);
             Integer count = gradeMap.get(item);
             gradeMap.put(item, (count == null) ? 1 : count + 1);
         });

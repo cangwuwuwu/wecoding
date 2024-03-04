@@ -29,9 +29,9 @@ public class SpendAdminController {
      * 后台管理管理-财务管理 --分页插叙所有财务收支信息
      */
     @GetMapping("getSpendInfo")
-    public ResponseEntity<PageInfo<CompSpend>> getSpendInfo(@RequestParam(value = "page", defaultValue = "1")Integer page,
+    public ResponseEntity<PageInfo<CompSpend>> getSpendInfo(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                             @RequestParam(value = "size", defaultValue = "5") Integer size,
-                                                            @RequestParam(value = "search", required = false) String search){
+                                                            @RequestParam(value = "search", required = false) String search) {
         PageInfo<CompSpend> spendInfo = adminService.findSpendInfo(page, size, search);
         return ResponseEntity.ok(spendInfo);
     }
@@ -49,7 +49,7 @@ public class SpendAdminController {
      * 后台管理管理-财务管理 --新增或修改财务收支信息
      */
     @PostMapping("/updateOrInsertSpend")
-    public ResponseEntity<Void> updateOrInsertSpend(@RequestBody  CompSpend compSpend){
+    public ResponseEntity<Void> updateOrInsertSpend(@RequestBody CompSpend compSpend) {
         adminService.updateOrInsertSpend(compSpend);
         return ResponseEntity.ok().build();
     }
@@ -58,7 +58,7 @@ public class SpendAdminController {
      * 后台管理管理-财务管理 --删除指定的财务收支信息
      */
     @DeleteMapping("/deleteSpend/{id}")
-    public ResponseEntity<Void> deleteSpendById(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteSpendById(@PathVariable Integer id) {
         adminService.removeSpend(id);
         return ResponseEntity.ok().build();
     }
@@ -67,9 +67,9 @@ public class SpendAdminController {
      * 后台管理管理-财务管理 --分页插叙所有会费缴纳信息
      */
     @GetMapping("getSpendDuesInfo")
-    public ResponseEntity<PageInfo<Payment>> getSpendDuesInfo(@RequestParam(value = "page", defaultValue = "1")Integer page,
+    public ResponseEntity<PageInfo<Payment>> getSpendDuesInfo(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                               @RequestParam(value = "size", defaultValue = "5") Integer size,
-                                                              @RequestParam(value = "search", required = false) String search){
+                                                              @RequestParam(value = "search", required = false) String search) {
         PageInfo<Payment> PaymentInfo = adminService.getSpendDuesInfo(page, size, search);
         return ResponseEntity.ok(PaymentInfo);
     }
@@ -78,7 +78,7 @@ public class SpendAdminController {
      * 后台管理管理-财务管理 --手动添加会费缴纳信息
      */
     @PostMapping("updatePaymentInfo")
-    public ResponseEntity<Void> updatePaymentInfo(@RequestBody Payment payment){
+    public ResponseEntity<Void> updatePaymentInfo(@RequestBody Payment payment) {
         adminService.insertPaymentInfo(payment);
         return ResponseEntity.ok().build();
     }

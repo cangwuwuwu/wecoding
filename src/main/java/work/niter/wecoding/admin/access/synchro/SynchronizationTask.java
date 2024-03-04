@@ -57,11 +57,8 @@ public class SynchronizationTask {
         AccessPage pageViewData = accessUtils.getPageViewData();
         accessPageMapper.insertSelective(pageViewData);
         accessMapper.insertSelective(accessData);
-        redisUtils.delUserAccess(accessDayKey,accessUvDayKey,guideKey,resKey,financeKey,electricKey,courseKey,helpKey);
+        redisUtils.delUserAccess(accessDayKey, accessUvDayKey, guideKey, resKey, financeKey, electricKey, courseKey, helpKey);
     }
-
-
-
 
 
 }

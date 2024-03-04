@@ -32,7 +32,7 @@ public class AccessUtils {
     private RedisUtils redisUtils;
 
     //获取完整的用户访问量数据和用户活跃度信息的数据
-    public  Access getAccessData(){
+    public Access getAccessData() {
         LocalDate nowTime = LocalDate.now();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
@@ -50,9 +50,9 @@ public class AccessUtils {
         Access accessY = accessMapper.getAccessY(dateS); //获取昨天输入的数据
         System.out.println(accessY);
         //如果数据库没有之前的数据，则把今天的数据当成最终的数据
-        if (accessY == null){
-            accessT = initAccess(accessT);
-        }else {
+        if (accessY == null) {
+            initAccess(accessT);
+        } else {
             accessT.setAccessMonth(dayValue + accessY.getAccessMonth());
             accessT.setAccessYear(dayValue + accessY.getAccessYear());
             accessT.setAccessAll(dayValue + accessY.getAccessAll());
@@ -70,10 +70,10 @@ public class AccessUtils {
             //判断今天是否与最近一天不在同一个月，或者同一年
             Date lasAccessTime = accessY.getAccessTime();
             LocalDate lasAccess = lasAccessTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (nowTime.getMonthValue() != lasAccess.getMonthValue()){
+            if (nowTime.getMonthValue() != lasAccess.getMonthValue()) {
                 accessT.setAccessMonth(dayValue);
                 accessT.setAccessUvMonth(uvDayValue);
-                if (nowTime.getYear() != lasAccess.getYear()){
+                if (nowTime.getYear() != lasAccess.getYear()) {
                     accessT.setAccessYear(dayValue);
                 }
             }
@@ -82,7 +82,7 @@ public class AccessUtils {
     }
 
     //获取各个页面完整的页面访问量
-    public AccessPage getPageViewData(){
+    public AccessPage getPageViewData() {
         LocalDate nowTime = LocalDate.now();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
@@ -105,9 +105,9 @@ public class AccessUtils {
         //从数据库中获取离当前时间之前的最近的一天中页面访问最终的数据
         AccessPage accessPageY = accessPageMapper.getAccessPageY(dateS);
         //如果数据库没有之前的数据，则把今天的数据当成最终的数据
-        if (accessPageY == null){
+        if (accessPageY == null) {
             accessPageY = initAccessPage(accessPage);
-        }else {
+        } else {
             accessPage.setGuideMonth(guideDayValue + accessPageY.getGuideMonth());
             accessPage.setGuideYear(guideDayValue + accessPageY.getGuideYear());
             accessPage.setResMonth(resDayValue + accessPageY.getResMonth());
@@ -124,14 +124,14 @@ public class AccessUtils {
             //判断今天是否与最近一天不在同一个月，或者同一年
             Date lastViewTime = accessPageY.getPageViewTime();
             LocalDate lastView = lastViewTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (nowTime.getMonthValue() != lastView.getMonthValue()){
+            if (nowTime.getMonthValue() != lastView.getMonthValue()) {
                 accessPage.setGuideMonth(guideDayValue);
                 accessPage.setResMonth(resDayValue);
                 accessPage.setFinanceMonth(financeDayValue);
                 accessPage.setElectricMonth(electricDayValue);
                 accessPage.setCourseMonth(courseDayValue);
                 accessPage.setHelpMonth(helpDayValue);
-                if (nowTime.getYear()  != lastView.getYear()){
+                if (nowTime.getYear() != lastView.getYear()) {
                     accessPage.setGuideYear(guideDayValue);
                     accessPage.setResYear(resDayValue);
                     accessPage.setFinanceYear(financeDayValue);
@@ -146,7 +146,7 @@ public class AccessUtils {
 
     private AccessPage initAccessPage(AccessPage accessPage) {
         Long guideDayValue = accessPage.getGuideDay();
-        Long resDayValue =accessPage.getResDay();
+        Long resDayValue = accessPage.getResDay();
         Long financeDayValue = accessPage.getFinanceDay();
         Long electricDayValue = accessPage.getElectricDay();
         Long courseDayValue = accessPage.getCourseDay();
@@ -167,12 +167,11 @@ public class AccessUtils {
     }
 
     //给Access赋初始值
-    private  Access initAccess(Access access){
+    private void initAccess(Access access) {
         Long dayValue = access.getAccessDay();
         access.setAccessMonth(dayValue);
         access.setAccessYear(dayValue);
         access.setAccessAll(dayValue);
         access.setAccessUvMonth(access.getAccessUvDay());
-        return access;
     }
 }

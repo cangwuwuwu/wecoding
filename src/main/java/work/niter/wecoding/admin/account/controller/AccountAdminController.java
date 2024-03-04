@@ -31,17 +31,16 @@ public class AccountAdminController {
     @GetMapping("getAccountInfo")
     public ResponseEntity<PageInfo<Account>> getAllAccountInfo(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                                @RequestParam(value = "size", defaultValue = "5") Integer size,
-                                                               @RequestParam(value = "search", required = false) String search){
+                                                               @RequestParam(value = "search", required = false) String search) {
         return ResponseEntity.ok(adminService.findInfoWithSearch(page, size, search));
     }
-
 
 
     /**
      * 后台管理管理-账户管理 --查询所有权限名称
      */
     @GetMapping("getAllAuth")
-    public ResponseEntity<List<Map<String, String>>> getAllAuth(){
+    public ResponseEntity<List<Map<String, String>>> getAllAuth() {
         return ResponseEntity.ok(adminService.findAllAuth());
     }
 
@@ -49,7 +48,7 @@ public class AccountAdminController {
      * 后台管理管理-账户管理 --根据学号修改权限
      */
     @PutMapping("/updateAuth")
-    public ResponseEntity<Void> putUpdateAuth(@RequestParam("stuId")String stuId, @RequestParam("stuAuth")String stuAuthString){
+    public ResponseEntity<Void> putUpdateAuth(@RequestParam("stuId") String stuId, @RequestParam("stuAuth") String stuAuthString) {
         adminService.updateAuth(stuId, stuAuthString);
         return ResponseEntity.ok().build();
     }
@@ -58,7 +57,7 @@ public class AccountAdminController {
      * 后台管理管理-账户管理 --根据学号删除账号
      */
     @DeleteMapping("/deleteAccount/{stuId}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable("stuId") String stuId){
+    public ResponseEntity<Void> deleteAccount(@PathVariable("stuId") String stuId) {
         adminService.removeAccount(stuId);
         return ResponseEntity.ok().build();
     }

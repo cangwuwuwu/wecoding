@@ -26,15 +26,16 @@ public class RedisUtils {
 
     /**
      * 计数，将独立用户访问量(UV)记录在Redis中
+     *
      * @param key
      * @param value
      * @return
      */
-    public void add(String key, Long value){
-        if (redisTemplate.opsForHyperLogLog().size(key) == 0){
+    public void add(String key, Long value) {
+        if (redisTemplate.opsForHyperLogLog().size(key) == 0) {
             redisTemplate.opsForHyperLogLog().add(key, value);
             redisTemplate.expire(key, 1, TimeUnit.DAYS);
-        }else {
+        } else {
             redisTemplate.opsForHyperLogLog().add(key, value);
         }
 
@@ -42,9 +43,10 @@ public class RedisUtils {
 
     /**
      * 删除缓存
+     *
      * @param key
      */
-    public void del(String... key){
+    public void del(String... key) {
         for (String s : key) {
             redisTemplate.opsForHyperLogLog().delete(s);
         }
@@ -53,25 +55,26 @@ public class RedisUtils {
 
     /**
      * 获取总数
+     *
      * @param key
      * @return
      */
-    public Long size(String key){
-        return redisTemplate.opsForHyperLogLog().size(key).longValue();
+    public Long size(String key) {
+        return redisTemplate.opsForHyperLogLog().size(key);
     }
 
     /**
      * 用户访问后新增1个访问量到redis中
-     * @param key
      *
+     * @param key
      */
-    public void setUserAccess(String key){
+    public void setUserAccess(String key) {
         Object accessCount = redisTemplate.opsForValue().get(key);
-        if (accessCount == null){
+        if (accessCount == null) {
             accessCount = 1L;
             redisTemplate.opsForValue().set(key, accessCount);
             redisTemplate.expire(key, 1, TimeUnit.DAYS);
-        }else {
+        } else {
             redisTemplate.opsForValue().increment(key);
         }
 
@@ -79,12 +82,13 @@ public class RedisUtils {
 
     /**
      * 获取访问量
+     *
      * @param key
      * @return
      */
-    public Long getUserAccess(String key){
+    public Long getUserAccess(String key) {
         Object accessCount = redisTemplate.opsForValue().get(key);
-        if (accessCount == null){
+        if (accessCount == null) {
             accessCount = "0";
         }
         return Long.valueOf(accessCount.toString());
@@ -92,9 +96,10 @@ public class RedisUtils {
 
     /**
      * 删除访问量
+     *
      * @param key
      */
-    public void delUserAccess(String... key){
+    public void delUserAccess(String... key) {
         for (String s : key) {
             redisTemplate.delete(s);
         }

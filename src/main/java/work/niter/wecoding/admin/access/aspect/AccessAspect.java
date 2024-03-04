@@ -31,33 +31,41 @@ public class AccessAspect {
 
     /*切入点*/
     @Pointcut("@annotation(work.niter.wecoding.admin.access.annotation.AccessView)")
-    public void accessView(){}
+    public void accessView() {
+    }
 
     @Pointcut("@annotation(work.niter.wecoding.admin.access.annotation.PageView)")
-    public void pageView(){}
+    public void pageView() {
+    }
 
     //用户访问量
     @After("accessView()")
-    public void doAccessViewAfter(){
+    public void doAccessViewAfter() {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String dateS = format.format(date);
         try {
             String accessDayKey = "userAccess:day:" + dateS;
             String ipAddr = IpUtils.getIpAddr();
-            String rIpAddr = ipAddr.replace(".", "");
-            Long ipAddrL = Long.valueOf(rIpAddr);
-            String accessUvDayKey = "uvAccess:day:"+ dateS;
+            long ipAddrL;
+            // 未知ip设置为-1 统一记录
+            if (ipAddr == null) {
+                ipAddrL = -1L;
+            } else {
+                String rIpAddr = ipAddr.replace(".", "");
+                ipAddrL = Long.parseLong(rIpAddr);
+            }
+            String accessUvDayKey = "uvAccess:day:" + dateS;
             redisUtils.setUserAccess(accessDayKey);
             redisUtils.add(accessUvDayKey, ipAddrL);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //各个页面访问量
     @After("pageView()")
-    public void doPageViewAfter(JoinPoint jp){
+    public void doPageViewAfter(JoinPoint jp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date();
         String dateS = format.format(date);
@@ -65,16 +73,14 @@ public class AccessAspect {
         try {
             String pageViewKey = pageName + ":day:" + dateS;
             redisUtils.setUserAccess(pageViewKey);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
     private String getPageName(JoinPoint jp) {
-        PageView pageView = ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(PageView.class);
+        PageView pageView = ((MethodSignature) jp.getSignature()).getMethod().getAnnotation(PageView.class);
         return pageView.value();
     }
-
-
 }

@@ -45,31 +45,30 @@ public class SpendAdminService {
      */
     public PageInfo<CompSpend> findSpendInfo(Integer page, Integer size, String search) {
         PageHelper.startPage(page, size);
-        List<CompSpend> spends = null;
-        if (StringUtils.isNotBlank(search)){
+        List<CompSpend> spends;
+        if (StringUtils.isNotBlank(search)) {
             spends = spendMapper.searchSpend(search);
-        }else {
+        } else {
             Example example = new Example(CompSpend.class);
             example.setOrderByClause("time DESC");
             spends = spendMapper.selectByExample(example);
         }
-        if (CollectionUtils.isEmpty(spends)){
+        if (CollectionUtils.isEmpty(spends)) {
             throw new RestException(ExceptionEnum.INFO_NOT_FOUND);
         }
-        PageInfo<CompSpend> pageInfo = new PageInfo<>(spends);
-        return pageInfo;
+        return new PageInfo<>(spends);
     }
 
     /*查询协会余额*/
     public double findSpendBalance() throws ScriptException {
         List<CompSpend> spends = spendMapper.selectSpend();
 //        double totalPayCount = payMapper.selectCount(new Payment());
-        double  totalPay = 0;
+        double totalPay = 0;
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("JavaScript");
         for (CompSpend s : spends) {
-            String expression = String.valueOf(totalPay) + s.getType() + s.getNumber();
-            totalPay = (double)scriptEngine.eval(expression);
+            String expression = totalPay + s.getType() + s.getNumber();
+            totalPay = (double) scriptEngine.eval(expression);
         }
         return totalPay;
     }
@@ -77,13 +76,13 @@ public class SpendAdminService {
     /**
      * 后台管理管理-财务管理 --新增修改或财务收支信息
      */
-    public void updateOrInsertSpend(CompSpend compSpend){
+    public void updateOrInsertSpend(CompSpend compSpend) {
         CompSpend spend = new CompSpend();
         spend.setId(compSpend.getId());
         int count = spendMapper.selectCount(spend);
-        if (count == 1){
+        if (count == 1) {
             spendMapper.updateByPrimaryKey(compSpend);
-        }else {
+        } else {
             spendMapper.insertSelective(compSpend);
 
         }
@@ -94,15 +93,16 @@ public class SpendAdminService {
      */
     @Transactional
     public void removeSpend(Integer id) {
-        if (id != null){
+        if (id != null) {
             spendMapper.deleteByPrimaryKey(id);
-        }else {
+        } else {
             throw new RestException(ExceptionEnum.UNKNOWN_ERROR);
         }
     }
 
     /**
      * 后台管理管理-财务管理 --插叙所有会费缴纳信息
+     *
      * @param page
      * @param size
      * @param search
@@ -111,31 +111,30 @@ public class SpendAdminService {
     public PageInfo<Payment> getSpendDuesInfo(Integer page, Integer size, String search) {
         PageHelper.startPage(page, size);
         List<Payment> payments = null;
-        if (StringUtils.isNotBlank(search)){
+        if (StringUtils.isNotBlank(search)) {
             payments = payMapper.searchPayment(search);
-        }else {
+        } else {
             payments = payMapper.selectPayment();
         }
 
-        if (CollectionUtils.isEmpty(payments)){
+        if (CollectionUtils.isEmpty(payments)) {
             throw new RestException(ExceptionEnum.INFO_NOT_FOUND);
         }
-        PageInfo<Payment> pageInfo = new PageInfo<>(payments);
-        return pageInfo;
+        return new PageInfo<>(payments);
     }
 
     public void insertPaymentInfo(Payment payment) {
         Example example = new Example(Payment.class);
         example.createCriteria().andEqualTo("userId", payment.getUserId());
         int count1 = payMapper.selectCountByExample(example);
-        if (count1 != 0){
+        if (count1 != 0) {
             throw new RestException(ExceptionEnum.USER_ALSO_EXIST);
         }
 
         Example stuExample = new Example(CompStudent.class);
         stuExample.createCriteria().andEqualTo("stuId", payment.getUserId());
         int count2 = compMapper.selectCountByExample(stuExample);
-        if (count2 == 0){
+        if (count2 == 0) {
             throw new RestException(ExceptionEnum.STU_NOT_IN_INSTITUTE);
         }
 
@@ -143,7 +142,7 @@ public class SpendAdminService {
         payment.setPaymentType(2);
         payment.setCreateTime(payment.getFinishTime());
         int i = payMapper.insertSelective(payment);
-        if (i != 1){
+        if (i != 1) {
             throw new RestException(ExceptionEnum.ARGS_NOT_FOUND_ERROR);
         }
     }
